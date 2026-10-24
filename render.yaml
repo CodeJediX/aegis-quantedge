@@ -10,9 +10,9 @@ services:
       - key: PYTHON_VERSION
         value: 3.11.9
       - key: AEGIS_DATABASE_URL
-        sync: false
-      - key: AEGIS_ADMIN_KEY
-        generateValue: true
+        value: sqlite:////tmp/aegis-research.sqlite3
+      - key: AEGIS_READONLY_DATABASE
+        value: "1"
       - key: AEGIS_REQUIRE_DATABASE
         value: "1"
       - key: OPENBLAS_NUM_THREADS

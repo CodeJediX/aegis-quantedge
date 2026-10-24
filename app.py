@@ -131,7 +131,9 @@ with st.sidebar:
         "Backtest weights are the fixed AEGIS candidate; allocation experiments do not rewrite validated forecasts."
     )
     if active_store() is not None:
-        st.caption("Research storage: SQL database · version " + research_version()[:12])
+        backend = "PostgreSQL" if active_store().postgres else "SQLite"
+        mode = " · read-only" if os.environ.get("AEGIS_READONLY_DATABASE") == "1" else ""
+        st.caption("Research storage: " + backend + mode + " · version " + research_version()[:12])
     else:
         st.caption("Research storage: verified offline files")
     st.markdown(

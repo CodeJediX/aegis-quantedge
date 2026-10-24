@@ -1,6 +1,6 @@
 # Hosted application and SQL database
 
-The application retains Python and Streamlit. `render.yaml` defines a free Render Python web service. A separate Supabase PostgreSQL database provides persistence across app restarts and redeployments. No cloud deployment or database creation is claimed until verified against the actual providers.
+The application retains Python and Streamlit. The no-payment Render configuration uses a real SQLite research database, initialized from the verified release snapshots on every new container. Shared allocation saving is disabled with `AEGIS_READONLY_DATABASE=1` because free container storage is temporary. All required research pages and current-session allocation experiments work in this mode. A separate Supabase PostgreSQL database is supported as an optional durable store; its provisioning is not claimed. No live deployment is claimed until verified against the actual provider.
 
 ## Data stored
 
@@ -20,6 +20,9 @@ Set these in Render's server-side environment settings:
 | `AEGIS_DATABASE_URL` | Supabase PostgreSQL connection URL. Copy the actual session-pooler host from the project's Connect dialog for IPv4 access. Do not infer the host. |
 | `AEGIS_ADMIN_KEY` | Long random administrator key. Render Blueprint generates it. Required only to save shared allocation records. |
 | `AEGIS_REQUIRE_DATABASE` | `1` on the hosted service, so missing configuration blocks startup. |
+| `AEGIS_READONLY_DATABASE` | `1` for free SQLite hosting. Blocks shared saves and explains temporary storage in the app. |
+
+For the no-payment deployment, `AEGIS_DATABASE_URL=sqlite:////tmp/aegis-research.sqlite3` is a nonsecret local SQL URL, not a PostgreSQL credential. Leave `AEGIS_ADMIN_KEY` unset. Select Render's manual **Web Service** setup and the **Free / $0 per month** compute plan. Render's Blueprint creation requested payment information on this account and was cancelled; no card was entered. The manual configuration uses the build/start commands and environment settings in `render.yaml`. PostgreSQL-specific instructions below apply only when an external database is configured.
 
 PostgreSQL connections use TLS, a small connection pool, finite connection timeout and no prepared statements. Credentials stay server-side, outside the Git repository and ZIP. The `aegis` schema is separate from the default public Data API schema. Bootstrap revokes schema access from PUBLIC and enables row-level security as defense in depth. The bootstrap database role must own this schema; no anonymous browser role receives database access. Use a dedicated database project for this application.
 

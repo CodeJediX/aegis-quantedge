@@ -43,4 +43,8 @@ The Render Blueprint passed validation against Render's current published JSON s
 
 ## Release checks
 
+## No-payment deployment configuration
+
+The user explicitly required no payment details. Render's Blueprint flow requested a card and was cancelled. The manual Web Service form offered a selected **Free / $0 per month** plan. The deployment therefore uses SQLite as a real SQL research store, rebuilt from the hashed genuine snapshots at each container start. `AEGIS_READONLY_DATABASE=1` blocks shared saves and explains temporary storage in the interface. An external PostgreSQL service remains an optional future enhancement rather than a falsely claimed provisioned database. All26 interface checks passed with SQL required and read-only mode enabled. An initial parallel Windows test run hit an operating-system paging-file limit while loading a SciPy DLL; the serial rerun with one BLAS thread passed. The numerical calculation code was unchanged.
+
 `scripts/package_submission.py` writes a file-size/SHA-256 manifest, excludes secrets/environments/QA caches, creates the ZIP and checks CRC integrity. Extracted-package execution is checked separately before handoff. Git attributes preserve exact file bytes so Windows line-ending conversion cannot invalidate snapshot or manifest hashes. The source repository is private; judge access, verified cloud provisioning and independent human-team review remain external release steps. No cloud completion or human approval is fabricated.

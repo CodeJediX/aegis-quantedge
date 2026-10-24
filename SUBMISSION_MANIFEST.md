@@ -14,11 +14,11 @@ Virtual environments, secrets, intermediate deck builds and external QA render d
 
 | File | Bytes | SHA-256 |
 |---|---:|---|
-| .env.example | 509 | 3acb6bce2e45b6fa75b7eeaca8717383896e77de399cc8f9e273a16358863924 |
+| .env.example | 537 | 50ec68cfd61646ec3611f1b4ef8ab0ba51909431b326879bd35377708f9b28ea |
 | .gitattributes | 129 | 5cfc825676fbb0cd1e7b381f9aeadea517cb70e9a59f9e981babc5dc2073f7bd |
 | .gitignore | 125 | 6bec6d82c3cde22b714c365e94a5ede8958c02588a809688857b4b6503cb809e |
 | .streamlit/config.toml | 214 | 5aebd9a63a3346345b1a7826f9f148dc326f904ad71c13fa9ac0eb384996da26 |
-| app.py | 6173 | 1c58f2ff3e68c01c1abd7df0a43360905d60d043541817ee6021e94781a3a8e7 |
+| app.py | 6348 | 58cf9fd9de084733d01313b8ed7129d515c90458590190ef85e9231bcd1ac54f |
 | assets/style.css | 1600 | 459859d4a0491e9f0d281fe6e35cebd54acb6e1747116bee96940c6e27f9fece |
 | data/metadata/fred.json | 302 | b1bb1b8aa1d13460942ec2e31244d84369e19c0bf1dd5abc48ab8de64e21cef3 |
 | data/metadata/prices.json | 405 | 7748ac014c2bafaf3f333254958900fe5e7d56faf1bc1abb0e7c8f5c3e5a6e9c |
@@ -30,14 +30,14 @@ Virtual environments, secrets, intermediate deck builds and external QA render d
 | documentation/Data_Governance.md | 2020 | c728825016b102ed96749edb17ef7ce8a7a1d8f48311cc786991bdd7cb8a7f8b |
 | documentation/Deployment_Guide.md | 2484 | 4db8926690c770210e7d0e75fb79f6a41a42e2d75c1a6e2b9d904db7d4f5f1c4 |
 | documentation/Final_Competition_Audit.md | 3668 | 906cf67db335000060a70103293255ad99a2c431c5a4342a4eca0a2b75ddf9c5 |
-| documentation/Hosted_Database.md | 4188 | 2179ce814e6d06b6b9418475e688a0ba144fc1a779c545fccbeeb6abdd2c5d83 |
+| documentation/Hosted_Database.md | 5175 | c5247c58069d40528b4f86bcdd05871d382cfd5a2f2463fe1120a1997bdf1d47 |
 | documentation/Judges_QA.md | 6558 | 3b9ba2526319d30901ffa942fe9d7f2d8d44536bd3f93bcde63bb3f1629a84f7 |
 | documentation/Methodology.md | 4125 | 5cfd8e1140f23aecd73ac1101ddad00a3c5d43d9ca2751f9742ce016c6f2e2fc |
 | documentation/Prior_Work_Audit.md | 1656 | 130911efcfbba63d4e6f15e600af5e7300379f7d12464c851bbd02d50db83e66 |
 | documentation/Requirements_Traceability.md | 6422 | d17848aa315209256040c215859b908055823cb87df8e9a83e280ae77e495f5e |
 | documentation/Sources.md | 3160 | c5ea5cb5bc714cdc243a6b5ab2390bc0e379af958464396b45735bf0de5ceffb |
 | documentation/Team_Approval_Checklist.md | 1391 | 256a0fece2a24a24754383e797a61fdda6c4dd8f8bbae88c80ace2bea34507c8 |
-| documentation/Testing_and_Validation.md | 7593 | d8747c49301d6ec710c4ebd8bfb41b62c974c6eb8bedf5ec3098c60f77e93fd7 |
+| documentation/Testing_and_Validation.md | 8447 | 4ff2889d6a65a12c42fb4710a5ac41aa99fad4aea2d4babc6d70cf57683ccdf1 |
 | outputs/figures/allocation.png | 31191 | a9759d848a851dd67597da1ecfd56ef7341966c85f8c3e37b3c38ad9e731669a |
 | outputs/figures/backtest.png | 135847 | 07bba54b2f55f64f0c36571841e36777bfce07baccf4a4fa0234238fc1928751 |
 | outputs/figures/evt.png | 61950 | 7af919f0bbafdc7516c289ee5b773dd62977d1601f0c331a8afa0dd1a8d3d9bf |
@@ -78,8 +78,8 @@ Virtual environments, secrets, intermediate deck builds and external QA render d
 | presentation/pitch_data.json | 8802 | a490dcc6fd1b125275c30b8111bc9ad9e5b8e8c04a50e1afe535a43e589c607f |
 | presentation/Rehearsal_Script.md | 8334 | d6d85661cfe6a10acb241f59478bceacddf6b1a67f7c59ba56f369e57bc2335e |
 | presentation/Speaker_Notes.md | 3535 | c3e34c95641c4cc9bd2c6df8d292e6c96ba71f5a0726c1e0e24a03e222bdd6b9 |
-| README.md | 9605 | 471ef058594479693a6e2a392243bb993abba9f6a203913bbbce16bda6ee1610 |
-| render.yaml | 647 | 87327f69ab3ee610a687e3cd69d0fc1fe7a74523fa52629c53b126b8a5e26aeb |
+| README.md | 9689 | f33acc9ff4b71a45d2e07f05005de9a3e81c63cc8dab70b6378179e49bd5d37e |
+| render.yaml | 679 | 2d2fcb7e11f1336fc5c81ec9906dd9e4bbe6ddf630f60acacaf5c24907302369 |
 | reports/Executive_Tear_Sheet.pdf | 3348 | a04f0a265c3b3484caecb3863978fafb308cf9bbd30a234625d399cf38b9c2d1 |
 | reports/Investment_Committee_Memo.pdf | 3462 | 0c26cd8953d4a7be84ad67e7e0d68ff5e9e9098e55d0021c5c3d5cd3c584d55e |
 | reports/Technical_Report.docx | 538591 | 906b83765232f92a44f9e2e88117842cc3e3d8c17905786eb2a8ce75635e7803 |
@@ -101,7 +101,7 @@ Virtual environments, secrets, intermediate deck builds and external QA render d
 | src/backtesting.py | 6147 | 8e7b6bbad01fa14893b32ded6320f9e3cbd838cf92a5b18900b6b0e4576c4a90 |
 | src/config.py | 1382 | 44be4ba3ce177d25e223861eaa5e0f0e8fe3cea9780caa312772fd4e71a53189 |
 | src/data.py | 7665 | c7a0efff5266bbd2d688ccd909a7541ab72cc166b0c8277175b4e93e82a89a1e |
-| src/database.py | 12067 | 208282f64fe8619f6a584b006555e7021e86fb5ec2611b841c4169eb5ef5a5d3 |
+| src/database.py | 12218 | 3d0393cb4a36f306eba5bab06eb98741625845838da3b490c9ead8139ffb6c3a |
 | src/decision.py | 6090 | e2831ac984f2db0559ad6d27826583ae51c6d48c7536b1cc65a82deb295120c6 |
 | src/evt.py | 3391 | b55185e4f13279376a310d8fa7f8e9db235307521fa757322964060cf5fe18e8 |
 | src/figures.py | 4973 | 4440a979a460563e51452b41c0155da6bc2f4db372a46a7321a04f423e75efd7 |
@@ -109,7 +109,7 @@ Virtual environments, secrets, intermediate deck builds and external QA render d
 | src/reporting.py | 42235 | 74a74a191b27a003ea87557a22d1d8a34cf99810f3b1dfb76558e06e7a27873d |
 | src/risk.py | 3920 | 603ea775be3877b95d5128bf909b054168e21727ffa838081382c7d2fa300b40 |
 | src/stress.py | 3244 | 7a7ef52a33b7d3fb48cbacd9c6e43b02af1d11374c21b040e6a164db17ccf0bd |
-| src/ui.py | 25583 | 7f31ddfe342fffcfde7c4dc58e29c3c2dfc55c31e61f5fd96c9f41eda5f06acb |
-| tests/test_database.py | 4285 | bbc977869db9cab561be3bc5277c67e4c23558e3e4c53ffbe6ce6d9d894ff60b |
+| src/ui.py | 25909 | d81041e8e22e52736615d03b1926d73b8db9be34851ec219588957ee1b791199 |
+| tests/test_database.py | 4645 | 80bb65683b966d44971ba776f66ae0d90c3d552e2bfea6fad7de1ae18a284593 |
 | tests/test_integration.py | 2623 | bdffa0d31a01610938b6830cfcddf40e7d306c2686d583060328272cb922c781 |
 | tests/test_quant.py | 5300 | e1251b9da49246be8b9f2bea3aef27457e9157596bc92ac8def210da45310832 |

@@ -28,6 +28,9 @@ def saved_allocations_panel(w):
     if store is None:
         return
     with st.expander("Saved research allocations"):
+        if os.environ.get("AEGIS_READONLY_DATABASE") == "1":
+            st.info("This free deployment uses a read-only SQLite research database rebuilt from verified source snapshots on restart. Allocation experiments work in your current session. Shared saves require a persistent external database.")
+            return
         st.caption("Saved proposals are shared research records. They do not change the approved snapshot or the fixed backtest. Only the configured team administrator can save records.")
         version = research_version()
         records = store.list_allocations(version)

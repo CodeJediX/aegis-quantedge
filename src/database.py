@@ -196,6 +196,8 @@ class ResearchStore:
             raise DatabaseUnavailable("Persistent database status is unavailable.") from None
 
     def save_allocation(self, version, name, weights):
+        if os.environ.get("AEGIS_READONLY_DATABASE") == "1":
+            raise ValueError("Saving is disabled on this read-only research deployment.")
         weights = validate_weights(weights)
         name = str(name).strip()
         if not name or len(name) > 80:

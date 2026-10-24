@@ -1,5 +1,6 @@
 """Meaningful SQL persistence checks against the actual versioned research inputs."""
 import json
+import os
 import tempfile
 import unittest
 from pathlib import Path
@@ -57,6 +58,12 @@ class DatabaseTests(unittest.TestCase):
             self.store.save_allocation(self.version, "bad", np.ones(7))
         with self.assertRaises(ValueError):
             self.store.save_allocation(self.version, " ", np.ones(7) / 7)
+        self.assertEqual(self.store.list_allocations(self.version), [])
+
+    def test_readonly_deployment_cannot_save(self):
+        with patch.dict(os.environ, {"AEGIS_READONLY_DATABASE": "1"}):
+            with self.assertRaisesRegex(ValueError, "read-only"):
+                self.store.save_allocation(self.version, "Not allowed", np.ones(7) / 7)
         self.assertEqual(self.store.list_allocations(self.version), [])
 
     def test_corrupt_evidence_is_rejected(self):
