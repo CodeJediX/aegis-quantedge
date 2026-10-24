@@ -1,0 +1,9 @@
+component,value,proposed_limit,status,direction
+Net OOS annual volatility,0.0663957191624,0.1,Within,maximum
+Net OOS drawdown,0.0611705452713,0.15,Within,maximum
+Current daily historical ES99,0.0131011139112,0.025,Within,maximum
+Worst replay/scenario loss,0.15226699473,0.15,Review,maximum
+Worst historical replay drawdown,0.175192060208,0.15,Review,maximum
+Largest holding,0.7,0.7,Within,maximum
+Net OOS CAGR,0.099919265821,0.04,Within,minimum
+Historical VaR99 conditional coverage p,0.836752691419,0.05,No rejection,diagnostic

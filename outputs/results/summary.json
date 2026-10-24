@@ -1,0 +1,131 @@
+{
+  "team": "Quantum-X",
+  "brand": "AEGIS",
+  "data": {
+    "n_prices": 5470,
+    "n_returns": 5469,
+    "start": "2005-01-03",
+    "end": "2026-09-30",
+    "missing": {
+      "SPY": 0,
+      "EFA": 0,
+      "EEM": 0,
+      "AGG": 0,
+      "GLD": 0,
+      "XLE": 0,
+      "XLK": 0
+    },
+    "dropped_rows": 0,
+    "max_abs_log_return": {
+      "SPY": 0.13557744156523463,
+      "EFA": 0.14745084552107515,
+      "EEM": 0.20514109494150867,
+      "AGG": 0.07084593314096303,
+      "GLD": 0.1084123374487409,
+      "XLE": 0.224909744121379,
+      "XLK": 0.1486626061257053
+    },
+    "flags": 374,
+    "training_end": "2018-12-31",
+    "common_calendar_note": "Intersection of valid Yahoo dates; no independent exchange-calendar verification",
+    "fred_note": "Strictly lagged current-vintage DTB3, not a vintage-correct forecast dataset"
+  },
+  "capital": 10000000,
+  "seed": 20261024,
+  "train_end": "2018-12-31",
+  "development_end": "2022-12-31",
+  "test_start": "2023-01-03",
+  "test_end": "2026-09-30",
+  "n_train": 3522,
+  "n_test": 939,
+  "candidate": "AEGIS minimum variance",
+  "weights": {
+    "SPY": 0.1173300527,
+    "EFA": 0.0,
+    "EEM": 0.0,
+    "AGG": 0.7000000000000001,
+    "GLD": 0.1,
+    "XLE": 0.0,
+    "XLK": 0.0826699473
+  },
+  "training_expected_arithmetic": 0.06980907532208827,
+  "training_volatility": 0.05180950451310469,
+  "assumed_nominal_objective": 0.04,
+  "assumed_inflation": 0.025,
+  "investment_horizon": "10+ years; annual governance review",
+  "out_of_sample": {
+    "period": "Test",
+    "portfolio": "AEGIS minimum variance",
+    "CAGR": 0.09991926582102173,
+    "arithmetic_return": 0.09745508865755799,
+    "volatility": 0.06639571916240548,
+    "Sharpe": 0.7887969053016377,
+    "Sortino": 1.153474253993928,
+    "Treynor": 0.1722511265842395,
+    "Jensen_alpha": 0.002508978575765929,
+    "information_ratio": -0.6948468144660279,
+    "max_drawdown": 0.06117054527127397,
+    "Calmar": 1.633453901349223,
+    "beta": 0.3040487388334681,
+    "cumulative_return": 0.42599582122668256,
+    "annual_turnover": 0.8754235130542383
+  },
+  "latest_window_start": "2023-09-26",
+  "latest_window_end": "2026-09-30",
+  "evt_fit": {
+    "threshold": 0.004277212349075684,
+    "threshold_q": 0.9,
+    "shape": -0.18913400255741125,
+    "scale": 0.003493762229149308,
+    "n": 756,
+    "exceedances": 76,
+    "p_exceed": 0.10052910052910052,
+    "finite_ES": true,
+    "warning": "Serial tail clustering and threshold uncertainty remain; no iid precision claim"
+  },
+  "evt_bootstrap": {
+    "repetitions": 150,
+    "valid": 150,
+    "block": 20,
+    "shape_CI": [
+      -0.4536902058931783,
+      0.08985880036481368
+    ],
+    "VaR99_CI": [
+      0.008978489557346139,
+      0.012143869111295733
+    ],
+    "ES99_CI": [
+      0.010755299021146322,
+      0.013866023006786583
+    ],
+    "note": "Circular block percentile interval refits threshold and GPD; not a guarantee of coverage"
+  },
+  "regime_comparison": {
+    "mean_difference": 0.1321285322598504,
+    "CI": [
+      -0.11064741307462983,
+      0.39406594334344114
+    ],
+    "block": 20,
+    "n": 939,
+    "meaning": "Negative favours volatility-state model; paired conditional block diagnostic"
+  },
+  "MC_ES99_standard_error": 6.79432086729525e-05,
+  "proposal_status": "ADJUST mandate / pending independent human-team review",
+  "policy_reviews": [
+    "Worst replay/scenario loss",
+    "Worst historical replay drawdown"
+  ],
+  "rejected_alternatives": "Equal weight and 60/40 exceed proposed equity budget; mean-variance mean estimates are uncertain",
+  "versions": {
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "scipy": "1.15.3",
+    "statsmodels": "0.15.0",
+    "streamlit": "1.50.0",
+    "plotly": "6.3.1",
+    "yfinance": "0.2.66",
+    "reportlab": "4.5.1"
+  }
+}

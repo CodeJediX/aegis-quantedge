@@ -1,0 +1,7 @@
+{
+  "source": "FRED DTB3",
+  "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DTB3&cosd=2004-12-01&coed=2026-09-30",
+  "retrieved_utc": "2026-10-24T12:29:17.328846+00:00",
+  "sha256": "40897a0518d118159f8af98fa4e57b124bec9ceb419bed747e838b7195594eb2",
+  "basis": "bank discount yield"
+}

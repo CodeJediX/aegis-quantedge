@@ -1,0 +1,29 @@
+{
+  "n_prices": 5470,
+  "n_returns": 5469,
+  "start": "2005-01-03",
+  "end": "2026-09-30",
+  "missing": {
+    "SPY": 0,
+    "EFA": 0,
+    "EEM": 0,
+    "AGG": 0,
+    "GLD": 0,
+    "XLE": 0,
+    "XLK": 0
+  },
+  "dropped_rows": 0,
+  "max_abs_log_return": {
+    "SPY": 0.13557744156523463,
+    "EFA": 0.14745084552107515,
+    "EEM": 0.20514109494150867,
+    "AGG": 0.07084593314096303,
+    "GLD": 0.1084123374487409,
+    "XLE": 0.224909744121379,
+    "XLK": 0.1486626061257053
+  },
+  "flags": 374,
+  "training_end": "2018-12-31",
+  "common_calendar_note": "Intersection of valid Yahoo dates; no independent exchange-calendar verification",
+  "fred_note": "Strictly lagged current-vintage DTB3, not a vintage-correct forecast dataset"
+}

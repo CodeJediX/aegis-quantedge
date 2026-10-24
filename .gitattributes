@@ -1,0 +1,6 @@
+# Preserve exact snapshot and manifest bytes on Windows and Linux.
+* -text
+*.pdf binary
+*.docx binary
+*.pptx binary
+*.png binary

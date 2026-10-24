@@ -1,0 +1,132 @@
+[
+  {
+    "check": "startup",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "page: Executive Command Center",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "page: Market Intelligence",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "page: Portfolio Construction",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "page: Risk Analytics",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "page: EVT & Tail-Risk Laboratory",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "page: Backtesting & Validation",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "page: Crisis Simulation Studio",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "page: Portfolio Decision Lab",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "page: AI Research Assistant",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "page: Investment Committee Reports",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "page: Assumptions & Limitations",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "page: Methodology, Sources & AI Disclosure",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "confidence 0.9",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "confidence 0.95",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "confidence 0.99",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "lookback 252",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "lookback 504",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "lookback 756",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "lookback 1260",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "alternative portfolio",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "EVT selector",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "unsupported EVT90 handled",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "threshold .95",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "malformed weight sum handled",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "backtest date control",
+    "passed": true,
+    "exceptions": []
+  }
+]

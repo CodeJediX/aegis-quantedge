@@ -1,0 +1,17 @@
+{
+  "source": "Yahoo Finance through yfinance.download, Adj Close",
+  "retrieved_utc": "2026-10-24T12:29:14.331847+00:00",
+  "tickers": [
+    "SPY",
+    "EFA",
+    "EEM",
+    "AGG",
+    "GLD",
+    "XLE",
+    "XLK"
+  ],
+  "start": "2005-01-01",
+  "end_exclusive": "2026-10-01",
+  "sha256": "7948d99f7ba6b79b6c8425ecd48482d76d914115088adc84c3c8ff90df0f2af1",
+  "yfinance_version": "0.2.66"
+}

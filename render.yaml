@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: aegis-quantedge
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python scripts/bootstrap_database.py && streamlit run app.py --server.address 0.0.0.0 --server.port $PORT --server.headless true
+    healthCheckPath: /_stcore/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: AEGIS_DATABASE_URL
+        sync: false
+      - key: AEGIS_ADMIN_KEY
+        generateValue: true
+      - key: AEGIS_REQUIRE_DATABASE
+        value: "1"
+      - key: OPENBLAS_NUM_THREADS
+        value: "1"
+      - key: OMP_NUM_THREADS
+        value: "1"

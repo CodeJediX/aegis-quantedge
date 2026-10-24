@@ -1,0 +1,256 @@
+[
+  {
+    "title": "AEGIS",
+    "body": "Capital preservation research\nQuantum-X \u00b7 Serendib University Endowment\nUSD 10 million proposed mandate",
+    "notes": "Introduce the mandate and identify this as an AI-assisted proposal pending independent team review. The objective is a defensible loss budget, not the highest backtested return.",
+    "seconds": 35,
+    "chart": null,
+    "table": null
+  },
+  {
+    "title": "The investment decision",
+    "body": "ADJUST the mandate before funding\nResolve stress tolerance and the spending objective",
+    "notes": "The final brief asks for a decision. Explain that low daily volatility alone does not justify accepting the mandate. A 15% proposed drawdown limit conflicts with the replay evidence.",
+    "seconds": 50,
+    "chart": null,
+    "table": null
+  },
+  {
+    "title": "A conservative policy framework",
+    "body": "10+ year horizon \u00b7 provisional 4% nominal objective\nAGG 35\u201370% \u00b7 gold 5\u201320% \u00b7 equities 20\u201350%\nNo leverage; daily rebalancing is a research assumption",
+    "notes": "The 4% objective assumes 2.5% inflation, about 1.46% real growth before spending. No client payout rate was supplied. Constraints are our proposed assumptions for human review, not confirmed instructions.",
+    "seconds": 55,
+    "chart": null,
+    "table": null
+  },
+  {
+    "title": "Data before decisions",
+    "body": "5,470 aligned adjusted closes \u00b7 seven eligible ETFs\nTraining through 2018 \u00b7 development 2019\u20132022\nTest 2023-01-03 to 2026-09-30",
+    "notes": "Sources: approved Yahoo through yfinance and FRED DTB3. No missing returned aligned cells. Flags are retained. Rates are strictly lagged but current vintage. This is a retrospective chronological experiment, not a preregistered live record. See documentation/Sources.md.",
+    "seconds": 55,
+    "chart": null,
+    "table": null
+  },
+  {
+    "title": "The proposed allocation",
+    "body": "Training variance minimization\nThe AGG cap binds; bond concentration remains a risk",
+    "notes": "Explain sample covariance with 10% diagonal shrinkage, the constraints, and why zero international/energy weights are allowed. Geographic diversification was not forced. These weights need team review.",
+    "seconds": 60,
+    "chart": {
+      "categories": [
+        "SPY",
+        "EFA",
+        "EEM",
+        "AGG",
+        "GLD",
+        "XLE",
+        "XLK"
+      ],
+      "series": [
+        {
+          "name": "Weight (%)",
+          "values": [
+            11.733005270000001,
+            0.0,
+            0.0,
+            70.0,
+            10.0,
+            0.0,
+            8.26699473
+          ]
+        }
+      ]
+    },
+    "table": null
+  },
+  {
+    "title": "Return is one part of suitability",
+    "body": "AEGIS net held-out CAGR 9.99%\nAnnual volatility 6.64% \u00b7 drawdown 6.12%",
+    "notes": "Compare all alternatives without choosing the best test outcome. Costs are 10bp per dollar of absolute daily turnover. Benchmark uses the same net accounting. Income adequacy remains untested.",
+    "seconds": 60,
+    "chart": null,
+    "table": [
+      [
+        "Portfolio",
+        "Net CAGR",
+        "Volatility",
+        "Max DD"
+      ],
+      [
+        "AEGIS minimum variance",
+        "9.99%",
+        "6.64%",
+        "6.12%"
+      ],
+      [
+        "Mean variance",
+        "12.78%",
+        "7.81%",
+        "6.49%"
+      ],
+      [
+        "Constrained risk parity",
+        "11.23%",
+        "7.11%",
+        "5.80%"
+      ],
+      [
+        "Equal weight",
+        "19.81%",
+        "11.93%",
+        "12.32%"
+      ],
+      [
+        "60/40 benchmark",
+        "14.16%",
+        "9.62%",
+        "11.29%"
+      ]
+    ]
+  },
+  {
+    "title": "Risk estimates depend on assumptions",
+    "body": "One-day 99% losses on the same portfolio\nGaussian agreement does not establish tail adequacy",
+    "notes": "Historical quantiles retain observed extremes. Parametric normal portfolio log returns and Monte Carlo normal asset log returns aggregate differently; both omit heavy tails. Dollar amounts use constant $10m NAV.",
+    "seconds": 60,
+    "chart": {
+      "categories": [
+        "Historical",
+        "Parametric",
+        "Monte Carlo",
+        "EVT"
+      ],
+      "series": [
+        {
+          "name": "VaR99 (% NAV)",
+          "values": [
+            1.11477334395,
+            0.9191411905970001,
+            0.904463551558,
+            1.08109507646
+          ]
+        },
+        {
+          "name": "ES99 (% NAV)",
+          "values": [
+            1.31011139112,
+            1.05828536329,
+            1.04449682813,
+            1.27098201318
+          ]
+        }
+      ]
+    },
+    "table": null
+  },
+  {
+    "title": "EVT makes uncertainty visible",
+    "body": "90% threshold \u00b7 76 exceedances\nShape -0.189; uncertainty spans zero\nTail laboratory exposes threshold sensitivity",
+    "notes": "Threshold was fixed before the test to provide around 76 exceedances in 756 observations. Explain the GPD excess model, minimum 40 count, ES unavailable for shape at least one, and why a negative point estimate is not a safe loss bound. Source: McNeil/Frey context and SciPy, documentation/Sources.md.",
+    "seconds": 60,
+    "chart": null,
+    "table": null
+  },
+  {
+    "title": "Forecasts precede observed losses",
+    "body": "756 prior observations for every date\nLegacy Basel traffic lights use exactly 250 days at 99%",
+    "notes": "Kupiec tests frequency and Christoffersen tests first-order clustering. Non-rejection is not proof. Last 250 is explicitly separate from the full test. Sources: Kupiec 1995, Christoffersen 1998 and BIS 1996, documentation/Sources.md.",
+    "seconds": 60,
+    "chart": null,
+    "table": [
+      [
+        "99% model",
+        "Exceptions",
+        "Kupiec p",
+        "CC p",
+        "Last250"
+      ],
+      [
+        "EVT",
+        "6",
+        "0.234",
+        "0.474",
+        "Green"
+      ],
+      [
+        "Historical",
+        "8",
+        "0.640",
+        "0.837",
+        "Green"
+      ],
+      [
+        "Monte Carlo",
+        "13",
+        "0.263",
+        "0.445",
+        "Amber"
+      ],
+      [
+        "Parametric",
+        "9",
+        "0.898",
+        "0.909",
+        "Amber"
+      ],
+      [
+        "Volatility state",
+        "15",
+        "0.090",
+        "0.016",
+        "Amber"
+      ]
+    ]
+  },
+  {
+    "title": "Crisis losses challenge the risk budget",
+    "body": "Terminal return can conceal a deeper interim drawdown\nHistorical replay is hindsight exposure, not a live track record",
+    "notes": "Replay actual returns through 2008, COVID and 2022. Contrast terminal return with peak drawdown. The simultaneous funding squeeze is explicitly assumed, with no probability or invented recovery.",
+    "seconds": 60,
+    "chart": {
+      "categories": [
+        "2008 GFC",
+        "2020 COVID",
+        "2022 rates",
+        "Hypothetical funding squeeze"
+      ],
+      "series": [
+        {
+          "name": "Terminal loss (%)",
+          "values": [
+            3.7388750289400003,
+            3.6587567000099996,
+            13.2584374866,
+            15.226699473
+          ]
+        },
+        {
+          "name": "Peak drawdown (%)",
+          "values": [
+            16.657558983599998,
+            11.1282520718,
+            17.5192060208,
+            15.226699473
+          ]
+        }
+      ]
+    },
+    "table": null
+  },
+  {
+    "title": "Useful innovation includes rejection",
+    "body": "Volatility-state score difference +0.132\n95% interval [-0.111, +0.394]\nNo reliable improvement; retain historical baseline",
+    "notes": "Negative FZ0 difference would favour the extension. Its confidence interval crosses zero and its exception clustering is rejected. Demonstrate the evidence ledger, threshold lab, crisis controls and separate policy checks. The deterministic assistant uses no external LLM.",
+    "seconds": 55,
+    "chart": null,
+    "table": null
+  },
+  {
+    "title": "Conditions for a fundable mandate",
+    "body": "Agree crisis tolerance and payout requirement\nValidate an eligible allocation and feasible rebalancing\nHuman team reviews, revises and signs the decision",
+    "notes": "Conclude with ADJUST. If 15% remains binding, require substantiated reallocation or reject this candidate. Limits can be exceeded in the future. No approval, GitHub publication or deployment is fabricated. The team must own and defend the final judgment under brief section 8.7.",
+    "seconds": 50,
+    "chart": null,
+    "table": null
+  }
+]

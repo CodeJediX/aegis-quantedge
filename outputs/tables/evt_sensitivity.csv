@@ -1,0 +1,6 @@
+threshold,threshold_q,shape,scale,n,exceedances,p_exceed,finite_ES,warning,VaR,ES,status
+0.00340551852891,0.85,-0.0353694738597,0.00277432438838,756,114,0.150793650794,True,Serial tail clustering and threshold uncertainty remain; no iid precision claim,0.010583241155,0.0130175915769,estimated
+0.00385421137868,0.875,-0.0756697038159,0.00293597183169,756,95,0.125661375661,True,Serial tail clustering and threshold uncertainty remain; no iid precision claim,0.0106169159517,0.012870618897,estimated
+0.00427721234908,0.9,-0.189134002557,0.00349376222915,756,76,0.100529100529,True,Serial tail clustering and threshold uncertainty remain; no iid precision claim,0.0108109507646,0.0127098201318,estimated
+0.00524775161759,0.925,-0.184139730082,0.00329031571686,756,57,0.0753968253968,True,Serial tail clustering and threshold uncertainty remain; no iid precision claim,0.0107984940688,0.0127139804279,estimated
+,0.95,,,,,,,,,,Insufficient EVT exceedances: 38 < 40
