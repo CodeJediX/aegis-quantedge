@@ -23,9 +23,9 @@ PAGES = [
 ]
 
 
-def main():
+def main(entrypoint="app.py"):
     outcomes = []
-    app = AppTest.from_file(str(ROOT / "app.py"), default_timeout=60).run()
+    app = AppTest.from_file(str(ROOT / entrypoint), default_timeout=60).run()
 
     def check(label):
         errors = [e.message for e in app.exception]
@@ -72,4 +72,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1] if len(sys.argv) > 1 else "app.py")

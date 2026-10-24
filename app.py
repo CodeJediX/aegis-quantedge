@@ -30,6 +30,8 @@ def inputs() -> tuple:
     store = active_store()
     if os.environ.get("AEGIS_REQUIRE_DATABASE") == "1" and store is None:
         raise DatabaseUnavailable("Hosted database configuration is required for this deployment.")
+    if store is not None and not store.postgres and os.environ.get("AEGIS_READONLY_DATABASE") == "1":
+        store.seed()
     for filename, metadata in [
         ("adjusted_prices.csv", "prices.json"),
         ("DTB3.csv", "fred.json"),
