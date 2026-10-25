@@ -16,16 +16,16 @@ Virtual environments, secrets, intermediate deck builds and external QA render d
 |---|---:|---|
 | .env.example | 537 | 50ec68cfd61646ec3611f1b4ef8ab0ba51909431b326879bd35377708f9b28ea |
 | .gitattributes | 129 | 5cfc825676fbb0cd1e7b381f9aeadea517cb70e9a59f9e981babc5dc2073f7bd |
-| .gitignore | 125 | 6bec6d82c3cde22b714c365e94a5ede8958c02588a809688857b4b6503cb809e |
-| .streamlit/config.toml | 214 | 5aebd9a63a3346345b1a7826f9f148dc326f904ad71c13fa9ac0eb384996da26 |
-| app.py | 6473 | 9e729fabf77d5634829bd914e361ca3e4dcd960b1c63b47cbc54b987e46026f5 |
-| assets/style.css | 1600 | 459859d4a0491e9f0d281fe6e35cebd54acb6e1747116bee96940c6e27f9fece |
+| .gitignore | 158 | b593906cfc9d68d75709e07c9d57f13d0869b6143fcbad7649dc86b9c0a116af |
+| .streamlit/config.toml | 214 | ae66df6dbf9ef84583adde9931143187d9ae7ae243a6dde7292095e8d6758f9a |
+| app.py | 8179 | 67ff6d229c8882f45610693e3e013805094313aa67f9df8bf45beab48d6c6bbc |
+| assets/style.css | 5650 | c5c7d8c53ed56a1b392549f8fe90503fc8e5b1840a41ec7908d86e39235e52a7 |
 | data/metadata/fred.json | 302 | b1bb1b8aa1d13460942ec2e31244d84369e19c0bf1dd5abc48ab8de64e21cef3 |
 | data/metadata/prices.json | 405 | 7748ac014c2bafaf3f333254958900fe5e7d56faf1bc1abb0e7c8f5c3e5a6e9c |
 | data/README.md | 760 | 0fc146e39879a0fa43b7615789abcc17e237a6848990ce6377d7901c4d1dfd0c |
 | data/snapshots/adjusted_prices.csv | 595496 | 7948d99f7ba6b79b6c8425ecd48482d76d914115088adc84c3c8ff90df0f2af1 |
 | data/snapshots/DTB3.csv | 95398 | 40897a0518d118159f8af98fa4e57b124bec9ceb419bed747e838b7195594eb2 |
-| documentation/AI_Disclosure.md | 1697 | 284ad4308573315b92d433f93b437673788c6b916b88cb75fbfed46910a5d76e |
+| documentation/AI_Disclosure.md | 2043 | 6e668a571a4fbd27a23fb7f30a0d51f644591fe74b1e4f1c5a1b65da7b7ca4e0 |
 | documentation/Assumptions_and_Limitations.md | 6226 | cceb0732c7432d9cb6468eb7fe442f4a86000eac36f2961c1a1f654a67ebbc11 |
 | documentation/Data_Governance.md | 2020 | c728825016b102ed96749edb17ef7ce8a7a1d8f48311cc786991bdd7cb8a7f8b |
 | documentation/Deployment_Guide.md | 2489 | c8ecf262bfaa15e882fadad3d93f769bcfeffbf29caa79ee320a70a56af3eb40 |
@@ -34,10 +34,10 @@ Virtual environments, secrets, intermediate deck builds and external QA render d
 | documentation/Judges_QA.md | 6558 | 3b9ba2526319d30901ffa942fe9d7f2d8d44536bd3f93bcde63bb3f1629a84f7 |
 | documentation/Methodology.md | 4125 | 5cfd8e1140f23aecd73ac1101ddad00a3c5d43d9ca2751f9742ce016c6f2e2fc |
 | documentation/Prior_Work_Audit.md | 1656 | 130911efcfbba63d4e6f15e600af5e7300379f7d12464c851bbd02d50db83e66 |
-| documentation/Requirements_Traceability.md | 6422 | d17848aa315209256040c215859b908055823cb87df8e9a83e280ae77e495f5e |
+| documentation/Requirements_Traceability.md | 6681 | f651701dc418e685f92f5fdcb3f6c29ed26d6610a32f7942f88c40dfde7914ec |
 | documentation/Sources.md | 3160 | c5ea5cb5bc714cdc243a6b5ab2390bc0e379af958464396b45735bf0de5ceffb |
 | documentation/Team_Approval_Checklist.md | 1391 | 256a0fece2a24a24754383e797a61fdda6c4dd8f8bbae88c80ace2bea34507c8 |
-| documentation/Testing_and_Validation.md | 8468 | 5aa64b7d35c49c053829c9f9471e6fe22c9728e9a8796899907caaf2a476f2d6 |
+| documentation/Testing_and_Validation.md | 9869 | dfaf3b6ab7b8f6cc58ae3f1e40d3ce3bf16e6ef683f68a318b1092dfbd99228e |
 | hosted_app.py | 580 | 3857e07b6a06ed5fb17f92f9017c6eaf2ca5099b2d50c01759659316898cee8c |
 | outputs/figures/allocation.png | 31191 | a9759d848a851dd67597da1ecfd56ef7341966c85f8c3e37b3c38ad9e731669a |
 | outputs/figures/backtest.png | 135847 | 07bba54b2f55f64f0c36571841e36777bfce07baccf4a4fa0234238fc1928751 |
@@ -46,7 +46,7 @@ Virtual environments, secrets, intermediate deck builds and external QA render d
 | outputs/figures/performance.png | 203398 | c07d0327deedc5178a21617279df8c34a719deebc9e1df9fc8f1fa350f3fe8c9 |
 | outputs/figures/risk.png | 38657 | 34bc62d2c0fc12a34e7aa347aa467160d4b1b0e8988279e5781e98ccccb2687e |
 | outputs/figures/stress.png | 40249 | 3432a3d316f50c59dd98369da2f6f3e0822a10b9c8484515433cd99256b321e6 |
-| outputs/results/app_checks.json | 2452 | 3b71b517450c454260f97ae8aef000975454fecb287b913868f7b6e3941ba1be |
+| outputs/results/app_checks.json | 2660 | 3f4058b9c5541a57d79708bc159f3869db4526f03405901f43b4e0e314120ebd |
 | outputs/results/data_audit.json | 760 | c8f676d9d716c88fe7e0bbe29ae02b3b033d60854494c5a41f548ddac98230f1 |
 | outputs/results/summary.json | 3900 | 034204771912a52409eb3118c2579c0fb19a19a597fe981d77f7c755e00d1013 |
 | outputs/tables/adf.csv | 555 | dfe74f476beb9c22575f0bb6901a52884dc88701f2da60c54c19c8afc1eac575 |
@@ -91,9 +91,9 @@ Virtual environments, secrets, intermediate deck builds and external QA render d
 | scripts/bootstrap_database.py | 648 | adbadf76aec9e68b558e4e16ebf0362b0bdad6880dbc3be5106bc459c58261f2 |
 | scripts/build_pitch.mjs | 5546 | 44d7efbb19a80c9be3468247c750a1bf5b258c3e146bcdd04b10845ba93e452c |
 | scripts/build_word_report.py | 6306 | ec2319343d3783f46ddf38670e0ba13c613ed6e94faf90c9f9cc0765802a0b35 |
-| scripts/check_app.py | 2720 | d88a81965a486c8ed9b522ab1f5375ac7741fd6456ee5a10dfed12062ccc39bf |
+| scripts/check_app.py | 3330 | fb76edd1b53aed5b35f442f2c47c8213ca4e6348658e86e7565ceb5ea1daf7e0 |
 | scripts/check_database_app.py | 2693 | 2f000cc8a575c1bb2c5d88e8e60b8ac1c60580978f4b8a8cd60a25e8abac8086 |
-| scripts/package_submission.py | 4323 | f62030815b0fa6eb7cbe37d5b1cd037feb915ed62c5db2a9f9cb4998fa86badd |
+| scripts/package_submission.py | 4449 | 5c360e6de0fc078e2f2fe57431c772c7f4535f59f6661f65596155382ef41b19 |
 | scripts/prepare_qa.py | 8671 | b772441f1d801248ed01a290afbf875bfc8277351b6ecf03bbff2433212ed116 |
 | scripts/rehearsal.py | 8813 | a8287aa7e6418a86bbe2d29dbcc0a91f96e6c7ff72bb941ff5fade0318763e07 |
 | scripts/render_pitch_pdf.py | 622 | 1c56143674c98017fef4a015a7c3add5993844526bec92250f8e4fb65c61dd91 |
@@ -110,7 +110,7 @@ Virtual environments, secrets, intermediate deck builds and external QA render d
 | src/reporting.py | 42235 | 74a74a191b27a003ea87557a22d1d8a34cf99810f3b1dfb76558e06e7a27873d |
 | src/risk.py | 3920 | 603ea775be3877b95d5128bf909b054168e21727ffa838081382c7d2fa300b40 |
 | src/stress.py | 3244 | 7a7ef52a33b7d3fb48cbacd9c6e43b02af1d11374c21b040e6a164db17ccf0bd |
-| src/ui.py | 25909 | d81041e8e22e52736615d03b1926d73b8db9be34851ec219588957ee1b791199 |
+| src/ui.py | 30215 | 16feaed065a449a0ee0b4b755d3f720af0fdfbb2fd4e83ce2ec001226b910d4a |
 | tests/test_database.py | 4645 | 80bb65683b966d44971ba776f66ae0d90c3d552e2bfea6fad7de1ae18a284593 |
 | tests/test_integration.py | 2623 | bdffa0d31a01610938b6830cfcddf40e7d306c2686d583060328272cb922c781 |
 | tests/test_quant.py | 5300 | e1251b9da49246be8b9f2bea3aef27457e9157596bc92ac8def210da45310832 |

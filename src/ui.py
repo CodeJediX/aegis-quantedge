@@ -17,6 +17,11 @@ from .backtesting import summarize
 from .database import active_store, research_version, release_table, DatabaseUnavailable
 
 COLORS = ["#55CCB0", "#D8B76E", "#91B8D3", "#CE846B", "#B4A4CE", "#6EABB4", "#B5C6A2"]
+px.defaults.color_discrete_sequence = COLORS
+
+
+def open_workspace(page):
+    st.session_state["page"] = page
 
 
 def read(name: str) -> pd.DataFrame:
@@ -29,7 +34,7 @@ def saved_allocations_panel(w):
         return
     with st.expander("Saved research allocations"):
         if os.environ.get("AEGIS_READONLY_DATABASE") == "1":
-            st.info("This free deployment uses a read-only SQLite research database rebuilt from verified source snapshots on restart. Allocation experiments work in your current session. Shared saves require a persistent external database.")
+            st.info("Your allocation experiments stay in this session. Download a copy from Build a portfolio to keep your weights. Shared online saving is unavailable on this deployment.")
             return
         st.caption("Saved proposals are shared research records. They do not change the approved snapshot or the fixed backtest. Only the configured team administrator can save records.")
         version = research_version()
@@ -66,16 +71,18 @@ def pct(x):
 def chart(fig) -> None:
     fig.update_layout(
         template="plotly_dark",
-        paper_bgcolor="#0C1822",
-        plot_bgcolor="#0C1822",
-        font=dict(family="Segoe UI", color="#DCE9EF"),
+        paper_bgcolor="#0E1C21",
+        plot_bgcolor="#0E1C21",
+        font=dict(family="Segoe UI", color="#DCE9EF", size=12),
+        title=dict(font=dict(family="Georgia", size=20, color="#EDF3F1"), x=0.01),
         colorway=COLORS,
-        margin=dict(l=15, r=20, t=45, b=25),
+        margin=dict(l=18, r=24, t=58, b=30),
         legend=dict(orientation="h", y=-0.2),
         height=370,
+        hoverlabel=dict(bgcolor="#162A30", font_color="#EDF3F1"),
     )
     fig.update_xaxes(showgrid=False)
-    fig.update_yaxes(gridcolor="#263E4D")
+    fig.update_yaxes(gridcolor="#243B42", zerolinecolor="#3A565E")
     st.plotly_chart(fig, use_container_width=True)
 
 
@@ -132,11 +139,11 @@ def render(page, s, prices, r, rf, alloc, w, name, a, method, lookback, dates) -
     chosen = risk[risk.model == method]
     if page == "Executive Command Center":
         lede(
-            "Protect the endowment’s capacity to fund its mission. AEGIS compares allocation choices with measured tail losses, rolling model validation and crisis replays."
+            "Explore a diversified seven-ETF portfolio through performance, downside risk, model validation and real crisis replays. Every figure comes from a fixed historical dataset."
         )
         row = chosen.iloc[0] if len(chosen) else None
         cols = st.columns(4)
-        for c, label, value in zip(
+        for c, label, value, explanation in zip(
             cols,
             [
                 "Held-out net CAGR",
@@ -150,11 +157,17 @@ def render(page, s, prices, r, rf, alloc, w, name, a, method, lookback, dates) -
                 pct(row.VaR) if row is not None else "N/A",
                 pct(row.ES) if row is not None else "N/A",
             ],
+            [
+                "Compound annual growth after modeled costs over the held-out test period. Past performance does not predict future returns.",
+                "Largest peak-to-trough loss within the held-out test period, starting from its initial portfolio value.",
+                "One-day loss cutoff at the selected confidence level. Losses can exceed this estimate.",
+                "Expected shortfall: estimated average one-day loss in the worst tail at the selected confidence level.",
+            ],
         ):
-            c.metric(label, value)
+            c.metric(label, value, help=explanation)
         if row is not None:
             st.caption(
-                f'{name} · {method} · {lookback} prior returns as of {s["data"]["end"]} · VaR USD {row.VaR*NAV:,.0f}; ES USD {row.ES*NAV:,.0f}'
+                f'{name} · {method} · {lookback} prior returns · USD 10m reference value · VaR USD {row.VaR*NAV:,.0f} · ES USD {row.ES*NAV:,.0f}'
             )
         left, right = st.columns([1.6, 1])
         with left:
@@ -176,11 +189,19 @@ def render(page, s, prices, r, rf, alloc, w, name, a, method, lookback, dates) -
                     title="Target allocation",
                 )
             )
-        st.subheader("Decision proposal: adjust the mandate")
-        st.write(
-            "Use the constrained minimum-variance allocation as a starting proposal. Approve the risk limits and spending assumptions before funding; the stress losses and estimated tail losses are not capital guarantees."
+        st.markdown('<div class="section-label">CHOOSE YOUR NEXT STEP</div>', unsafe_allow_html=True)
+        actions = st.columns(3)
+        for col, label, target in zip(actions,
+            ["Build a portfolio →", "Compare downside risk →", "Replay a market crisis →"],
+            ["Portfolio Construction", "Risk Analytics", "Crisis Simulation Studio"]):
+            col.button(label, on_click=open_workspace, args=(target,), use_container_width=True)
+        st.markdown(
+            '<div class="review-note"><strong>Portfolio status · review before adoption</strong>'
+            '<p>The minimum-variance allocation is a research starting point. Historical crisis loss exceeds the proposed 15% tolerance, so risk limits, spending needs and implementation must be approved before funding.</p></div>',
+            unsafe_allow_html=True,
         )
-        table(read("scorecard"))
+        with st.expander("See the full decision scorecard"):
+            table(read("scorecard"))
     elif page == "Market Intelligence":
         lede(
             "One approved universe, one common calendar. Large market moves remain in the research sample and are flagged for inspection."
@@ -204,7 +225,7 @@ def render(page, s, prices, r, rf, alloc, w, name, a, method, lookback, dates) -
                 title=f"Return correlations · latest {lookback} observations",
             )
         )
-        with st.expander("Coverage and provenance", expanded=True):
+        with st.expander("Coverage and provenance"):
             table(read("coverage"))
             st.json(s["data"])
             st.json(
@@ -247,11 +268,11 @@ def render(page, s, prices, r, rf, alloc, w, name, a, method, lookback, dates) -
                 st.session_state["custom"] = validate_weights(
                     np.array(values) / 100
                 ).tolist()
-                st.success(
-                    "Custom allocation saved. Select Custom allocation in the sidebar."
-                )
+                st.session_state["_use_custom"] = True
+                st.rerun()
             except ValueError as e:
                 st.error(str(e))
+        st.download_button("Download selected allocation · CSV", pd.DataFrame({"ticker": TICKERS, "weight": w}).to_csv(index=False), file_name="aegis_allocation.csv", mime="text/csv")
         chart(
             px.line(
                 read("frontier"),
@@ -284,7 +305,12 @@ def render(page, s, prices, r, rf, alloc, w, name, a, method, lookback, dates) -
         display["ES USD"] = display.ES * NAV
         display["VaR %"] = display.VaR * 100
         display["ES %"] = display.ES * 100
-        table(display)
+        compact = display[["model", "confidence", "VaR %", "ES %", "VaR USD", "ES USD"]].copy()
+        compact.columns = ["Model", "Confidence", "VaR (%)", "Expected shortfall (%)", "VaR (USD)", "Expected shortfall (USD)"]
+        compact["Confidence"] = compact["Confidence"].map(lambda x: f"{x:.0%}")
+        compact[["VaR (%)", "Expected shortfall (%)"]] = compact[["VaR (%)", "Expected shortfall (%)"]].round(3)
+        compact[["VaR (USD)", "Expected shortfall (USD)"]] = compact[["VaR (USD)", "Expected shortfall (USD)"]].round(0)
+        table(compact)
         chart(
             px.bar(
                 display.melt(id_vars="model", value_vars=["VaR %", "ES %"]),
@@ -300,13 +326,11 @@ def render(page, s, prices, r, rf, alloc, w, name, a, method, lookback, dates) -
             st.info(
                 "EVT unavailable at 90% because the requested quantile is at or below the 90% fitting threshold. Use 95% or 99%."
             )
-        st.write(
-            "Historical risk retains observed tails. Parametric risk assumes a normal portfolio log return. Monte Carlo assumes correlated normal asset log returns with covariance shrinkage. Their agreement is not independent confirmation; both Gaussian approaches can miss heavy tails. EVT extrapolates the loss tail and adds threshold and parameter uncertainty."
-        )
-        table(read("mc_convergence"))
-        st.caption(
-            "Convergence table belongs to the locked 756-day AEGIS reference, not the current allocation experiment."
-        )
+        with st.expander("How to interpret the models"):
+            st.write("Historical risk retains observed tails. Parametric risk assumes a normal portfolio log return. Monte Carlo assumes correlated normal asset log returns with covariance shrinkage. Agreement between the two Gaussian approaches is not independent confirmation. EVT extrapolates the observed loss tail and adds threshold and parameter uncertainty.")
+        with st.expander("Monte Carlo convergence detail"):
+            table(read("mc_convergence"))
+            st.caption("This diagnostic belongs to the locked 756-day AEGIS reference, not the current allocation experiment.")
     elif page == "EVT & Tail-Risk Laboratory":
         lede(
             "A severe-loss estimate is only as credible as its tail sample. Move the threshold to see the loss of observations and the change in fitted shape."
@@ -316,7 +340,11 @@ def render(page, s, prices, r, rf, alloc, w, name, a, method, lookback, dates) -
         )
         loss = -(recent.to_numpy() @ w)
         model = fit(loss, tq)
-        st.json(model)
+        c = st.columns(4)
+        c[0].metric("Tail threshold", pct(model["threshold"]))
+        c[1].metric("Tail observations", f'{model["exceedances"]:,}')
+        c[2].metric("GPD shape", f'{model["shape"]:.3f}')
+        c[3].metric("GPD scale", pct(model["scale"]))
         if a > tq:
             est = estimate(model, a)
             c = st.columns(2)
@@ -350,10 +378,9 @@ def render(page, s, prices, r, rf, alloc, w, name, a, method, lookback, dates) -
             st.warning(
                 "Fewer than 80 exceedances: tail precision is limited. Serial clustering further reduces independent information."
             )
-        table(read("evt_sensitivity"))
-        st.caption(
-            "Saved sensitivity table uses the fixed 756-day candidate. The interactive fit above uses your controls."
-        )
+        with st.expander("Threshold sensitivity and model detail"):
+            table(read("evt_sensitivity"))
+            st.caption("The saved sensitivity table uses the fixed 756-day reference allocation. The interactive fit above uses the current controls.")
     elif page == "Backtesting & Validation":
         lede(
             "Forecast first, observe second. Every threshold uses only the 756 trading days before the date being evaluated."
@@ -372,8 +399,32 @@ def render(page, s, prices, r, rf, alloc, w, name, a, method, lookback, dates) -
         if len(f) == 0:
             st.warning("No forecasts in this date range.")
             return
-        table(summarize(f))
+        validation = summarize(f)
         g = f[f.model == method]
+        selected = validation[validation.model == method]
+        if len(selected):
+            result = selected.iloc[0]
+            traffic = str(result.traffic_last250)
+            css = traffic.lower() if traffic in {"Green", "Amber", "Red"} else "neutral"
+            st.markdown(
+                f'<div class="traffic-line {css}"><span class="traffic-light"></span>'
+                f'<strong>{method}</strong> · last-250 traffic light: {traffic} · '
+                f'{int(result.exceptions)} exceptions across {int(result.n)} forecasts</div>',
+                unsafe_allow_html=True,
+            )
+        st.dataframe(
+            validation[["model", "confidence", "n", "exceptions", "expected", "exception_rate", "kupiec_p", "independence_p", "conditional_p", "traffic_last250"]],
+            hide_index=True, width="stretch",
+            column_config={
+                "model": "Model", "confidence": st.column_config.NumberColumn("Confidence", format="%.2f"),
+                "n": "Forecasts", "exceptions": "Exceptions", "expected": st.column_config.NumberColumn("Expected", format="%.2f"),
+                "exception_rate": st.column_config.NumberColumn("Exception rate", format="%.4f"),
+                "kupiec_p": st.column_config.NumberColumn("Kupiec p-value", format="%.3f"),
+                "independence_p": st.column_config.NumberColumn("Christoffersen independence p", format="%.3f"),
+                "conditional_p": st.column_config.NumberColumn("Conditional coverage p", format="%.3f"),
+                "traffic_last250": "Last-250 traffic light",
+            },
+        )
         if len(g):
             fig = go.Figure()
             fig.add_scatter(
@@ -392,11 +443,13 @@ def render(page, s, prices, r, rf, alloc, w, name, a, method, lookback, dates) -
         st.caption(
             "Full-window traffic light applies only when exactly 250 forecasts at 99% are selected. Last-250 status uses a separate explicit 250-day window. It is a pedagogical Basel classification, not regulatory approval."
         )
-        st.subheader("Regime-aware extension: volatility state")
-        st.json(s["regime_comparison"])
-        st.write(
-            "A short/long volatility ratio scales historical shocks. The paired FZ0 difference is computed on the full fixed test period; negative favours the extension. An interval crossing zero does not support a clear improvement."
-        )
+        st.subheader("Did the volatility-state extension improve the model?")
+        regime = s["regime_comparison"]
+        rc = st.columns(3)
+        rc[0].metric("Mean score difference", f'{regime["mean_difference"]:.3f}')
+        rc[1].metric("95% interval · low", f'{regime["CI"][0]:.3f}')
+        rc[2].metric("95% interval · high", f'{regime["CI"][1]:.3f}')
+        st.write("No clear improvement. Negative values would favour the volatility-state model, but the interval crosses zero. The result is retained as an honest negative finding.")
         st.caption(
             "Lookback and portfolio sidebar controls affect current-risk experiments. The saved backtest uses the locked 756-day AEGIS design; it is never silently relabelled as a custom allocation backtest."
         )
@@ -513,7 +566,7 @@ def render(page, s, prices, r, rf, alloc, w, name, a, method, lookback, dates) -
         )
     elif page == "AI Research Assistant":
         lede(
-            "Evidence guide · no external model, API key or confidential-data transfer."
+            "Plain-language answers grounded in the published calculations. Choose a question to find the relevant evidence and caveats."
         )
         question = st.selectbox(
             "Research question",
@@ -538,28 +591,22 @@ def render(page, s, prices, r, rf, alloc, w, name, a, method, lookback, dates) -
             if question == "What does the backtest say?"
             else read("evidence_ledger")
         )
-        st.info(
-            "This is a deterministic evidence navigator, not a generative AI integration. The optional LLM feature was not added because it is unnecessary for the mandatory analysis."
-        )
+        st.caption("Answers are deterministic and run without an external AI service, API key or transfer of confidential data.")
     elif page == "Investment Committee Reports":
         lede(
             "Committee documents use the locked research candidate. Downloaded reference reports do not change when you explore a custom allocation."
         )
         for folder in ["reports", "presentation"]:
             for file in sorted((ROOT / folder).glob("*")):
-                if file.suffix in [".pdf", ".pptx", ".md"]:
+                if file.suffix in [".pdf", ".docx", ".pptx", ".md"]:
                     st.download_button(
-                        "Download " + file.name,
+                        file.stem.replace("_", " ") + " · " + file.suffix[1:].upper(),
                         data=file.read_bytes(),
                         file_name=file.name,
                         key="download_" + file.name,
                     )
-        st.subheader("Approval record")
-        st.markdown(
-            (ROOT / "documentation/Team_Approval_Checklist.md").read_text(
-                encoding="utf-8-sig"
-            )
-        )
+        with st.expander("Research review and approval record"):
+            st.markdown((ROOT / "documentation/Team_Approval_Checklist.md").read_text(encoding="utf-8-sig"))
     elif page == "Assumptions & Limitations":
         st.markdown(
             (ROOT / "documentation/Assumptions_and_Limitations.md").read_text(

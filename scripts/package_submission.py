@@ -10,6 +10,9 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def include(path: Path) -> bool:
     rel = path.relative_to(ROOT)
+    # A locally extracted copy must never be repackaged inside itself.
+    if rel.parts[0] == ROOT.name:
+        return False
     if any(
         p in {"__pycache__", ".git", ".venv", "venv", ".deck_build"} for p in rel.parts
     ):

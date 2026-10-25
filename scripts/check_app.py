@@ -33,6 +33,9 @@ def main(entrypoint="app.py"):
         assert not errors, (label, errors)
 
     check("startup")
+    next(button for button in app.button if button.label == "Compare downside risk →").click().run()
+    assert app.selectbox(key="page").value == "Risk Analytics"
+    check("overview navigation action")
     for page in PAGES:
         app.selectbox(key="page").set_value(page).run()
         check("page: " + page)
@@ -57,6 +60,12 @@ def main(entrypoint="app.py"):
     app.button[0].click().run()
     check("malformed weight sum handled")
     assert len(app.error) > 0, "Malformed allocation should show an actionable error"
+    for ticker in ["SPY", "EFA", "EEM", "AGG", "GLD", "XLE", "XLK"]:
+        app.number_input(key="weight_" + ticker).set_value(50.0 if ticker in ["SPY", "AGG"] else 0.0)
+    app.button[0].click().run()
+    assert app.selectbox(key="portfolio").value == "Custom allocation"
+    assert app.session_state["custom"] == [0.5, 0.0, 0.0, 0.5, 0.0, 0.0, 0.0]
+    check("valid allocation automatically applies")
     app.selectbox(key="page").set_value("Backtesting & Validation").run()
     app.selectbox(key="confidence").set_value(0.99).run()
     import datetime

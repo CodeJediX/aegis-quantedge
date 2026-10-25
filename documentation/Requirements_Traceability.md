@@ -15,8 +15,8 @@ Authority: supplied October 2026 ten-page final challenge. Page references below
 | O09 | Stress panel; p6 | stress.historical, Crisis Simulation Studio | Actual paths and contribution checks |
 | O10 | Dedicated Assumptions & Limitations page; p6 | route and full documentation | Navigation tested; report limitations page |
 | O11 | Free toolkit, no paid-data/compute advantage; p6 | requirements; approved snapshots; no external LLM | Mandatory features operate without secrets |
-| O12 | Public/judge-accessible GitHub repository; p6 | Git-ready source, .gitignore, Deployment_Guide | **External action outstanding: team must publish URL** |
-| O13 | Deployed or one-command local app; p6 | streamlit run app.py | Local startup executed; deployment optional |
+| O12 | Public/judge-accessible GitHub repository; p6 | https://github.com/CodeJediX/aegis-quantedge | Public repository verified 25 October 2026 |
+| O13 | Deployed or one-command local app; p6 | https://quantumx-aegis.streamlit.app/; streamlit run app.py | Public deployment and local startup verified |
 | O14 | 7–15-page technical report/memo; p6 | reports/Technical_Report.pdf | 13 pages including cover/references; render checks |
 | O15 | One-page executive tear sheet; p6 | reports/Executive_Tear_Sheet.pdf | One-page count and render review |
 | O16 | 10–12-minute pitch/deck for finalists; p6 | presentation/Final_Pitch.pptx and PDF, Speaker_Notes | 12 native slides; 11-minute script; live rehearsal pending |
@@ -36,7 +36,7 @@ Authority: supplied October 2026 ten-page final challenge. Page references below
 | O30 | Flag suspicious prices, do not silently delete; p9 | data_flags.csv with large/flat/break labels | Retained flags, zero undocumented edits |
 | O31 | ADF and reproducible cleaning; p9 | statsmodels ADF, data pipeline | Training-only results and repeatable snapshot |
 | O32 | Decision30/technical25/software15/innovation15/communication15; p10 | Final_Competition_Audit.md | Evidence-based audit, no invented judge scores |
-| U01 | Twelve specified workspaces and premium design; user | app.py, src/ui, CSS, theme | All12 routes tested; desktop/mobile review |
+| U01 | Twelve specified workspaces and premium design; user | app.py, src/ui, CSS, theme | All12 routes retained with simpler display names; 28 UI checks; desktop/mobile review |
 | U02 | At least25 Q&A and speaker timings; user | Judges_QA.md, Speaker_Notes.md | 30 questions; 660-second target |
 | U03 | Explainable regime extension and honest baseline; user | filtered_forecast, paired_score_ci | Negative finding retained, no ML needed |
 | U04 | Tail stability, replay, evidence ledger; user | EVT lab, crisis controls, evidence_ledger.csv | Functioning controls tested |
@@ -45,4 +45,4 @@ Authority: supplied October 2026 ten-page final challenge. Page references below
 | U07 | Optional LLM only if it adds value; user | Deterministic evidence-guide route | Optional LLM deliberately not added; mandatory app independent |
 | U08 | Complete ZIP/manifest/reproduction/tests; user | scripts/package_submission.py, README, manifest | CRC, size, hashes, clean extracted run; details in validation record |
 
-Scope note: the original Round 1 wavelet/copula portfolio is preserved separately and is not substituted for any final-round requirement. No claim of a paid plagiarism/AI-detection clearance, published repository or human-approved investment decision is made.
+Scope note: the original Round 1 wavelet/copula portfolio is preserved separately and is not substituted for any final-round requirement. No paid plagiarism/AI-detection clearance or human-approved investment decision is claimed. The public product interface retains the reference mandate, seven-ETF universe, five quantitative layers, sidebar controls, explicitly named Assumptions & Limitations page, AI disclosure and pending human-review record.

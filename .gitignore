@@ -11,3 +11,4 @@ venv/
 *.sqlite3
 .env.*
 !.env.example
+/QuantEdge_1.0_Final_Submission/

@@ -4,6 +4,7 @@ import json
 import hashlib
 import io
 import os
+from html import escape
 import numpy as np
 import pandas as pd
 import streamlit as st
@@ -12,10 +13,10 @@ from src.ui import render
 from src.database import active_store, research_version, DatabaseUnavailable
 
 st.set_page_config(
-    page_title="AEGIS | Quantum-X",
+    page_title="AEGIS · Portfolio Intelligence",
     page_icon="◈",
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="auto",
 )
 st.markdown(
     "<style>"
@@ -91,15 +92,25 @@ PAGES = [
     "Assumptions & Limitations",
     "Methodology, Sources & AI Disclosure",
 ]
+PAGE_LABELS = dict(zip(PAGES, [
+    "Overview", "Markets", "Build a portfolio", "Risk comparison", "Tail-risk lab",
+    "Model validation", "Stress testing", "Risk budgets", "Research guide",
+    "Reports & downloads", "Assumptions & Limitations", "Methods & disclosures",
+]))
+PAGE_TITLES = {**PAGE_LABELS, "Executive Command Center": "Your portfolio, in perspective."}
+if st.session_state.pop("_use_custom", False):
+    st.session_state["portfolio"] = "Custom allocation"
 with st.sidebar:
     st.markdown(
-        '<div class="brand">AEGIS</div><div class="micro">QUANTUM-X · CAPITAL PRESERVATION RESEARCH</div>',
+        '<div class="brand-lockup"><span class="brand-mark" aria-hidden="true">◈</span>'
+        '<div><div class="brand">AEGIS</div><div class="brand-sub">PORTFOLIO INTELLIGENCE</div></div></div>',
         unsafe_allow_html=True,
     )
-    st.divider()
-    page = st.selectbox("Research workspace", PAGES, key="page")
+    page = st.selectbox("Workspace", PAGES, format_func=PAGE_LABELS.get, key="page")
+    st.markdown('<div class="sidebar-label">EXPLORE AN ALLOCATION</div>', unsafe_allow_html=True)
     candidate = st.selectbox(
-        "Portfolio", list(alloc.columns) + ["Custom allocation"], key="portfolio"
+        "Portfolio", list(alloc.columns) + ["Custom allocation"], key="portfolio",
+        help="Choose a reference portfolio, or build your own in Build a portfolio. All allocations use the same seven ETFs.",
     )
     alpha = st.selectbox(
         "Confidence level",
@@ -107,41 +118,34 @@ with st.sidebar:
         index=2,
         format_func=lambda x: f"{x:.0%}",
         key="confidence",
+        help="A 99% VaR is a loss cutoff expected to be exceeded on about 1 in 100 days under the model. It is not a maximum loss.",
     )
     method = st.selectbox(
         "VaR methodology",
         ["Historical", "Parametric", "Monte Carlo", "EVT", "Volatility state"],
         key="method",
+        help="Compare all methods in Risk comparison. Each estimates the same one-day loss horizon.",
     )
-    lookback = st.selectbox(
-        "Historical lookback (trading days)",
-        [252, 504, 756, 1260],
-        index=2,
-        key="lookback",
-    )
-    dates = st.date_input(
-        "Backtesting date range",
-        value=(
-            pd.Timestamp(s["test_start"]).date(),
-            pd.Timestamp(s["test_end"]).date(),
-        ),
-        min_value=pd.Timestamp(s["test_start"]).date(),
-        max_value=pd.Timestamp(s["test_end"]).date(),
-        key="dates",
-    )
-    st.caption(
-        "Backtest weights are the fixed AEGIS candidate; allocation experiments do not rewrite validated forecasts."
-    )
-    if active_store() is not None:
-        backend = "PostgreSQL" if active_store().postgres else "SQLite"
-        mode = " · read-only" if os.environ.get("AEGIS_READONLY_DATABASE") == "1" else ""
-        st.caption("Research storage: " + backend + mode + " · version " + research_version()[:12])
-    else:
-        st.caption("Research storage: verified offline files")
-    st.markdown(
-        f'<div class="micro">DATA THROUGH {s["data"]["end"]}<br/>USD 10,000,000 mandate<br/>One-day risk horizon · {s["seed"]} seed</div>',
-        unsafe_allow_html=True,
-    )
+    with st.expander("Analysis settings", expanded=page == "Backtesting & Validation"):
+        lookback = st.selectbox("Historical lookback (trading days)", [252, 504, 756, 1260], index=2, key="lookback")
+        dates = st.date_input(
+            "Backtesting date range",
+            value=(pd.Timestamp(s["test_start"]).date(), pd.Timestamp(s["test_end"]).date()),
+            min_value=pd.Timestamp(s["test_start"]).date(),
+            max_value=pd.Timestamp(s["test_end"]).date(), key="dates",
+        )
+        st.caption("Date filters apply to Model validation. Its forecasts use the fixed reference allocation and a 756-day window.")
+    with st.expander("About this research"):
+        st.write("Seven ETFs across equities, bonds and gold. All dollar estimates use a USD 10 million reference portfolio; results are historical, not live prices.")
+        st.caption("Reference case: Serendib University Endowment Fund · Quantum-X · QuantEdge 1.0. The case constraints remain in force. Independent human review of the investment proposal is pending.")
+        if active_store() is not None:
+            backend = "PostgreSQL" if active_store().postgres else "SQLite"
+            mode = " · read-only" if os.environ.get("AEGIS_READONLY_DATABASE") == "1" else ""
+            st.caption("Research storage: " + backend + mode + " · version " + research_version()[:12])
+        else:
+            st.caption("Research storage: verified offline files")
+        st.caption(f'Reproducibility seed: {s["seed"]}')
+    st.markdown(f'<div class="sidebar-footer"><span class="status-dot"></span> Historical dataset<br/><strong>Through {s["data"]["end"]}</strong></div>', unsafe_allow_html=True)
 
 w = np.asarray(
     st.session_state.get("custom", alloc.iloc[:, 0].tolist())
@@ -149,14 +153,11 @@ w = np.asarray(
     else alloc[candidate].to_numpy()
 )
 st.markdown(
-    '<div class="eyebrow">SERENDIB UNIVERSITY ENDOWMENT FUND / RESEARCH PROPOSAL</div>',
+    '<div class="app-topline"><span>RESEARCH / ' + escape(PAGE_LABELS[page].upper()) + '</span>'
+    '<span class="snapshot-badge">HISTORICAL · ' + s["data"]["end"] + '</span></div>',
     unsafe_allow_html=True,
 )
-st.title(page)
-st.markdown(
-    '<div class="status-line">PENDING TEAM REVIEW · Proposal and risk appetite require independent human approval</div>',
-    unsafe_allow_html=True,
-)
+st.title(PAGE_TITLES[page])
 try:
     with st.spinner("Calculating from the approved historical snapshot…"):
         render(
@@ -180,3 +181,4 @@ except (ValueError, KeyError, np.linalg.LinAlgError) as exc:
     st.info(
         "Try a longer lookback or less extreme threshold. Unsupported estimates are shown as unavailable rather than replaced with invented values."
     )
+st.markdown('<footer class="app-footer"><strong>AEGIS</strong><span>Historical research · No capital guarantee · Not personal investment advice</span></footer>', unsafe_allow_html=True)

@@ -5,6 +5,11 @@
     "exceptions": []
   },
   {
+    "check": "overview navigation action",
+    "passed": true,
+    "exceptions": []
+  },
+  {
     "check": "page: Executive Command Center",
     "passed": true,
     "exceptions": []
@@ -121,6 +126,11 @@
   },
   {
     "check": "malformed weight sum handled",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "valid allocation automatically applies",
     "passed": true,
     "exceptions": []
   },
