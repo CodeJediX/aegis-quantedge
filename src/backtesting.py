@@ -10,9 +10,10 @@ from .config import WINDOW, CONFIDENCES, SEED
 
 
 def coverage(hits: np.ndarray, alpha: float) -> dict:
-    h = np.asarray(hits, dtype=int)
-    if len(h) < 2 or not np.isin(h, [0, 1]).all():
+    h = np.asarray(hits)
+    if len(h) < 2 or not np.isin(h, [0, 1]).all() or not 0 < alpha < 1:
         raise ValueError("At least two binary hits required")
+    h = h.astype(int)
     n = len(h)
     k = int(h.sum())
     p = 1 - alpha
@@ -70,6 +71,12 @@ def forecasts(
     window: int = WINDOW,
     n_mc: int = 10000,
 ) -> pd.DataFrame:
+    from .portfolio import validate_weights
+    from .config import TICKERS
+    validate_weights(w)
+    if (list(r.columns) != TICKERS or r.index.has_duplicates or not r.index.is_monotonic_increasing
+            or window < 100 or len(r) <= window or not np.isfinite(r.to_numpy()).all() or (r <= -1).any().any()):
+        raise ValueError("Rolling forecasts require complete chronological seven-ETF returns and an adequate prior window.")
     portfolio = r.to_numpy() @ w
     rows = []
     for i in range(window, len(r)):
@@ -117,6 +124,9 @@ def forecasts(
 def summarize(f: pd.DataFrame) -> pd.DataFrame:
     rows = []
     for (model, a), g in f.groupby(["model", "confidence"]):
+        g = g.sort_values("date")
+        if g.date.duplicated().any():
+            raise ValueError("Duplicate forecast dates within a model/confidence series.")
         hits = g.loss.to_numpy() > g.VaR.to_numpy()
         q = g.VaR.to_numpy()
         e = g.ES.to_numpy()
@@ -148,7 +158,13 @@ def summarize(f: pd.DataFrame) -> pd.DataFrame:
                 traffic_full=traffic(hits, a),
                 traffic_last250=(
                     traffic(hits[-250:], a) if len(hits) >= 250 else traffic(hits, a)
-                )
+                ),
+                last250_n=min(250, len(hits)),
+                last250_exceptions=int(hits[-250:].sum()),
+                last250_expected=min(250, len(hits)) * (1 - a),
+                full_start=str(pd.Timestamp(g.date.iloc[0]).date()),
+                full_end=str(pd.Timestamp(g.date.iloc[-1]).date()),
+                last250_start=str(pd.Timestamp(g.date.iloc[-min(250, len(hits))]).date()),
             )
         )
     return pd.DataFrame(rows)

@@ -33,3 +33,13 @@ The volatility-state extension scales historical shocks by the 20-day/756-day vo
 ## Decision and approval
 
 The scorecard reports separate policy tests without a weighted composite. Proposed limits are 10% annual volatility, 15% drawdown/scenario loss and 2.5% daily ES99; nominal return objective 4%. A failure requires review; a pass does not imply safety. Limit sensitivity is shown at ±20%. The proposal is ADJUST: resolve stress-limit breaches and missing spending/income assumptions before funding. The human team must independently review the allocation, model logic and investment conclusion. The application cannot grant that approval.
+
+The current interactive equivalent is **REVISE**, with three default failed checks:16.71% training net drawdown,15.23% worst terminal scenario loss and17.52% worst historical crisis drawdown against15% proposed limits. APPROVE/REVISE/REJECT is automated triage only; human approval remains pending. Editable limits are research assumptions, not client-authorized mandate amendments. Strict optimization failure is not proof of global infeasibility.
+
+## Interactive research and storage
+
+Custom allocations are retrospective experiments. Repeated viewing or optimizing after seeing test/crisis outcomes can overfit the displayed history, even though solver inputs stop in2018 and each rolling forecast uses only earlier returns. Custom validation is unavailable until explicitly run; fixed-reference outputs are not relabelled. Unrun validation prevents automated APPROVE.
+
+The named allocation library is scoped to the current session. Download its JSON to retain it and import it after a reset. Free public hosting uses a real read-only SQLite store rebuilt from verified snapshots; local disk is temporary and shared public saves are disabled. Optional administrator-controlled SQL saving is a separate deployment mode. No external PostgreSQL service is claimed.
+
+Rate shocks use a first-order assumed duration approximation, omitting convexity, spreads, coupons and timing. Volatility multipliers and equity/gold shocks are hypothetical sensitivities without assigned probabilities. Tail confidence intervals are conditional on the block-resampling design and can be unavailable. The80-exceedance caution is heuristic. Neither advanced features nor a numerical APPROVE provide a capital guarantee.

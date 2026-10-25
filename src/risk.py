@@ -27,6 +27,9 @@ def normal_log(portfolio_returns: np.ndarray, alpha: float) -> dict:
     z = np.log1p(x)
     mu = z.mean()
     sd = z.std(ddof=1)
+    if sd < 1e-15:
+        value = float(-np.expm1(mu))
+        return dict(VaR=value, ES=value)
     p = 1 - alpha
     a = mu + sd * norm.ppf(p)
     return dict(
@@ -38,6 +41,8 @@ def normal_log(portfolio_returns: np.ndarray, alpha: float) -> dict:
 def mc_losses(
     log_returns: pd.DataFrame, w: np.ndarray, n: int = N_SIM, seed: int = SEED
 ) -> np.ndarray:
+    from .portfolio import validate_weights
+    w = validate_weights(w)
     x = np.asarray(log_returns)
     if (
         x.ndim != 2
@@ -51,7 +56,14 @@ def mc_losses(
     cov = np.cov(x, rowvar=False)
     cov = 0.95 * cov + 0.05 * np.diag(np.diag(cov))
     rng = np.random.default_rng(seed)
-    z = rng.standard_normal((n, len(w))) @ np.linalg.cholesky(cov).T
+    try:
+        factor = np.linalg.cholesky(cov)
+    except np.linalg.LinAlgError:
+        values, vectors = np.linalg.eigh(cov)
+        if values.min() < -1e-10:
+            raise ValueError("Simulation covariance is not positive semidefinite.") from None
+        factor = vectors @ np.diag(np.sqrt(np.maximum(values, 0)))
+    z = rng.standard_normal((n, len(w))) @ factor.T
     return -(np.expm1(mu + z) @ w)
 
 
@@ -93,7 +105,7 @@ def contributions(r: pd.DataFrame, w: np.ndarray, alpha: float = 0.99) -> pd.Dat
     mu = r.mean().to_numpy()
     sigma = np.sqrt(w @ cov @ w)
     z = norm.ppf(alpha)
-    mvar = -mu + z * (cov @ w) / sigma
+    mvar = -mu + z * (cov @ w) / sigma if sigma > 1e-15 else -mu
     cvar = w * mvar
     return pd.DataFrame(
         dict(
@@ -103,7 +115,7 @@ def contributions(r: pd.DataFrame, w: np.ndarray, alpha: float = 0.99) -> pd.Dat
             component_ES=ces,
             marginal_normal_VaR=mvar,
             component_normal_VaR=cvar,
-            ES_share=ces / ces.sum(),
+            ES_share=ces / ces.sum() if abs(ces.sum()) > 1e-15 else np.full(len(w), np.nan),
         )
     )
 
@@ -114,7 +126,7 @@ def filtered_forecast(history: np.ndarray, alpha: float) -> dict:
     mu = x.mean()
     long = x.std(ddof=1)
     short = x[-20:].std(ddof=1)
-    ratio = np.clip(short / long, 0.5, 3)
+    ratio = np.clip(short / long, 0.5, 3) if long > 1e-15 else 1.0
     return dict(
         **empirical(-(mu + (x - mu) * ratio), alpha), volatility_ratio=float(ratio)
     )

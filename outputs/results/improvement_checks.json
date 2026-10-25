@@ -1,0 +1,647 @@
+[
+  {
+    "check": "startup",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "route Risk Analytics",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix AEGIS minimum variance / 0.9 / Historical",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix AEGIS minimum variance / 0.9 / Parametric",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix AEGIS minimum variance / 0.9 / Monte Carlo",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix AEGIS minimum variance / 0.9 / EVT",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix AEGIS minimum variance / 0.9 / Volatility state",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix AEGIS minimum variance / 0.95 / Historical",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix AEGIS minimum variance / 0.95 / Parametric",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix AEGIS minimum variance / 0.95 / Monte Carlo",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix AEGIS minimum variance / 0.95 / EVT",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix AEGIS minimum variance / 0.95 / Volatility state",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix AEGIS minimum variance / 0.99 / Historical",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix AEGIS minimum variance / 0.99 / Parametric",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix AEGIS minimum variance / 0.99 / Monte Carlo",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix AEGIS minimum variance / 0.99 / EVT",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix AEGIS minimum variance / 0.99 / Volatility state",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Mean variance / 0.9 / Historical",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Mean variance / 0.9 / Parametric",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Mean variance / 0.9 / Monte Carlo",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Mean variance / 0.9 / EVT",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Mean variance / 0.9 / Volatility state",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Mean variance / 0.95 / Historical",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Mean variance / 0.95 / Parametric",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Mean variance / 0.95 / Monte Carlo",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Mean variance / 0.95 / EVT",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Mean variance / 0.95 / Volatility state",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Mean variance / 0.99 / Historical",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Mean variance / 0.99 / Parametric",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Mean variance / 0.99 / Monte Carlo",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Mean variance / 0.99 / EVT",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Mean variance / 0.99 / Volatility state",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Constrained risk parity / 0.9 / Historical",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Constrained risk parity / 0.9 / Parametric",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Constrained risk parity / 0.9 / Monte Carlo",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Constrained risk parity / 0.9 / EVT",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Constrained risk parity / 0.9 / Volatility state",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Constrained risk parity / 0.95 / Historical",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Constrained risk parity / 0.95 / Parametric",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Constrained risk parity / 0.95 / Monte Carlo",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Constrained risk parity / 0.95 / EVT",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Constrained risk parity / 0.95 / Volatility state",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Constrained risk parity / 0.99 / Historical",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Constrained risk parity / 0.99 / Parametric",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Constrained risk parity / 0.99 / Monte Carlo",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Constrained risk parity / 0.99 / EVT",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Constrained risk parity / 0.99 / Volatility state",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Equal weight / 0.9 / Historical",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Equal weight / 0.9 / Parametric",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Equal weight / 0.9 / Monte Carlo",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Equal weight / 0.9 / EVT",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Equal weight / 0.9 / Volatility state",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Equal weight / 0.95 / Historical",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Equal weight / 0.95 / Parametric",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Equal weight / 0.95 / Monte Carlo",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Equal weight / 0.95 / EVT",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Equal weight / 0.95 / Volatility state",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Equal weight / 0.99 / Historical",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Equal weight / 0.99 / Parametric",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Equal weight / 0.99 / Monte Carlo",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Equal weight / 0.99 / EVT",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Equal weight / 0.99 / Volatility state",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix 60/40 benchmark / 0.9 / Historical",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix 60/40 benchmark / 0.9 / Parametric",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix 60/40 benchmark / 0.9 / Monte Carlo",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix 60/40 benchmark / 0.9 / EVT",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix 60/40 benchmark / 0.9 / Volatility state",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix 60/40 benchmark / 0.95 / Historical",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix 60/40 benchmark / 0.95 / Parametric",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix 60/40 benchmark / 0.95 / Monte Carlo",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix 60/40 benchmark / 0.95 / EVT",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix 60/40 benchmark / 0.95 / Volatility state",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix 60/40 benchmark / 0.99 / Historical",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix 60/40 benchmark / 0.99 / Parametric",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix 60/40 benchmark / 0.99 / Monte Carlo",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix 60/40 benchmark / 0.99 / EVT",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix 60/40 benchmark / 0.99 / Volatility state",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Custom allocation / 0.9 / Historical",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Custom allocation / 0.9 / Parametric",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Custom allocation / 0.9 / Monte Carlo",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Custom allocation / 0.9 / EVT",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Custom allocation / 0.9 / Volatility state",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Custom allocation / 0.95 / Historical",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Custom allocation / 0.95 / Parametric",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Custom allocation / 0.95 / Monte Carlo",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Custom allocation / 0.95 / EVT",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Custom allocation / 0.95 / Volatility state",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Custom allocation / 0.99 / Historical",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Custom allocation / 0.99 / Parametric",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Custom allocation / 0.99 / Monte Carlo",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Custom allocation / 0.99 / EVT",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "risk matrix Custom allocation / 0.99 / Volatility state",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "USD display",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "route Portfolio Construction",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "allocation editor follows selected weights",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "custom allocation applies",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "named session allocation reload",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "portfolio comparison Performance",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "portfolio comparison Downside risk",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "portfolio comparison All calculations",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "route Crisis Simulation Studio",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "stress 2008 GFC",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "stress 2020 COVID",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "stress 2022 rates",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "stress Hypothetical funding squeeze",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "what-if rate/volatility -100",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "what-if rate/volatility 200",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "route EVT & Tail-Risk Laboratory",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "selected-confidence EVT uncertainty",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "insufficient EVT exceedances handled",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "route Backtesting & Validation",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "full selected-allocation chronological backtest",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "validation detail Coverage tests",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "validation detail Exception windows",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "validation detail All numerical diagnostics",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "explicit fixed reference source",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "route Portfolio Decision Lab",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "training-only objective comparison",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "optimizer applies feasible training allocation",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "route Investment Committee Reports",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "selected PDF/CSV package generation",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "route AI Research Assistant",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "guide What is the proposed portfolio?",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "guide What does the backtest say?",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "guide Why do risk models disagree?",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "guide Can we claim capital is protected?",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "guide What requires human approval?",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "route Assumptions & Limitations",
+    "passed": true,
+    "exceptions": []
+  },
+  {
+    "check": "route Methodology, Sources & AI Disclosure",
+    "passed": true,
+    "exceptions": []
+  }
+]

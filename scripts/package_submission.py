@@ -36,6 +36,7 @@ def main() -> None:
         "AEGIS / Quantum-X | QuantEdge 1.0 Final Challenge | prepared 24 October 2026; release verified 25 October 2026",
         "",
         "Data cutoff: 2026-09-30. Technical report 13 pages plus editable Word companion; tear sheet 1; memo 1; pitch 12 slides and 660-second rehearsal target. All five technical layers and twelve workspaces are implemented.",
+        "Selected-portfolio exports are generated separately in the app: technical PDF 7 pages, tear sheet 1, committee memo 1, identified CSV/ZIP and provenance. The current default automated recommendation is REVISE with three failed proposed policy checks. The 46-item improvement audit and 44 numerical/integration/database tests, 28 base interface checks and 129 expanded checks are documented.",
         "",
         "Live application: https://quantumx-aegis.streamlit.app/ (Streamlit Community Cloud; verified 25 October 2026). Public source: https://github.com/CodeJediX/aegis-quantedge. Hosting uses read-only SQLite rebuilt from verified research snapshots; shared saves are disabled. **Pending human actions:** independent team validation and the final investment decision. No human approval is claimed.",
         "",

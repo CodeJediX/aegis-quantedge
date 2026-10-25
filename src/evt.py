@@ -94,3 +94,41 @@ def bootstrap(
         ES99_CI=np.quantile(a[:, 2], [0.025, 0.975]).tolist(),
         note="Circular block percentile interval refits threshold and GPD; not a guarantee of coverage",
     )
+
+
+def uncertainty(loss, tq=0.90, alpha=0.99, reps=100, block=20):
+    """Selected-confidence intervals; unavailable fits never become invented values."""
+    x = np.asarray(loss, dtype=float)
+    if alpha <= tq or not 0 < alpha < 1 or not 30 <= reps <= 1000 or not 1 <= block <= len(x):
+        raise ValueError("Choose confidence above the tail threshold and valid resampling settings.")
+    rng = np.random.default_rng(SEED)
+    values = []
+    for _ in range(reps):
+        starts = rng.integers(len(x), size=int(np.ceil(len(x) / block)))
+        sample = x[((starts[:, None] + np.arange(block)) % len(x)).ravel()[:len(x)]]
+        try:
+            model = fit(sample, tq)
+            result = estimate(model, alpha)
+            if result["ES"] is not None:
+                values.append([model["shape"], result["VaR"], result["ES"]])
+        except ValueError:
+            continue
+    if len(values) < 30 or len(values) / reps < 0.5:
+        raise ValueError("Too few valid tail fits for a reliable interval. Lower the threshold or increase the lookback.")
+    array = np.asarray(values)
+    return dict(confidence=alpha, repetitions=reps, valid=len(values), block=block,
+                shape_CI=np.quantile(array[:, 0], [0.025, 0.975]).tolist(),
+                VaR_CI=np.quantile(array[:, 1], [0.025, 0.975]).tolist(),
+                ES_CI=np.quantile(array[:, 2], [0.025, 0.975]).tolist())
+
+
+def reliability(model, loss):
+    x = np.asarray(loss)
+    exceed = x > model["threshold"]
+    adjacent = int(np.sum(exceed[1:] & exceed[:-1]))
+    return dict(exceedances=model["exceedances"], adjacent_exceedance_pairs=adjacent,
+                finite_ES=model["finite_ES"],
+                status="LIMITED" if model["exceedances"] < 80 or adjacent > 0 else "CAUTION",
+                message="Tail precision is limited; fewer than 80 exceedances or clustered extremes reduce confidence. The 80-observation flag is a cautious application heuristic, not a statistical guarantee."
+                if model["exceedances"] < 80 or adjacent > 0 else
+                "Estimates remain sensitive to threshold and tail sampling. A fitted GPD does not establish predictive reliability.")

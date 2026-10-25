@@ -2,7 +2,7 @@
 
 QuantEdge 1.0 Final Challenge — Serendib University Endowment Fund, USD 10 million.
 
-AEGIS is a Python/Streamlit capital-preservation research application. It constructs a constrained portfolio from the seven prescribed ETFs, compares daily VaR/ES/EVT, performs strictly prior-window backtesting and crisis replay, and presents a draft ADJUST decision. The allocation, proposed limits and investment judgment require independent human-team review. The application and all required calculations run without AI keys, subscriptions or paid data.
+AEGIS is a Python/Streamlit capital-preservation research application. It constructs a constrained portfolio from the seven prescribed ETFs, compares daily VaR/ES/EVT, performs strictly prior-window backtesting and crisis replay, and presents an automated APPROVE / REVISE / REJECT assessment. The default reference is **REVISE**, with three failed proposed policy checks. The allocation, proposed limits and investment judgment require independent human-team review. The application and all required calculations run without AI keys, subscriptions or paid data.
 
 ## Install and launch
 
@@ -15,7 +15,9 @@ python -m pip install -r requirements.txt
 streamlit run app.py
 ```
 
-The final line is the one-command local app launch. The submitted snapshots and outputs permit offline/cached use after dependency installation. Navigate with Research workspace in the sidebar. Controls include confidence (90/95/99%), risk methodology, lookback, candidate allocation and backtest dates. Custom allocation experiments change current-risk and performance views; saved rolling validation remains explicitly labelled as the fixed AEGIS candidate.
+The final line is the one-command local app launch. The submitted snapshots and outputs permit offline/cached use after dependency installation. Navigate with Workspace in the sidebar. Controls include confidence (90/95/99%), risk methodology, lookback, candidate allocation and backtest dates. A selected allocation consistently drives performance, risk, stress, comparisons, attribution, decisions, the deterministic guide and selected exports. Run its rolling backtest in Model validation; reference forecasts are reused only when the actual weights and lookback match. Unavailable custom validation remains explicitly unavailable.
+
+Risk budgets supports editable proposed limits and three training-only optimization priorities. Build a portfolio supports named session allocations with JSON export/import for retention. Reports & downloads generates a selected seven-page technical report, one-page tear sheet, one-page committee memorandum and identified CSV/ZIP exports. The original 13-page reference PDF and Word companion remain separately labelled. See `documentation/Website_Improvements_Audit.md` for all 46 requested improvements and practical limits.
 
 ## Reproduce the research and reports
 
@@ -23,6 +25,8 @@ The final line is the one-command local app launch. The submitted snapshots and 
 python run.py --reproduce
 python -m unittest discover -s tests -v
 python scripts/check_app.py
+python scripts/check_improvements.py
+python scripts/check_database_app.py
 ```
 
 The pipeline regenerates data audits, cleaned simple/log returns, stationarity checks, weights, alternatives, KPIs, CAPM, frontier, risk estimates, EVT fits/intervals/sensitivity, daily rolling forecasts, coverage tests, crisis replays, risk contributions, policy checks, figures, technical PDF, one-page tear sheet, one-page decision memo, and pitch evidence/speaker notes. Allow roughly 30–90 seconds on a laptop after installation; the actual measured preparation run is in the validation record. Downloads and installation take longer. No multiprocessing is used.
@@ -72,7 +76,7 @@ SUBMISSION_MANIFEST.md      Checksums, inventory and pending external actions
 
 ## Review the results correctly
 
-The proposed ADJUST decision is driven by the conflict between a 15% proposed tolerance and larger crisis/scenario exposure. It is not an instruction to place trades. A higher backtested return does not make a comparator suitable. A non-rejected coverage test is not certification, and a green traffic light is not a maximum-loss bound. The scorecard deliberately avoids arbitrary weighted aggregation. See the evidence ledger and Assumptions_and_Limitations.md.
+The automated REVISE assessment is driven by the conflict between a 15% proposed tolerance and larger training/crisis/scenario exposure. The original fixed memo uses the equivalent earlier label ADJUST. The stricter optimizer did not find a training-feasible allocation at the original limits; this is not a global infeasibility proof. It does not silently relax the limits. A higher backtested return does not make a comparator suitable. A non-rejected coverage test is not certification, and a green traffic light is not a maximum-loss bound. See the evidence ledger and Assumptions_and_Limitations.md.
 
 AI usage is material and disclosed in `documentation/AI_Disclosure.md`. The human team must independently check and defend the allocation, interpretation and recommendation before submission under brief section 8.7. The pending checklist is not a claim that review happened.
 

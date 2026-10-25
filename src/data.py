@@ -16,6 +16,17 @@ from .config import ROOT, TICKERS, START, END, TRAIN_END
 LOG = logging.getLogger(__name__)
 
 
+def validate_prices(prices):
+    """Fail closed for the complete, versioned application snapshot."""
+    if list(prices.columns) != TICKERS or not isinstance(prices.index, pd.DatetimeIndex):
+        raise ValueError("Prices must contain exactly the seven permitted ETFs and parsed trading dates.")
+    if len(prices) < 100 or prices.index.has_duplicates or not prices.index.is_monotonic_increasing or prices.index.hasnans:
+        raise ValueError("Price dates must be unique, ordered and complete.")
+    if not np.isfinite(prices.to_numpy()).all() or (prices <= 0).any().any():
+        raise ValueError("Adjusted prices contain missing, infinite or nonpositive values. Restore the verified snapshot.")
+    return prices
+
+
 def checksum(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
@@ -90,11 +101,13 @@ def load() -> tuple:
         or (raw <= 0).any().any()
     ):
         raise ValueError("Invalid price index or nonpositive prices")
-    prices = raw.dropna(how="any")
+    prices = validate_prices(raw.dropna(how="any"))
     simple = prices.pct_change(fill_method=None).dropna()
     logs = np.log(prices / prices.shift()).dropna()
     rfraw = pd.read_csv(f, index_col=0, parse_dates=True).iloc[:, 0]
     rfraw = pd.to_numeric(rfraw, errors="coerce").dropna()
+    if rfraw.index.has_duplicates or not rfraw.index.is_monotonic_increasing or not np.isfinite(rfraw.to_numpy()).all():
+        raise ValueError("Risk-free observations must be finite and uniquely ordered by date.")
     # Only strictly earlier rate observations, no same-date close or backfill.
     daily = rfraw.reindex(rfraw.index.union(simple.index)).sort_index().ffill()
     lag = daily.shift(1).reindex(simple.index)

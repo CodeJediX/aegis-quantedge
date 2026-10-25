@@ -116,6 +116,8 @@ def metrics(
         np.asarray(x, dtype=float) for x in [p, market, benchmark, rf]
     ]
     n = len(p)
+    if n < 2 or any(len(x) != n for x in [market, benchmark, rf]) or not all(np.isfinite(x).all() for x in [p, market, benchmark, rf]) or (p <= -1).any():
+        raise ValueError("Performance metrics require at least two aligned finite observations and returns greater than -100%.")
     wealth = np.cumprod(1 + p)
     draw = wealth / np.maximum.accumulate(np.r_[1, wealth])[1:] - 1
     excess = p - rf
@@ -123,7 +125,8 @@ def metrics(
     active = p - benchmark
     vol = p.std(ddof=1) * np.sqrt(252)
     down = np.sqrt(np.mean(np.minimum(excess, 0) ** 2)) * np.sqrt(252)
-    beta = np.cov(excess, mx, ddof=1)[0, 1] / np.var(mx, ddof=1)
+    market_variance = np.var(mx, ddof=1)
+    beta = np.cov(excess, mx, ddof=1)[0, 1] / market_variance if market_variance > 1e-20 else None
     cagr = wealth[-1] ** (252 / n) - 1
     dd = float(-draw.min())
     div = lambda a, b: float(a / b) if abs(b) > 1e-12 else None
@@ -133,12 +136,12 @@ def metrics(
         volatility=float(vol),
         Sharpe=div(excess.mean() * 252, vol),
         Sortino=div(excess.mean() * 252, down),
-        Treynor=div(excess.mean() * 252, beta),
-        Jensen_alpha=float((excess.mean() - beta * mx.mean()) * 252),
+        Treynor=div(excess.mean() * 252, beta) if beta is not None else None,
+        Jensen_alpha=float((excess.mean() - beta * mx.mean()) * 252) if beta is not None else None,
         information_ratio=div(active.mean() * 252, active.std(ddof=1) * np.sqrt(252)),
         max_drawdown=dd,
         Calmar=div(cagr, dd),
-        beta=float(beta),
+        beta=float(beta) if beta is not None else None,
         cumulative_return=float(wealth[-1] - 1),
     )
 

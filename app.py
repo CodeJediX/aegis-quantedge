@@ -11,6 +11,8 @@ import streamlit as st
 from src.config import ROOT, TICKERS
 from src.ui import render
 from src.database import active_store, research_version, DatabaseUnavailable
+from src.data import validate_prices
+from src.interactive import allocation_id
 
 st.set_page_config(
     page_title="AEGIS · Portfolio Intelligence",
@@ -50,7 +52,7 @@ def inputs() -> tuple:
     if store is not None:
         version = research_version()
         summary = json.loads(store.content(version, "outputs/results/summary.json"))
-        prices = store.load_prices(version)
+        prices = validate_prices(store.load_prices(version))
         r = prices.pct_change(fill_method=None).dropna()
         rf = pd.read_csv(io.StringIO(store.content(version, "outputs/tables/risk_free.csv")), index_col=0, parse_dates=True).iloc[:, 0]
         alloc = pd.read_csv(io.StringIO(store.content(version, "outputs/tables/allocations.csv")), index_col=0)
@@ -60,7 +62,8 @@ def inputs() -> tuple:
     )
     prices = pd.read_csv(
         ROOT / "data/snapshots/adjusted_prices.csv", index_col=0, parse_dates=True
-    )[TICKERS].dropna()
+    )[TICKERS]
+    validate_prices(prices)
     r = prices.pct_change(fill_method=None).dropna()
     rf = pd.read_csv(
         ROOT / "outputs/tables/risk_free.csv", index_col=0, parse_dates=True
@@ -97,7 +100,7 @@ PAGE_LABELS = dict(zip(PAGES, [
     "Model validation", "Stress testing", "Risk budgets", "Research guide",
     "Reports & downloads", "Assumptions & Limitations", "Methods & disclosures",
 ]))
-PAGE_TITLES = {**PAGE_LABELS, "Executive Command Center": "Your portfolio, in perspective."}
+PAGE_TITLES = {**PAGE_LABELS, "Executive Command Center": "Investment decision"}
 if st.session_state.pop("_use_custom", False):
     st.session_state["portfolio"] = "Custom allocation"
 with st.sidebar:
@@ -134,7 +137,7 @@ with st.sidebar:
             min_value=pd.Timestamp(s["test_start"]).date(),
             max_value=pd.Timestamp(s["test_end"]).date(), key="dates",
         )
-        st.caption("Date filters apply to Model validation. Its forecasts use the fixed reference allocation and a 756-day window.")
+        st.caption("Date filters apply to Model validation. Selected-allocation forecasts use the selected lookback; the fixed research reference retains its756-day window.")
     with st.expander("About this research"):
         st.write("Seven ETFs across equities, bonds and gold. All dollar estimates use a USD 10 million reference portfolio; results are historical, not live prices.")
         st.caption("Reference case: Serendib University Endowment Fund · Quantum-X · QuantEdge 1.0. The case constraints remain in force. Independent human review of the investment proposal is pending.")
@@ -152,6 +155,11 @@ w = np.asarray(
     if candidate == "Custom allocation"
     else alloc[candidate].to_numpy()
 )
+signature = allocation_id(w)
+if st.session_state.get("_editor_signature") != signature:
+    for ticker, weight in zip(TICKERS, w):
+        st.session_state["weight_" + ticker] = float(weight * 100)
+    st.session_state["_editor_signature"] = signature
 st.markdown(
     '<div class="app-topline"><span>RESEARCH / ' + escape(PAGE_LABELS[page].upper()) + '</span>'
     '<span class="snapshot-badge">HISTORICAL · ' + s["data"]["end"] + '</span></div>',
