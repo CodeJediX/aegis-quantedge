@@ -1,0 +1,50 @@
+{
+  "verified_utc": "2026-10-25T16:14:45.746407+00:00",
+  "source_commit_verified": "e492d9a821f4b2da33b4bcc1b011e307938d0c9c",
+  "reboot_approved_by_user": true,
+  "hosting": "Streamlit Community Cloud (free)",
+  "http_checks": [
+    {
+      "url": "https://quantumx-aegis.streamlit.app/",
+      "status": 200,
+      "health_ok": null
+    },
+    {
+      "url": "https://quantumx-aegis.streamlit.app/~/+/_stcore/health",
+      "status": 200,
+      "health_ok": true
+    }
+  ],
+  "browser_observed": [
+    "New Investment decision dashboard; REVISE; 3 failed policy checks; human approval pending",
+    "Funding squeeze -15.23% and USD -1,522,670",
+    "Historical99 full 8/939 and latest 4/250; Green",
+    "Selected PDF/CSV/ZIP generation and actual ZIP download succeeded"
+  ],
+  "downloaded_analysis_sha256": "a416fb879cde2332f3a8894e6992009a0ee63a476b48b72f5ba4b18337447ad6",
+  "downloaded_report_pages": {
+    "technical.pdf": 7,
+    "tear_sheet.pdf": 1,
+    "memo.pdf": 1
+  },
+  "downloaded_allocation_id": "a71dc20a2355",
+  "downloaded_dataset_version": "bf7b262884afad107c126dd7c8bff3f8688ea70e4efa44d16e9f431ec6517a76",
+  "downloaded_recommendation": {
+    "status": "REVISE",
+    "failed_checks": 3,
+    "validation_pass": true,
+    "actions": [
+      "Resolve Training maximum net drawdown: observed 16.71%.",
+      "Resolve Worst scenario terminal loss: observed 15.23%.",
+      "Resolve Worst historical replay drawdown: observed 17.52%.",
+      "Obtain independent human review, confirm spending needs and agree the final mandate before funding."
+    ],
+    "human_approval": "PENDING - no human investment approval recorded",
+    "scope": "Automated historical model assessment; not a funding authorization or capital guarantee"
+  },
+  "funding_squeeze_return_fraction": -0.15226699473,
+  "funding_squeeze_USD": -1522669.9473,
+  "downloaded_zip_crc_verified": true,
+  "downloaded_internal_SHA256_verified": true,
+  "downloaded_stress_USD_identity_verified": true
+}

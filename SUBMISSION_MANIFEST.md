@@ -29,7 +29,7 @@ Virtual environments, secrets, intermediate deck builds and external QA render d
 | documentation/AI_Disclosure.md | 2688 | 1d640727abe5e294b975ecd90694087b1da5f3227feaeaee7939ce158171d30b |
 | documentation/Assumptions_and_Limitations.md | 7928 | 6c720762cdc4e62ef0a7a73ef63fd419ec65fc149e703548ca32f0e9157d2f84 |
 | documentation/Data_Governance.md | 2020 | c728825016b102ed96749edb17ef7ce8a7a1d8f48311cc786991bdd7cb8a7f8b |
-| documentation/Deployment_Guide.md | 2489 | c8ecf262bfaa15e882fadad3d93f769bcfeffbf29caa79ee320a70a56af3eb40 |
+| documentation/Deployment_Guide.md | 3113 | a447bdcc50238e1f5ac0933197fc401a580b206eae2dbfd43f6edb7264965c5a |
 | documentation/Final_Competition_Audit.md | 3691 | 07e9b8af5bd59f0019181489e5911f97527a02413300c80201b792846a39352e |
 | documentation/Hosted_Database.md | 5654 | 8db2d2dbcb3fe7cbc80e3fb50e812acfa61f34f2c3c2907469c942b22c6710fd |
 | documentation/Judges_QA.md | 6558 | 3b9ba2526319d30901ffa942fe9d7f2d8d44536bd3f93bcde63bb3f1629a84f7 |
@@ -38,7 +38,7 @@ Virtual environments, secrets, intermediate deck builds and external QA render d
 | documentation/Requirements_Traceability.md | 7389 | 03983b50f9f6401a50c7a564a3f877119cf2d66873783cdef044c7d520b86490 |
 | documentation/Sources.md | 3160 | c5ea5cb5bc714cdc243a6b5ab2390bc0e379af958464396b45735bf0de5ceffb |
 | documentation/Team_Approval_Checklist.md | 1391 | 256a0fece2a24a24754383e797a61fdda6c4dd8f8bbae88c80ace2bea34507c8 |
-| documentation/Testing_and_Validation.md | 13686 | 0a99d62e47aa82c47c2ddbf802cd6894a22ffb84d105dd94250e04fbcdb3e631 |
+| documentation/Testing_and_Validation.md | 14890 | 5c63d837428722abdaf16b298a394252a39f1595e45edc60f5880bfeffe6a824 |
 | documentation/Website_Improvements_Audit.md | 12509 | 135a5447517efb09f211e93a8617f3ee3f67460813d55d0b074106dde0aca834 |
 | hosted_app.py | 580 | 3857e07b6a06ed5fb17f92f9017c6eaf2ca5099b2d50c01759659316898cee8c |
 | outputs/figures/allocation.png | 31191 | a9759d848a851dd67597da1ecfd56ef7341966c85f8c3e37b3c38ad9e731669a |
@@ -50,6 +50,7 @@ Virtual environments, secrets, intermediate deck builds and external QA render d
 | outputs/figures/stress.png | 40249 | 3432a3d316f50c59dd98369da2f6f3e0822a10b9c8484515433cd99256b321e6 |
 | outputs/results/app_checks.json | 2660 | 3f4058b9c5541a57d79708bc159f3869db4526f03405901f43b4e0e314120ebd |
 | outputs/results/data_audit.json | 760 | c8f676d9d716c88fe7e0bbe29ae02b3b033d60854494c5a41f548ddac98230f1 |
+| outputs/results/deployment_checks.json | 2030 | 8586da360d37366f31eacd4f60fb5a8c8941cca08c2d1523c487f25317dd5eca |
 | outputs/results/improvement_checks.json | 14884 | 19b37232ab9bdfe5d91ed4bcb5c7b20deaa89561824ebb8705b5d9183a6b9017 |
 | outputs/results/summary.json | 3900 | 034204771912a52409eb3118c2579c0fb19a19a597fe981d77f7c755e00d1013 |
 | outputs/tables/adf.csv | 555 | dfe74f476beb9c22575f0bb6901a52884dc88701f2da60c54c19c8afc1eac575 |
