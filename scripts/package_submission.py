@@ -17,7 +17,7 @@ def include(path: Path) -> bool:
         p in {"__pycache__", ".git", ".venv", "venv", ".deck_build"} for p in rel.parts
     ):
         return False
-    if path.suffix in {".pyc", ".log", ".db", ".sqlite", ".sqlite3"} or path.name in {".env", "secrets.toml"}:
+    if path.suffix in {".pyc", ".log", ".db", ".sqlite", ".sqlite3", ".jks", ".keystore", ".class", ".dex", ".idsig"} or path.name in {".env", "secrets.toml"}:
         return False
     if path.name.startswith(".env.") and path.name != ".env.example":
         return False
@@ -33,12 +33,12 @@ def main() -> None:
     lines = [
         "# Submission manifest",
         "",
-        "AEGIS / Quantum-X | QuantEdge 1.0 Final Challenge | prepared 24 October 2026; release verified 25 October 2026",
+        "AEGIS / Quantum-X | QuantEdge 1.0 Final Challenge | current release 26 October 2026",
         "",
-        "Data cutoff: 2026-09-30. Technical report 13 pages plus editable Word companion; tear sheet 1; memo 1; pitch 12 slides and 660-second rehearsal target. All five technical layers and twelve workspaces are implemented.",
-        "Selected-portfolio exports are generated separately in the app: technical PDF 7 pages, tear sheet 1, committee memo 1, identified CSV/ZIP and provenance. The current default automated recommendation is REVISE with three failed proposed policy checks. The 46-item improvement audit and 44 numerical/integration/database tests, 28 base interface checks and 129 expanded checks are documented.",
+        "Data cutoff: 2026-09-30. Current technical report 15 pages, investment tear sheet 1 page, AI usage details 2 pages and a signed native Android APK. Original 13-page report/Word companion, memo and 12-slide pitch are preserved. All five technical layers and twelve workspaces are implemented.",
+        "Selected-portfolio exports are generated separately in the app: technical PDF 7 pages, tear sheet 1, committee memo 1, identified CSV/ZIP and provenance. The current default automated recommendation is REVISE with three failed proposed policy checks. Verification: 49 numerical/integration/database tests, 28 base and 129 expanded interface checks, 9 branding/chat checks, 222 Java/Python comparisons and 24 signed-APK emulator runtime checks. Native model scope is explicitly smaller than website scope; see mobile/README.md.",
         "",
-        "Live application: https://quantumx-aegis.streamlit.app/ (Streamlit Community Cloud; verified 25 October 2026). Public source: https://github.com/CodeJediX/aegis-quantedge. Hosting uses read-only SQLite rebuilt from verified research snapshots; shared saves are disabled. **Pending human actions:** independent team validation and the final investment decision. No human approval is claimed.",
+        "Live application: https://quantumx-aegis.streamlit.app/ (free Streamlit Community Cloud). Public source: https://github.com/CodeJediX/aegis-quantedge. Hosting uses read-only SQLite rebuilt from verified research snapshots; shared saves are disabled. **Pending human actions:** independent team validation and the final investment decision. No human approval is claimed.",
         "",
         "The application runs locally with one command after dependency installation: `streamlit run app.py`. Numerical/PDF report reproduction: `python run.py --reproduce`. Optional pitch authoring uses a separate Node artifact-tool runtime; the provided PPTX/PDF is ready to open.",
         "",
@@ -71,6 +71,13 @@ def main() -> None:
             "run.py",
             "reports/Technical_Report.pdf",
             "reports/Technical_Report.docx",
+            "reports/Current_Technical_Report.pdf",
+            "reports/Current_Investment_Tear_Sheet.pdf",
+            "reports/AI_Usage_Details.pdf",
+            "assets/quantumx_logo.png",
+            "mobile/README.md",
+            "mobile/releases/QuantumX_AEGIS_1.0.0.apk",
+            "mobile/releases/APK_MANIFEST.json",
             "reports/Executive_Tear_Sheet.pdf",
             "reports/Investment_Committee_Memo.pdf",
             "presentation/Final_Pitch.pptx",

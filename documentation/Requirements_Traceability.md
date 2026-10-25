@@ -48,3 +48,17 @@ Authority: supplied October 2026 ten-page final challenge. Page references below
 Scope note: the original Round 1 wavelet/copula portfolio is preserved separately and is not substituted for any final-round requirement. No paid plagiarism/AI-detection clearance or human-approved investment decision is claimed. The public product interface retains the reference mandate, seven-ETF universe, five quantitative layers, sidebar controls, explicitly named Assumptions & Limitations page, AI disclosure and pending human-review record.
 
 The later46-item user improvement request is traced individually in **Website_Improvements_Audit.md**. New selected-portfolio modules (`interactive`, `workspaces`, `exports`) add consistent custom analysis, explicit automated recommendations, proposed-limit controls, downside-constrained training optimization, three objectives, named allocation JSON libraries, selected rolling backtests, what-if tools and identified7/1/1-page reports.44numerical/integration/database tests,28base interface checks and129expanded checks are recorded in Testing_and_Validation.md. Original mandatory outputs and fixed reference report/Word/pitch materials are retained; no risk breach or pending human approval is hidden.
+
+
+## User release additions — 26 October 2026
+
+| Addition | Implementation | Evidence |
+|---|---|---|
+| Supplied main logo and attractive preloader | assets/quantumx_logo.png; src/branding.py; actual loading status and reduced-motion welcome | Original bytes preserved; visual QA and replay check |
+| Conversational website guide | src/chat_guide.py; typed session chat, selected result context, evidence navigation | 5 pure tests; 9 branding/chat AppTest checks |
+| Independent native APK | mobile/ native Java views, charts, numerical engine, private library, validation, guide and PDF export | 222 Python reference comparisons; 24 actual signed-APK emulator checks |
+| Full source | Public GitHub and checksum-indexed source ZIP | scripts/package_submission.py and verify_manifest.py |
+| Current technical report | reports/Current_Technical_Report.pdf | 15 pages, original study plus release appendix |
+| One-page investment tear sheet | reports/Current_Investment_Tear_Sheet.pdf | 1 page, original limits and pending review |
+| AI usage details | reports/AI_Usage_Details.pdf | 2 pages; material assistance, privacy, validation and human responsibility |
+| Updated screenshots only | Separate final screenshot gallery/ZIP with capture metadata | Post-deployment web captures plus native runtime captures; earlier pre-logo captures excluded |

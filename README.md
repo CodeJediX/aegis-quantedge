@@ -6,6 +6,10 @@ AEGIS is a Python/Streamlit capital-preservation research application. It constr
 
 ## Install and launch
 
+The current release also includes the supplied QuantumX logo, an actual loading state/welcome transition, a floating typed website-guide chat and a separate native Android app. The guide is deterministic and requires no paid AI service. Download the native APK from Reports & downloads or `mobile/releases/QuantumX_AEGIS_1.0.0.apk`; see `mobile/README.md` for its offline features and verified SDK build. This is a native mobile interface and Java engine with no WebView or internet permission.
+
+Current requested PDFs: `reports/Current_Technical_Report.pdf` (15pages: original13-page study plus2current software pages), `reports/Current_Investment_Tear_Sheet.pdf` (1page), and `reports/AI_Usage_Details.pdf` (2pages). The original reference PDF/Word/pitch materials are preserved. Current documents and APK are separate from dynamically generated selected-portfolio reports.
+
 Tested Python: **3.11.9** on Windows. Use Python 3.11.
 
 ```powershell
@@ -27,6 +31,7 @@ python -m unittest discover -s tests -v
 python scripts/check_app.py
 python scripts/check_improvements.py
 python scripts/check_database_app.py
+python scripts/check_branding_chat.py
 ```
 
 The pipeline regenerates data audits, cleaned simple/log returns, stationarity checks, weights, alternatives, KPIs, CAPM, frontier, risk estimates, EVT fits/intervals/sensitivity, daily rolling forecasts, coverage tests, crisis replays, risk contributions, policy checks, figures, technical PDF, one-page tear sheet, one-page decision memo, and pitch evidence/speaker notes. Allow roughly 30–90 seconds on a laptop after installation; the actual measured preparation run is in the validation record. Downloads and installation take longer. No multiprocessing is used.
@@ -70,6 +75,7 @@ reports/                    Technical PDF and editable Word report, one-page tea
 presentation/               12-slide PPTX, PDF, computed evidence and speaker script
 tests/                      Numerical reference, leakage and input validation tests
 scripts/                    App checks, presentation source, verification and packaging
+mobile/                     Native Android Java source, instrumentation tests, signed APK and installation/build guide
 documentation/              Methods, sources, governance, limitations, disclosure, traceability, Q&A, approvals, audit
 SUBMISSION_MANIFEST.md      Checksums, inventory and pending external actions
 ```

@@ -1,0 +1,38 @@
+[
+  {
+    "check": "branded app and guide launch",
+    "passed": true
+  },
+  {
+    "check": "typed chat: Why does it say REVISE?",
+    "passed": true
+  },
+  {
+    "check": "typed chat: Explain VaR and ES",
+    "passed": true
+  },
+  {
+    "check": "typed chat: How do I save my allocation?",
+    "passed": true
+  },
+  {
+    "check": "typed chat: Can I run a backtest?",
+    "passed": true
+  },
+  {
+    "check": "typed chat: Are you a live AI model?",
+    "passed": true
+  },
+  {
+    "check": "guide opens suggested evidence workspace",
+    "passed": true
+  },
+  {
+    "check": "chat clears only session conversation",
+    "passed": true
+  },
+  {
+    "check": "welcome can be replayed without changing the portfolio",
+    "passed": true
+  }
+]

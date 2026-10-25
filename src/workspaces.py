@@ -613,11 +613,23 @@ def reports(result,risk,decision,validation,a,method):
     slug=result["allocation_id"]+"_"+meta["generated_utc"][:10]
     for frame,label in [(risk,"risk"),(result["stress"],"stress"),(result["checks"],"policy_checks"),(pd.DataFrame([result["kpi"]]),"performance")]:
         st.download_button("Selected "+label.replace("_"," ")+" · CSV",csv_bytes(frame,meta),file_name="aegis_"+slug+"_"+label+".csv",mime="text/csv",key="selected_csv_"+label)
+    current_files={"Current_Technical_Report.pdf":"Current technical study · 15 pages", "Current_Investment_Tear_Sheet.pdf":"Current investment tear sheet · 1 page", "AI_Usage_Details.pdf":"AI usage details · 2 pages"}
+    if any((ROOT/"reports"/file).is_file() for file in current_files):
+        st.subheader("Current release files")
+        st.caption("The full technical study combines the locked reference research with a current software/mobile appendix. These release documents are distinct from the selected-allocation reports generated above.")
+        for file,label in current_files.items():
+            path=ROOT/"reports"/file
+            if path.is_file():st.download_button(label+" · PDF",path.read_bytes(),file_name=file,mime="application/pdf",key="release_"+file)
+        apk=ROOT/"mobile/releases/QuantumX_AEGIS_1.0.0.apk"
+        if apk.is_file():
+            st.download_button("Native Android app · APK",apk.read_bytes(),file_name=apk.name,mime="application/vnd.android.package-archive",key="release_apk")
+            st.caption("Native offline Android companion, Android 8.0+. Own mobile interface and calculations; no WebView or internet permission. Native risk scope is historical and Gaussian-log; advanced MC/EVT/state analytics remain on the website.")
+        st.link_button("Full website and Android source · GitHub","https://github.com/CodeJediX/aegis-quantedge")
     with st.expander("Fixed research reference package"):
         st.caption("These original reports concern the locked AEGIS minimum-variance portfolio. They do not change when a custom portfolio is selected. Technical PDF:13 pages; tear sheet:1 page; memo:1 page.")
         for folder in ["reports","presentation"]:
             for file in sorted((ROOT/folder).glob("*")):
-                if file.suffix in [".pdf",".docx",".pptx",".md"]:
+                if file.suffix in [".pdf",".docx",".pptx",".md"] and file.name not in current_files:
                     st.download_button("Reference · "+file.stem.replace("_"," ")+" · "+file.suffix[1:].upper(),file.read_bytes(),file_name=file.name,key="fixed_download_"+file.name)
     with st.expander("Research review and approval record"):
         st.markdown((ROOT/"documentation/Team_Approval_Checklist.md").read_text(encoding="utf-8-sig"))
@@ -685,3 +697,5 @@ def render(page,s,prices,r,rf,alloc,w,name,a,method,lookback,dates):
         assumptions()
     elif page=="Methodology, Sources & AI Disclosure":
         methods(result,a,method)
+    from .chat_guide import chat_widget
+    chat_widget(result,decision,validation is not None)

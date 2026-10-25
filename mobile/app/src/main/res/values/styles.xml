@@ -1,0 +1,8 @@
+<resources>
+  <style name="AegisTheme" parent="android:style/Theme.Material.NoActionBar">
+    <item name="android:fontFamily">sans</item><item name="android:colorAccent">#76DFBD</item>
+    <item name="android:windowLightStatusBar">false</item><item name="android:statusBarColor">#0B1418</item>
+    <item name="android:navigationBarColor">#102127</item><item name="android:windowBackground">#0B1418</item>
+    <item name="android:windowActionModeOverlay">true</item>
+  </style>
+</resources>

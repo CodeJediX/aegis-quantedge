@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "verified_utc": "2026-10-25T19:28:25.024996+00:00",
+  "device": "Android emulator",
+  "android_api": 36,
+  "instrumentation": "Android framework; actual signed native APK",
+  "checks_output": "INSTRUMENTATION_RESULT: checks=24\nINSTRUMENTATION_RESULT: details=Default policy has exactly three genuine failures\nDefault recommendation remains REVISE\nNative real rolling validation matches reference windows\nSeven native weight inputs rendered\nMalformed weight sum cannot replace valid allocation\nValid custom weights applied to the native calculation engine\nCustom validation is not borrowed from reference weights\nNative risk confidence control is available\n95 percent confidence selection works\nCustom Historical99 rolling validation actually executes\nSelected allocation saved in device library\nSaved allocation survives activity cold restart\nSaved allocation reloads actual weights\nNative market and rate what-if controls render\nNative interest-rate slider updates its assumption\nNative chat answers selected decision with approval limitation\nAll three native PDF export controls are present\nBundled real PDF verified: technical.pdf\nBundled real PDF verified: tear_sheet.pdf\nBundled real PDF verified: ai_usage.pdf\nAndroid document picker Save action executes\nNative PDF export callback completes successfully\nSaved PDF bytes exactly match the bundled technical report\nInstalled APK requests no internet permission\nINSTRUMENTATION_RESULT: result=PASS\nINSTRUMENTATION_RESULT: screenshots=/storage/emulated/0/Android/data/com.quantumx.aegis/files/qa-screenshots\nINSTRUMENTATION_CODE: -1",
+  "screenshot_count": 10,
+  "physical_device_tested": false,
+  "notes": "Read-only emulator mode preserves the existing AVD; app data changes are ephemeral. App has no internet permission."
+}

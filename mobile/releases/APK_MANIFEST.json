@@ -1,0 +1,12 @@
+{
+  "apk": "QuantumX_AEGIS_1.0.0.apk",
+  "bytes": 3253309,
+  "sha256": "b8c7b35b16ecb837b2dcc1a36d7a1b11bb5476e9abdb18720565081e4119f449",
+  "native": true,
+  "webview": false,
+  "internet_permission": false,
+  "min_android_api": 26,
+  "target_android_api": 35,
+  "release_signed": true,
+  "notes": "Local distribution certificate; private signing key is outside the repository. Emulator/runtime checks recorded separately."
+}

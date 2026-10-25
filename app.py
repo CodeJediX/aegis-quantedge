@@ -13,10 +13,11 @@ from src.ui import render
 from src.database import active_store, research_version, DatabaseUnavailable
 from src.data import validate_prices
 from src.interactive import allocation_id
+from src.branding import logo_html, loading_screen, welcome_screen
 
 st.set_page_config(
     page_title="AEGIS · Portfolio Intelligence",
-    page_icon="◈",
+    page_icon=str(ROOT / "assets/quantumx_logo.png"),
     layout="wide",
     initial_sidebar_state="auto",
 )
@@ -72,14 +73,19 @@ def inputs() -> tuple:
     return summary, prices, r, rf, alloc
 
 
+boot = loading_screen()
 try:
     s, prices, r, rf, alloc = inputs()
 except (FileNotFoundError, ValueError, KeyError, DatabaseUnavailable) as exc:
+    boot.empty()
     st.error(
         "Research outputs are unavailable. Run python run.py --reproduce, then restart the app. "
         + str(exc)
     )
     st.stop()
+
+boot.empty()
+welcome_screen()
 
 PAGES = [
     "Executive Command Center",
@@ -105,8 +111,8 @@ if st.session_state.pop("_use_custom", False):
     st.session_state["portfolio"] = "Custom allocation"
 with st.sidebar:
     st.markdown(
-        '<div class="brand-lockup"><span class="brand-mark" aria-hidden="true">◈</span>'
-        '<div><div class="brand">AEGIS</div><div class="brand-sub">PORTFOLIO INTELLIGENCE</div></div></div>',
+        '<div class="brand-lockup quantumx-lockup"><div class="brand-plaque">'+logo_html()+
+        '</div><div class="brand-sub">PORTFOLIO INTELLIGENCE</div></div>',
         unsafe_allow_html=True,
     )
     page = st.selectbox("Workspace", PAGES, format_func=PAGE_LABELS.get, key="page")

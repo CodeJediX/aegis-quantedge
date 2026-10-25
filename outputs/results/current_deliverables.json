@@ -1,0 +1,13 @@
+{
+  "generated_utc": "2026-10-25T19:26:30.824709+00:00",
+  "pages": {
+    "Current_Technical_Report.pdf": 15,
+    "Current_Investment_Tear_Sheet.pdf": 1,
+    "AI_Usage_Details.pdf": 2
+  },
+  "allocation_id": "a71dc20a2355",
+  "dataset_version": "bf7b262884afad107c126dd7c8bff3f8688ea70e4efa44d16e9f431ec6517a76",
+  "recommendation": "REVISE",
+  "human_approval": "PENDING",
+  "technical_structure": "13 unchanged research pages plus 2 current software/validation pages"
+}

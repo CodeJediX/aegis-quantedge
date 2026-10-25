@@ -1,0 +1,5 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.quantumx.aegis.qa" android:versionCode="1" android:versionName="1.0">
+  <uses-sdk android:minSdkVersion="26" android:targetSdkVersion="35"/>
+  <instrumentation android:name=".SmokeInstrumentation" android:targetPackage="com.quantumx.aegis" android:functionalTest="true" android:label="AEGIS native smoke tests"/>
+  <application android:label="AEGIS test runner"/>
+</manifest>

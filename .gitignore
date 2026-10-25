@@ -12,3 +12,8 @@ venv/
 .env.*
 !.env.example
 /QuantEdge_1.0_Final_Submission/
+*.jks
+*.keystore
+*.class
+*.dex
+*.idsig

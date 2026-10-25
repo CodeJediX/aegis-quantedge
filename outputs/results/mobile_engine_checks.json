@@ -1,0 +1,8 @@
+{
+  "reference_checks": 222,
+  "result": "PASS",
+  "output": "Native engine reference checks passed: 222; maximum absolute difference=3.057554209817681E-13",
+  "tolerance": 2e-09,
+  "source": "Python selected analysis and frozen reference backtests",
+  "synthetic_market_data": false
+}
