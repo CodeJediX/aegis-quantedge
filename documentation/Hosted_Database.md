@@ -1,6 +1,6 @@
 # Hosted application and SQL database
 
-The application retains Python and Streamlit. The no-payment configuration uses a real SQLite research database, initialized from the verified release snapshots on every new container. Shared allocation saving is disabled with `AEGIS_READONLY_DATABASE=1` because free container storage is temporary. All required research pages and current-session allocation experiments work in this mode. Streamlit Community Cloud uses `hosted_app.py`, which sets safe nonsecret defaults and initializes SQL at first startup. A separate Supabase PostgreSQL database is supported as an optional durable store; its provisioning is not claimed. No live deployment is claimed until verified against the actual provider.
+Live application: https://quantumx-aegis.streamlit.app/ (verified 25 October 2026). The no-payment configuration retains Python and Streamlit and uses a real SQLite research database, initialized from the verified release snapshots on every new container. Shared allocation saving is disabled with `AEGIS_READONLY_DATABASE=1` because free container storage is temporary. All required research pages and current-session allocation experiments work in this mode. Streamlit Community Cloud uses `hosted_app.py`, which sets safe nonsecret defaults and initializes SQL at first startup. A separate Supabase PostgreSQL database is supported as an optional durable store; its provisioning is not claimed.
 
 ## Data stored
 
@@ -18,7 +18,7 @@ Set these in Render's server-side environment settings:
 | Variable | Purpose |
 |---|---|
 | `AEGIS_DATABASE_URL` | Supabase PostgreSQL connection URL. Copy the actual session-pooler host from the project's Connect dialog for IPv4 access. Do not infer the host. |
-| `AEGIS_ADMIN_KEY` | Long random administrator key. Render Blueprint generates it. Required only to save shared allocation records. |
+| `AEGIS_ADMIN_KEY` | Long random administrator key supplied server-side. Required only for optional mutable PostgreSQL storage; unset in this free deployment. |
 | `AEGIS_REQUIRE_DATABASE` | `1` on the hosted service, so missing configuration blocks startup. |
 | `AEGIS_READONLY_DATABASE` | `1` for free SQLite hosting. Blocks shared saves and explains temporary storage in the app. |
 
@@ -34,7 +34,7 @@ Open Portfolio Decision Lab, expand Saved research allocations, enter a name and
 
 ## Deployment verification
 
-Before handing off a live URL, confirm the provider deployment is live, the HTTPS health endpoint succeeds, the browser renders the application, the database contains the genuine research records, and a saved test proposal survives a new database connection. A localhost address or a deployment-configuration link is not a hosted app URL.
+On 25 October 2026, Streamlit installed the pinned dependencies with Python 3.11.17 and rendered the live app. An unauthenticated HTTPS request to `/` returned HTTP 200, and `/~/+/_stcore/health` returned HTTP 200 with `ok`. The browser displayed SQLite read-only release `bf7b262884af`, the expected risk metrics and research charts. The store contains 38,290 adjusted-price records after verified bootstrap. Shared writes are intentionally blocked; durable saved-proposal checks apply only to optional external PostgreSQL, not this deployment.
 
 Free hosting can sleep when idle, and database providers impose free-tier quotas. Do not enable paid upgrades without the team's decision. Render's free local filesystem is ephemeral; it is unsuitable for the production SQL store. Provider plan details should be rechecked when deploying.
 

@@ -89,11 +89,11 @@ AI usage is material and disclosed in `documentation/AI_Disclosure.md`. The huma
 
 ## External release steps
 
-Source repository: https://github.com/CodeJediX/aegis-quantedge (private). Ensure judges receive repository access before submission. Deployment is optional under the brief when a one-command local app is supplied. `documentation/Deployment_Guide.md` includes publishing guidance. No live app URL or completed human approval is claimed until verified.
+Live application: https://quantumx-aegis.streamlit.app/ — deployed and verified on 25 October 2026. Public source repository: https://github.com/CodeJediX/aegis-quantedge. Streamlit Community Cloud runs `hosted_app.py` with Python 3.11 and no secrets or payment details. Independent human-team approval remains pending.
 
 ## Hosted database option
 
-The free Render deployment uses a real SQLite research database rebuilt from verified snapshots on startup. Prices and research tables come from SQL. Shared saves are disabled because free local storage is temporary; allocation experiments remain available in the current session. `render.yaml` records this free configuration. The code also supports external PostgreSQL for durable team-administered saves. `documentation/Hosted_Database.md` explains both modes. Bootstrap with `python scripts/bootstrap_database.py` after setting `AEGIS_DATABASE_URL`. Setting `AEGIS_REQUIRE_DATABASE=1` prevents a missing database configuration from silently becoming file mode. No cloud URL is claimed until a deployment is actually verified.
+The live application uses a real SQLite research database rebuilt from verified snapshots on startup. Prices and research tables come from SQL. Shared saves are disabled because free local storage is temporary; allocation experiments remain available in the current session. `render.yaml` records an unused alternative configuration. The code also supports external PostgreSQL for durable team-administered saves. `documentation/Hosted_Database.md` explains both modes. Bootstrap with `python scripts/bootstrap_database.py` after setting `AEGIS_DATABASE_URL`. Setting `AEGIS_REQUIRE_DATABASE=1` prevents a missing database configuration from silently becoming file mode.
 
 For free Streamlit Community Cloud hosting, select `hosted_app.py` as the entry point and Python3.11. It creates the same read-only SQLite database on first startup without any secrets or payment details. `streamlit run hosted_app.py` reproduces that hosted configuration locally. On this Render account, even the manual Free service form requested a card; that setup was cancelled without entering payment details. Streamlit Community Cloud is the chosen alternative.
 

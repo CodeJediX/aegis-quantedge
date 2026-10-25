@@ -34,7 +34,7 @@ def main() -> None:
         "",
         "Data cutoff: 2026-09-30. Technical report 13 pages plus editable Word companion; tear sheet 1; memo 1; pitch 12 slides and 660-second rehearsal target. All five technical layers and twelve workspaces are implemented.",
         "",
-        "Source repository: https://github.com/CodeJediX/aegis-quantedge (private; ensure judge access). **Pending external actions:** complete cloud provisioning and verified deployment, and record independent human-team validation and the final investment decision. No live app URL or human approval is claimed until verified.",
+        "Live application: https://quantumx-aegis.streamlit.app/ (Streamlit Community Cloud; verified 25 October 2026). Public source: https://github.com/CodeJediX/aegis-quantedge. Hosting uses read-only SQLite rebuilt from verified research snapshots; shared saves are disabled. **Pending human actions:** independent team validation and the final investment decision. No human approval is claimed.",
         "",
         "The application runs locally with one command after dependency installation: `streamlit run app.py`. Numerical/PDF report reproduction: `python run.py --reproduce`. Optional pitch authoring uses a separate Node artifact-tool runtime; the provided PPTX/PDF is ready to open.",
         "",

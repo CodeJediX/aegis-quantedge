@@ -4,7 +4,7 @@ AEGIS / Quantum-X | QuantEdge 1.0 Final Challenge | prepared 24 October 2026; re
 
 Data cutoff: 2026-09-30. Technical report 13 pages plus editable Word companion; tear sheet 1; memo 1; pitch 12 slides and 660-second rehearsal target. All five technical layers and twelve workspaces are implemented.
 
-Source repository: https://github.com/CodeJediX/aegis-quantedge (private; ensure judge access). **Pending external actions:** complete cloud provisioning and verified deployment, and record independent human-team validation and the final investment decision. No live app URL or human approval is claimed until verified.
+Live application: https://quantumx-aegis.streamlit.app/ (Streamlit Community Cloud; verified 25 October 2026). Public source: https://github.com/CodeJediX/aegis-quantedge. Hosting uses read-only SQLite rebuilt from verified research snapshots; shared saves are disabled. **Pending human actions:** independent team validation and the final investment decision. No human approval is claimed.
 
 The application runs locally with one command after dependency installation: `streamlit run app.py`. Numerical/PDF report reproduction: `python run.py --reproduce`. Optional pitch authoring uses a separate Node artifact-tool runtime; the provided PPTX/PDF is ready to open.
 
@@ -28,16 +28,16 @@ Virtual environments, secrets, intermediate deck builds and external QA render d
 | documentation/AI_Disclosure.md | 1697 | 284ad4308573315b92d433f93b437673788c6b916b88cb75fbfed46910a5d76e |
 | documentation/Assumptions_and_Limitations.md | 6226 | cceb0732c7432d9cb6468eb7fe442f4a86000eac36f2961c1a1f654a67ebbc11 |
 | documentation/Data_Governance.md | 2020 | c728825016b102ed96749edb17ef7ce8a7a1d8f48311cc786991bdd7cb8a7f8b |
-| documentation/Deployment_Guide.md | 2484 | 4db8926690c770210e7d0e75fb79f6a41a42e2d75c1a6e2b9d904db7d4f5f1c4 |
-| documentation/Final_Competition_Audit.md | 3668 | 906cf67db335000060a70103293255ad99a2c431c5a4342a4eca0a2b75ddf9c5 |
-| documentation/Hosted_Database.md | 5423 | efc566b14a795202206e77cc5e5ee5f5d1a2cb36971198d38252c7dd244ae45e |
+| documentation/Deployment_Guide.md | 2489 | c8ecf262bfaa15e882fadad3d93f769bcfeffbf29caa79ee320a70a56af3eb40 |
+| documentation/Final_Competition_Audit.md | 3691 | 07e9b8af5bd59f0019181489e5911f97527a02413300c80201b792846a39352e |
+| documentation/Hosted_Database.md | 5654 | 8db2d2dbcb3fe7cbc80e3fb50e812acfa61f34f2c3c2907469c942b22c6710fd |
 | documentation/Judges_QA.md | 6558 | 3b9ba2526319d30901ffa942fe9d7f2d8d44536bd3f93bcde63bb3f1629a84f7 |
 | documentation/Methodology.md | 4125 | 5cfd8e1140f23aecd73ac1101ddad00a3c5d43d9ca2751f9742ce016c6f2e2fc |
 | documentation/Prior_Work_Audit.md | 1656 | 130911efcfbba63d4e6f15e600af5e7300379f7d12464c851bbd02d50db83e66 |
 | documentation/Requirements_Traceability.md | 6422 | d17848aa315209256040c215859b908055823cb87df8e9a83e280ae77e495f5e |
 | documentation/Sources.md | 3160 | c5ea5cb5bc714cdc243a6b5ab2390bc0e379af958464396b45735bf0de5ceffb |
 | documentation/Team_Approval_Checklist.md | 1391 | 256a0fece2a24a24754383e797a61fdda6c4dd8f8bbae88c80ace2bea34507c8 |
-| documentation/Testing_and_Validation.md | 8447 | 4ff2889d6a65a12c42fb4710a5ac41aa99fad4aea2d4babc6d70cf57683ccdf1 |
+| documentation/Testing_and_Validation.md | 8468 | 5aa64b7d35c49c053829c9f9471e6fe22c9728e9a8796899907caaf2a476f2d6 |
 | hosted_app.py | 580 | 3857e07b6a06ed5fb17f92f9017c6eaf2ca5099b2d50c01759659316898cee8c |
 | outputs/figures/allocation.png | 31191 | a9759d848a851dd67597da1ecfd56ef7341966c85f8c3e37b3c38ad9e731669a |
 | outputs/figures/backtest.png | 135847 | 07bba54b2f55f64f0c36571841e36777bfce07baccf4a4fa0234238fc1928751 |
@@ -79,7 +79,7 @@ Virtual environments, secrets, intermediate deck builds and external QA render d
 | presentation/pitch_data.json | 8802 | a490dcc6fd1b125275c30b8111bc9ad9e5b8e8c04a50e1afe535a43e589c607f |
 | presentation/Rehearsal_Script.md | 8334 | d6d85661cfe6a10acb241f59478bceacddf6b1a67f7c59ba56f369e57bc2335e |
 | presentation/Speaker_Notes.md | 3535 | c3e34c95641c4cc9bd2c6df8d292e6c96ba71f5a0726c1e0e24a03e222bdd6b9 |
-| README.md | 10159 | 96357b6e37f2b0fedb9b2300f94575577fc8ca259d80bbce96d351980bd730cb |
+| README.md | 10070 | d6de98e60661ab3166293457ac8c4d98bcde42f9bb267d0edf37aa4037086de8 |
 | render.yaml | 679 | 2d2fcb7e11f1336fc5c81ec9906dd9e4bbe6ddf630f60acacaf5c24907302369 |
 | reports/Executive_Tear_Sheet.pdf | 3348 | a04f0a265c3b3484caecb3863978fafb308cf9bbd30a234625d399cf38b9c2d1 |
 | reports/Investment_Committee_Memo.pdf | 3462 | 0c26cd8953d4a7be84ad67e7e0d68ff5e9e9098e55d0021c5c3d5cd3c584d55e |
@@ -93,7 +93,7 @@ Virtual environments, secrets, intermediate deck builds and external QA render d
 | scripts/build_word_report.py | 6306 | ec2319343d3783f46ddf38670e0ba13c613ed6e94faf90c9f9cc0765802a0b35 |
 | scripts/check_app.py | 2720 | d88a81965a486c8ed9b522ab1f5375ac7741fd6456ee5a10dfed12062ccc39bf |
 | scripts/check_database_app.py | 2693 | 2f000cc8a575c1bb2c5d88e8e60b8ac1c60580978f4b8a8cd60a25e8abac8086 |
-| scripts/package_submission.py | 4252 | ef7ded8385928f6d9d2b5b98dc7634db9516d8e04ea9c50c2b42061eb350a270 |
+| scripts/package_submission.py | 4323 | f62030815b0fa6eb7cbe37d5b1cd037feb915ed62c5db2a9f9cb4998fa86badd |
 | scripts/prepare_qa.py | 8671 | b772441f1d801248ed01a290afbf875bfc8277351b6ecf03bbff2433212ed116 |
 | scripts/rehearsal.py | 8813 | a8287aa7e6418a86bbe2d29dbcc0a91f96e6c7ff72bb941ff5fade0318763e07 |
 | scripts/render_pitch_pdf.py | 622 | 1c56143674c98017fef4a015a7c3add5993844526bec92250f8e4fb65c61dd91 |
