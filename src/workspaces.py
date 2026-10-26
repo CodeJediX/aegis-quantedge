@@ -235,9 +235,11 @@ def market_view(s, prices, r, lookback):
 
 def construction(r,rf,alloc,result):
     lede("Edit the selected portfolio, compare alternatives and retain your own named allocations. Case limits are checked separately from input validity.")
+    for ticker,weight in zip(TICKERS,result["weights"]):
+        st.session_state.setdefault("weight_"+ticker,float(weight*100))
     with st.form("allocation_form"):
         cols=st.columns(4)
-        values=[cols[i%4].number_input(t+" weight (%)",0.0,100.0,float(result["weights"][i]*100),step=0.5,key="weight_"+t) for i,t in enumerate(TICKERS)]
+        values=[cols[i%4].number_input(t+" weight (%)",0.0,100.0,value=None,step=0.5,key="weight_"+t) for i,t in enumerate(TICKERS)]
         apply=st.form_submit_button("Apply allocation to portfolio and risk views")
     if apply:
         try:
