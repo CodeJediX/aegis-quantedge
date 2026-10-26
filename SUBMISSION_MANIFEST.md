@@ -21,7 +21,7 @@ Virtual environments, secrets, intermediate deck builds and external QA render d
 | .streamlit/config.toml | 214 | ae66df6dbf9ef84583adde9931143187d9ae7ae243a6dde7292095e8d6758f9a |
 | app.py | 8728 | 1312f72180bddbc78ab92cf610e5262a87fd57779a7890dfb51b1f36aff61186 |
 | assets/quantumx_logo.png | 604343 | 6fa6db064e9e32e737f794b145fdfab88cb93bdb601d2839f7f5755f663b8756 |
-| assets/style.css | 10973 | d4c05ff4d8aab8ab85a34e930ab65faaac55872b3d4f01e89d3a34ef8a01df04 |
+| assets/style.css | 10974 | e6c08bdb41a698e6b75389f58e43b7937344dd8f88e6b76656f89b7f1fc10681 |
 | data/metadata/fred.json | 302 | b1bb1b8aa1d13460942ec2e31244d84369e19c0bf1dd5abc48ab8de64e21cef3 |
 | data/metadata/prices.json | 405 | 7748ac014c2bafaf3f333254958900fe5e7d56faf1bc1abb0e7c8f5c3e5a6e9c |
 | data/README.md | 760 | 0fc146e39879a0fa43b7615789abcc17e237a6848990ce6377d7901c4d1dfd0c |
@@ -40,7 +40,7 @@ Virtual environments, secrets, intermediate deck builds and external QA render d
 | documentation/Requirements_Traceability.md | 8801 | 1f4690f14eb08609583ccd45d5bc00e765e776834ec8b36a74cea7948b55ed29 |
 | documentation/Sources.md | 3160 | c5ea5cb5bc714cdc243a6b5ab2390bc0e379af958464396b45735bf0de5ceffb |
 | documentation/Team_Approval_Checklist.md | 1391 | 256a0fece2a24a24754383e797a61fdda6c4dd8f8bbae88c80ace2bea34507c8 |
-| documentation/Testing_and_Validation.md | 16687 | 0353f23751f33086b7631688566f18921e77abde6cf1a040124a837379c088ea |
+| documentation/Testing_and_Validation.md | 18134 | a4a8598c9f1599f56005a274b467a9c7e06e15c2e96999ad9cfaaa194bfc6583 |
 | documentation/Website_Improvements_Audit.md | 12509 | 135a5447517efb09f211e93a8617f3ee3f67460813d55d0b074106dde0aca834 |
 | hosted_app.py | 580 | 3857e07b6a06ed5fb17f92f9017c6eaf2ca5099b2d50c01759659316898cee8c |
 | mobile/app/src/main/AndroidManifest.xml | 785 | be24b2296b3db44ba3fed85ca1719d133e0c35892dd0ed854d6300f1b44dd918 |
@@ -64,6 +64,7 @@ Virtual environments, secrets, intermediate deck builds and external QA render d
 | outputs/results/app_checks.json | 2660 | 3f4058b9c5541a57d79708bc159f3869db4526f03405901f43b4e0e314120ebd |
 | outputs/results/branding_chat_checks.json | 779 | 676841e716c924ead25a6f0c1ad7086bcb420308b3d94fca3cfde6f6011de601 |
 | outputs/results/current_deliverables.json | 485 | bc01f3e039a36c6e0e543b86b6d9a86c1124948dc5ec902db9a0e7b075a71863 |
+| outputs/results/current_release_deployment_checks.json | 2638 | a2ca70917167b364a7933e22e8c9704fd57b7d6aeb45f90a450ad9f540947a59 |
 | outputs/results/data_audit.json | 760 | c8f676d9d716c88fe7e0bbe29ae02b3b033d60854494c5a41f548ddac98230f1 |
 | outputs/results/deployment_checks.json | 2030 | 8586da360d37366f31eacd4f60fb5a8c8941cca08c2d1523c487f25317dd5eca |
 | outputs/results/improvement_checks.json | 14884 | 19b37232ab9bdfe5d91ed4bcb5c7b20deaa89561824ebb8705b5d9183a6b9017 |
@@ -145,7 +146,7 @@ Virtual environments, secrets, intermediate deck builds and external QA render d
 | src/risk.py | 4503 | c90319c3b01a13758ec8e552f9a50d8580564eab138f95498f89d4f032dd2a1e |
 | src/stress.py | 3244 | 7a7ef52a33b7d3fb48cbacd9c6e43b02af1d11374c21b040e6a164db17ccf0bd |
 | src/ui.py | 5119 | 81d1284bf9407443465bff46d8cecc071056460fe7254fd177c259619f6f6a58 |
-| src/workspaces.py | 51785 | a53063535c81fce9881401ac9b30da8c158896ade6dce5bc2786832805d21e4f |
+| src/workspaces.py | 51893 | eabd1f50001353fb6aaf47c408b65b97f783fa1c8b94074a202d166b2b8948c9 |
 | tests/test_chat_guide.py | 1966 | 77071429e2d511696435895cd4b41fca73d4f19fedb473179f6c2eed474114c9 |
 | tests/test_database.py | 4645 | 80bb65683b966d44971ba776f66ae0d90c3d552e2bfea6fad7de1ae18a284593 |
 | tests/test_improvements.py | 13895 | d7406619543d23e28721d52b6d439fd4f984d926ab1ac409a45c4f64d5f86ebd |

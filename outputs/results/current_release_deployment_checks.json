@@ -1,0 +1,77 @@
+{
+  "feature_source_commit": "b795970",
+  "input_warning_fix_commit": "04d570b",
+  "verified_utc": "2026-10-26T03:48:25.268791+00:00",
+  "live_url": "https://quantumx-aegis.streamlit.app/",
+  "free_hosting": true,
+  "payment_details_used": false,
+  "https_checks": [
+    {
+      "url": "https://quantumx-aegis.streamlit.app/",
+      "status": 200,
+      "health_body": "HTML app wrapper"
+    },
+    {
+      "url": "https://quantumx-aegis.streamlit.app/~/+/_stcore/health",
+      "status": 200,
+      "health_body": "ok"
+    }
+  ],
+  "public_downloads": [
+    {
+      "file": "QuantumX_AEGIS_1.0.0.apk",
+      "bytes": 3253309,
+      "sha256": "b8c7b35b16ecb837b2dcc1a36d7a1b11bb5476e9abdb18720565081e4119f449",
+      "matches_local": true
+    },
+    {
+      "file": "Current_Technical_Report.pdf",
+      "bytes": 1404441,
+      "sha256": "f1a91008338b712fd406c6c16fcd9ea0343932a27b066917a9eb25d240428352",
+      "matches_local": true
+    },
+    {
+      "file": "Current_Investment_Tear_Sheet.pdf",
+      "bytes": 2935,
+      "sha256": "a370a9733e7e642203d3f31ba2701915e7eea86fcbd3ad8f9c25e8ba4f0e0292",
+      "matches_local": true
+    },
+    {
+      "file": "AI_Usage_Details.pdf",
+      "bytes": 811919,
+      "sha256": "3f67c5a65a68bacfe6bd1e0bc8b6f52040c512068f6758d14c8cbf4d295a6ff2",
+      "matches_local": true
+    }
+  ],
+  "selected_export": {
+    "allocation_id": "db99fb41d53e",
+    "weights": "SPY20 / AGG60 / GLD20",
+    "sha256": "c8cc7164a3835bc1252dc65e460dac73f06391f62d3799be1c56031995e3a37f",
+    "crc_internal_hashes_and_usd_conversions": "PASS",
+    "pdf_pages": [
+      7,
+      1,
+      1
+    ],
+    "limits_drawdown_scenario": 0.15,
+    "human_approval": "PENDING"
+  },
+  "public_browser_checks": [
+    "Supplied logo visible",
+    "Typed guide responds with actual failures and scope disclosure",
+    "Guide opens supporting Reports workspace",
+    "Actual custom rolling Historical99 results14/939 and8/250 Amber",
+    "EVT95 block intervals100/100 fits",
+    "Actual interest-rate150bp and volatility1.20x controls",
+    "Strict original-limit optimizer failure retained",
+    "Three priorities assessed under explicitly adjusted20% research limits",
+    "Current PDF/APK/source controls visible"
+  ],
+  "limitations": [
+    "Frozen historical data through2026-09-30",
+    "Native API36 emulator tested; no physical-device certification",
+    "Native historical/Gaussian scope; advanced methods remain on web",
+    "Human investment approval pending; no detector clearance claimed"
+  ],
+  "hosting_badge_layout_fix_commit": "968da6f"
+}
