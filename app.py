@@ -166,7 +166,11 @@ w = np.asarray(
     else alloc[candidate].to_numpy()
 )
 signature = allocation_id(w)
-if st.session_state.get("_editor_signature") != signature:
+if page != "Portfolio Construction":
+    # The editor widgets are removed on other routes. Refill them from the
+    # selected allocation on return instead of retaining obsolete widget state.
+    st.session_state.pop("_editor_signature", None)
+elif st.session_state.get("_editor_signature") != signature:
     for ticker, weight in zip(TICKERS, w):
         st.session_state["weight_" + ticker] = float(weight * 100)
     st.session_state["_editor_signature"] = signature

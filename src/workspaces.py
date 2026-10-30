@@ -252,9 +252,11 @@ def construction(r,rf,alloc,result):
         apply=st.form_submit_button("Apply allocation to portfolio and risk views")
     if apply:
         try:
-            apply_custom(np.array(values)/100)
+            if any(value is None for value in values):
+                raise ValueError("Enter a weight for every ETF; use 0% for assets you do not want to hold")
+            apply_custom(np.asarray(values, dtype=float)/100)
         except ValueError as exc:
-            st.error(str(exc)+". Adjust the weights to total100%; no partial allocation was applied.")
+            st.error(str(exc)+". Weights must total 100%; no partial allocation was applied.")
     st.button("Restore reference portfolio and settings",key="restore_reference",on_click=reset_reference_context,
               help="Restore the original allocation, 99% Historical risk, 756-day window and original proposed limits. Saved allocation names are kept.")
     st.caption(f'Selected: {result["name"]} · ID {result["allocation_id"]}. Custom choices are retrospective research experiments, not a new independent out-of-sample strategy.')
