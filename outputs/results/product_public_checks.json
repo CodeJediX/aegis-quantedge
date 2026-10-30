@@ -25,5 +25,32 @@
     "95": 90861
   },
   "public_confidence_comparison": "90/95/99 visible for same allocation/window",
-  "free_app_woken_from_inactivity": true
+  "free_app_woken_from_inactivity": true,
+  "final_source_commit": "c68cbe1",
+  "final_public_documents": [
+    {
+      "file": "Current_Technical_Report.pdf",
+      "pages": 15,
+      "sha256": "e0ebe22beb893f8dc53c4f5beed8b4516b63e5bbde253816ad1b7210df8a4515",
+      "public_bytes_match": true
+    },
+    {
+      "file": "Current_Investment_Tear_Sheet.pdf",
+      "pages": 1,
+      "sha256": "db79e6e48df98ca8ff8d93ffaf7295aba58384d644f32357c4102cee7cb3d5ed",
+      "public_bytes_match": true
+    },
+    {
+      "file": "AI_Usage_Details.pdf",
+      "pages": 2,
+      "sha256": "644677c86dd660be402557d026076a09f7b07da90d7c93bcc49eff1658561d0d",
+      "public_bytes_match": true
+    }
+  ],
+  "health": {
+    "url": "https://quantumx-aegis.streamlit.app/~/+/_stcore/health",
+    "status": 200,
+    "body": "ok"
+  },
+  "default_context_restored_after_research_test": true
 }

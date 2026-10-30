@@ -41,7 +41,7 @@ Virtual environments, secrets, intermediate deck builds and external QA render d
 | documentation/Requirements_Traceability.md | 9573 | c47581827bd160718036faeeee292cd611209dbf885c9e08d11f4eb759d92db3 |
 | documentation/Sources.md | 3160 | c5ea5cb5bc714cdc243a6b5ab2390bc0e379af958464396b45735bf0de5ceffb |
 | documentation/Team_Approval_Checklist.md | 1391 | 256a0fece2a24a24754383e797a61fdda6c4dd8f8bbae88c80ace2bea34507c8 |
-| documentation/Testing_and_Validation.md | 21421 | 75c4be72e73cf99d5e0a9ef05ecd7255635594df1bf2fb5966f4167eab3c1ae9 |
+| documentation/Testing_and_Validation.md | 22314 | 09f38a13d7a78920c94ac5764053bbd43523f2befe60c6d5516ba18c90b2e5ac |
 | documentation/Website_Improvements_Audit.md | 12509 | 135a5447517efb09f211e93a8617f3ee3f67460813d55d0b074106dde0aca834 |
 | hosted_app.py | 580 | 3857e07b6a06ed5fb17f92f9017c6eaf2ca5099b2d50c01759659316898cee8c |
 | mobile/app/src/main/AndroidManifest.xml | 785 | be24b2296b3db44ba3fed85ca1719d133e0c35892dd0ed854d6300f1b44dd918 |
@@ -71,7 +71,8 @@ Virtual environments, secrets, intermediate deck builds and external QA render d
 | outputs/results/improvement_checks.json | 14884 | 19b37232ab9bdfe5d91ed4bcb5c7b20deaa89561824ebb8705b5d9183a6b9017 |
 | outputs/results/mobile_engine_checks.json | 294 | ea9e044a5dca8312db401170b80ca3cf925691c329ecb694e402d1dc47a9b9cd |
 | outputs/results/mobile_runtime_checks.json | 1842 | f37dbc6d5343b89a7de513fe908c81f1ba753100d68520bafc22f25aa8d70161 |
-| outputs/results/product_public_checks.json | 825 | 9b9b49a4b2b8ee71280d9b48f504e189a2b6e8d495cfbc5f1d0dcf7cf4baaaf5 |
+| outputs/results/product_final_extracted_checks.json | 500 | 7d00ab9de8af79559ae7d4ae19c6960e93e30c10950f88ac58049b5cd109754d |
+| outputs/results/product_public_checks.json | 1683 | c2e4d959d9aa1941c35fd32ee3b8bdd0cf8cb93f1aa2aa00927d58d49fc34405 |
 | outputs/results/product_release_checks.json | 928 | 491affa8a76e325e4eb111268f1c3fedf501762f9363b587ac13b98434ff6640 |
 | outputs/results/product_reproduction_checks.json | 617 | 328d80e56ba9523dc921765f5660a647eb7ecda0b3586c9771474c26fe2de8c6 |
 | outputs/results/product_verified_environment.json | 1930 | 289944eb6042f475618e1aeb379b30d2eb8e7338479cb987a7b908ce39ac61cd |
