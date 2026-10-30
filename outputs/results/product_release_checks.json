@@ -1,0 +1,38 @@
+[
+  {
+    "check": "product launch",
+    "passed": true
+  },
+  {
+    "check": "confidence changes visible risk while returns and policy stay fixed",
+    "passed": true
+  },
+  {
+    "check": "all confidence levels match independent quantiles of real selected returns",
+    "passed": true
+  },
+  {
+    "check": "confidence comparison keeps EVT90 unavailable",
+    "passed": true
+  },
+  {
+    "check": "risk limits can be edited",
+    "passed": true
+  },
+  {
+    "check": "limits and confidence persist through navigation into actual report metadata",
+    "passed": true
+  },
+  {
+    "check": "returning editor and original-limit restoration are consistent",
+    "passed": true
+  },
+  {
+    "check": "reference reset restores allocation and analysis controls",
+    "passed": true
+  },
+  {
+    "check": "changed settings do not expose stale selected report downloads",
+    "passed": true
+  }
+]

@@ -20,6 +20,7 @@ from .backtesting import forecasts, summarize, paired_score_ci
 from .database import research_version
 from .interactive import Limits, analyze, recommendation, compare, optimize, allocation_id, usd, library_json, parse_library, what_if
 from .exports import provenance, export_package, csv_bytes
+from .product import POLICY_CONTROLS, policy_parameters, remember_policy, restore_policy, restore_reference
 from .ui import chart, table, pct, lede, open_workspace, current_risk, read, saved_allocations_panel
 
 
@@ -28,13 +29,19 @@ def money_fraction(value):
 
 
 def limits_from_state():
-    return Limits(volatility=st.session_state.get("limit_vol", 10.0)/100,
-                  drawdown=st.session_state.get("limit_dd", 15.0)/100,
-                  daily_ES99=st.session_state.get("limit_es", 2.5)/100,
-                  scenario_loss=st.session_state.get("limit_scenario", 15.0)/100,
-                  objective=st.session_state.get("limit_return", 4.0)/100,
-                  bond_min=st.session_state.get("limit_bond", 0.35),
-                  equity_cap=st.session_state.get("limit_equity", 0.50))
+    return policy_parameters(st.session_state)
+
+
+def remember_policy_control(key):
+    remember_policy(st.session_state, key)
+
+
+def reset_policy_controls():
+    restore_policy(st.session_state)
+
+
+def reset_reference_context():
+    restore_reference(st.session_state)
 
 
 @st.cache_data(show_spinner=False, max_entries=30)
@@ -96,7 +103,7 @@ def decision_banner(result, decision):
     tone = "green" if code == "APPROVE" else "red" if code == "REJECT" else "amber"
     st.markdown(f'<div class="decision-banner {tone}"><span class="decision-code">{code}</span>'
                 f'<div><strong>{escape(result["name"])}</strong><p>{decision["failed_checks"]} failed policy checks · Human approval pending</p></div></div>',unsafe_allow_html=True)
-    st.caption("Automated research recommendation, not authorization to invest. Expected return is a training estimate; all performance and crisis replays are historical.")
+    st.caption("Historical model assessment, not a funding authorization.")
 
 
 def policy_details(result, decision):
@@ -188,12 +195,14 @@ def comparison_view(r, rf, alloc, result):
 
 def overview(result, risk, decision, a, method):
     decision_banner(result, decision)
+    selected=risk[risk.model==method]
+    selected_es=selected.iloc[0].ES if len(selected) else None
     columns = st.columns(4)
-    for col,label,value,help_text in zip(columns,["Training estimated return","Held-out net CAGR","Worst crisis drawdown","Daily historical ES99"],
-        [pct(result["expected_return"]),pct(result["kpi"]["CAGR"]),pct(result["stress"].query("n > 1").max_drawdown.max()),money_fraction(result["ES99"])],
-        ["Shrunk arithmetic annual return estimated only through2018; not a guarantee.","Net compound return over the retrospective held-out period.","Largest drawdown across2008,2020 and2022 constant-weight hindsight replays.","Historical99% expected one-day shortfall on USD10 million; distinct from a crisis loss."]):
+    for col,label,value,help_text in zip(columns,["Training estimated return","Held-out net CAGR","Worst crisis drawdown",f"{method} ES {a:.0%}"],
+        [pct(result["expected_return"]),pct(result["kpi"]["CAGR"]),pct(result["stress"].query("n > 1").max_drawdown.max()),money_fraction(selected_es)],
+        ["Shrunk annual arithmetic return estimated through2018; not a forecast.","Net compound return over the retrospective held-out period.","Largest drawdown across2008,2020 and2022 hindsight replays.","Expected one-day shortfall at your selected confidence and method. The separate mandate check always uses historical ES99."]):
         col.metric(label,value,help=help_text)
-    st.caption("Allocation · "+" · ".join(t+" "+pct(value) for t,value in zip(TICKERS,result["weights"]) if value>1e-10))
+    st.caption(" · ".join(t+" "+pct(value) for t,value in zip(TICKERS,result["weights"]) if value>1e-10))
     policy_details(result,decision)
     with st.expander("All selected portfolio weights"):
         table(pd.DataFrame({"ETF":TICKERS,"Weight":[pct(v) for v in result["weights"]]}))
@@ -234,7 +243,7 @@ def market_view(s, prices, r, lookback):
 
 
 def construction(r,rf,alloc,result):
-    lede("Edit the selected portfolio, compare alternatives and retain your own named allocations. Case limits are checked separately from input validity.")
+    lede("Choose your weights. Compare the outcome. Keep the allocations you want to revisit.")
     for ticker,weight in zip(TICKERS,result["weights"]):
         st.session_state.setdefault("weight_"+ticker,float(weight*100))
     with st.form("allocation_form"):
@@ -246,6 +255,8 @@ def construction(r,rf,alloc,result):
             apply_custom(np.array(values)/100)
         except ValueError as exc:
             st.error(str(exc)+". Adjust the weights to total100%; no partial allocation was applied.")
+    st.button("Restore reference portfolio and settings",key="restore_reference",on_click=reset_reference_context,
+              help="Restore the original allocation, 99% Historical risk, 756-day window and original proposed limits. Saved allocation names are kept.")
     st.caption(f'Selected: {result["name"]} · ID {result["allocation_id"]}. Custom choices are retrospective research experiments, not a new independent out-of-sample strategy.')
     metadata=provenance(result,research_version(),st.session_state.get("confidence",.99),st.session_state.get("method","Historical"))
     weights_csv=csv_bytes(pd.DataFrame({"ticker":TICKERS,"weight":result["weights"]}),metadata)
@@ -269,7 +280,7 @@ def construction(r,rf,alloc,result):
 
 
 def risk_view(r,result,risk,a,method):
-    lede("VaR is a one-day loss cutoff. Expected shortfall averages the worst tail. All displayed dollar amounts use USD10 million.")
+    lede("Compare one-day loss estimates on the same portfolio and historical window.")
     units=st.radio("Risk display units",["Percent of capital","USD"],horizontal=True,key="risk_units")
     fmt=pct if units=="Percent of capital" else money_fraction
     table(pd.DataFrame({"Model":risk.model,"VaR":[fmt(v) for v in risk.VaR],"Expected shortfall":[fmt(v) for v in risk.ES]}))
@@ -277,6 +288,25 @@ def risk_view(r,result,risk,a,method):
     chart(px.bar(risk.melt(id_vars="model",value_vars=["VaR","ES"]),x="model",y="value",color="variable",barmode="group",title=f"Matched {a:.0%} one-day risk",labels={"value":"Fraction of capital","model":"Model"}).update_yaxes(tickformat=".1%"))
     if not risk.model.eq("EVT").any():
         st.info("EVT unavailable at 90% because the requested quantile is at or below the 90% fitting threshold. Use 95% or 99%." if a<=0.90 else "EVT could not be fitted reliably for this window. Increase the lookback or inspect Tail-risk lab; no replacement estimate is invented.")
+    with st.expander("Compare confidence levels · 90% / 95% / 99%"):
+        st.caption("Higher confidence examines rarer losses. This changes VaR and ES, not historical returns or the mandate's fixed ES99 check. Confidence is not model accuracy.")
+        rows=[]
+        for alpha in [.90,.95,.99]:
+            estimates=current_risk(r.iloc[-result["lookback"]:],tuple(result["weights"]),alpha)
+            chosen=estimates[estimates.model==method]
+            rows.append({"Confidence":f"{alpha:.0%}","VaR":float(chosen.iloc[0].VaR) if len(chosen) else np.nan,
+                         "ES":float(chosen.iloc[0].ES) if len(chosen) else np.nan,
+                         "Expected exceedance frequency":{.90:"About 1 in 10 trading days",.95:"About 1 in 20 trading days",.99:"About 1 in 100 trading days"}[alpha]})
+        levels=pd.DataFrame(rows)
+        display=levels.rename(columns={"ES":"Expected shortfall"}).copy()
+        for column in ["VaR","Expected shortfall"]:
+            display[column]=display[column].map(lambda value:fmt(value) if pd.notna(value) else "Unavailable")
+        st.caption(method+" · "+result["name"]+" · same "+str(result["lookback"])+"-return window")
+        table(display)
+        st.caption("Exceedance frequencies are model expectations, not guarantees. EVT90 is unavailable at the default 90% fitting threshold. VaR is not a maximum loss.")
+        metadata=provenance(result,research_version(),a,method)
+        st.download_button("Download confidence comparison · CSV",csv_bytes(levels,metadata),
+                           file_name="aegis_confidence_"+result["allocation_id"]+".csv",mime="text/csv",key="confidence_csv")
     with st.expander("How to interpret the models"):
         st.write("Historical simulation keeps observed shocks. Parametric and Monte Carlo use Gaussian log-return assumptions, so their agreement is not independent confirmation. EVT extrapolates tail exceedances and adds threshold and parameter uncertainty. Volatility state rescales historical shocks; it is not a trained predictor.")
     with st.expander("Selected portfolio Monte Carlo convergence"):
@@ -370,7 +400,7 @@ def validation_view(r,alloc,result,a,method):
             return
     st.caption(label+" · retrospective test; not an independently preregistered live strategy")
     dates=st.session_state.get("dates",(pd.Timestamp(result["test_start"]).date(),pd.Timestamp(result["test_end"]).date()))
-    if len(dates)!=2:
+    if not isinstance(dates,(tuple,list)) or len(dates)!=2:
         st.info("Select both a start and end date in Analysis settings.")
         return
     filtered=raw[(pd.to_datetime(raw.date)>=pd.Timestamp(dates[0]))&(pd.to_datetime(raw.date)<=pd.Timestamp(dates[1]))&np.isclose(raw.confidence,a)].copy()
@@ -483,14 +513,21 @@ def stress_view(r,rf,alloc,result):
 def policy_editor():
     st.subheader("Proposed mandate and risk limits")
     st.caption("These controls change the research assessment. They do not record client approval or retrospectively alter the locked reference package.")
+    saved=st.session_state.get("_policy_settings",{})
+    for key,(_,default,_) in POLICY_CONTROLS.items():
+        st.session_state.setdefault(key,saved.get(key,default))
     c=st.columns(2)
-    c[0].number_input("Annual volatility limit (%)",1.0,50.0,10.0,0.5,key="limit_vol")
-    c[1].number_input("Maximum drawdown limit (%)",1.0,60.0,15.0,0.5,key="limit_dd")
-    c[0].number_input("Daily historical ES99 limit (%)",0.1,20.0,2.5,0.1,key="limit_es")
-    c[1].number_input("Scenario terminal-loss limit (%)",1.0,60.0,15.0,0.5,key="limit_scenario")
-    c[0].number_input("Training estimated return target (%)",0.0,30.0,4.0,0.5,key="limit_return")
-    c[0].slider("Proposed AGG floor",0.35,0.70,0.35,0.05,key="limit_bond")
-    c[1].slider("Proposed aggregate equity cap",0.20,0.50,0.50,0.05,key="limit_equity")
+    fields=[(0,"Annual volatility limit (%)",1.0,50.0,0.5,"limit_vol"),
+            (1,"Maximum drawdown limit (%)",1.0,60.0,0.5,"limit_dd"),
+            (0,"Daily historical ES99 limit (%)",0.1,20.0,0.1,"limit_es"),
+            (1,"Scenario terminal-loss limit (%)",1.0,60.0,0.5,"limit_scenario"),
+            (0,"Training estimated return target (%)",0.0,30.0,0.5,"limit_return")]
+    for column,label,lo,hi,step,key in fields:
+        c[column].number_input(label,lo,hi,value=None,step=step,key=key,on_change=remember_policy_control,args=(key,))
+    c[0].slider("Proposed AGG floor",0.35,0.70,value=None,step=0.05,key="limit_bond",on_change=remember_policy_control,args=("limit_bond",))
+    c[1].slider("Proposed aggregate equity cap",0.20,0.50,value=None,step=0.05,key="limit_equity",on_change=remember_policy_control,args=("limit_equity",))
+    st.button("Restore original risk limits",key="restore_limits",on_click=reset_policy_controls)
+    st.caption("Edited limits stay active across workspaces and exports until restored. They are research assumptions, not client approval.")
 
 
 def budgets(r,rf,alloc,result,decision,a):
@@ -594,46 +631,53 @@ def guide(result,decision,validation):
 
 
 def reports(result,risk,decision,validation,a,method):
-    lede("Generate exports for the selected allocation, or download the clearly labelled fixed reference package. Portfolio IDs, dataset versions, units and analysis timestamps travel with the selected export.")
+    lede("Take the decision, calculations and assumptions with you.")
     source_label=st.session_state.get("custom_label",result["name"]) if result["name"]=="Custom allocation" else result["name"]
     key=hashlib.sha256((research_version()+result["allocation_id"]+source_label+json.dumps(result["limits"],sort_keys=True)+str(result["lookback"])+str(a)+method+str(validation is not None)).encode()).hexdigest()
-    if st.button("Prepare selected portfolio reports",key="prepare_reports"):
-        with st.spinner("Building technical report, one-page tear sheet, memorandum and calculation exports…"):
+    st.subheader("Selected portfolio")
+    st.caption("Create PDFs and data for the allocation and settings shown above. Human investment approval remains pending.")
+    if st.button("Prepare selected portfolio reports",key="prepare_reports",type="primary"):
+        with st.spinner("Preparing reports and calculations…"):
             meta=provenance(result,research_version(),a,method)
             meta["portfolio_label"]=source_label
             st.session_state["report_export"]=(key,export_package(result,risk,decision,meta,validation))
     prepared=st.session_state.get("report_export")
     if prepared is not None and prepared[0]==key:
         prefix,archive,entries=prepared[1]
-        st.download_button("Download selected analysis package · ZIP",archive,file_name=prefix+".zip",mime="application/zip")
-        for kind,label in [("technical","Selected technical report"),("tear_sheet","Selected executive tear sheet"),("memo","Selected investment memorandum")]:
-            st.download_button(label+" · PDF",entries[kind+".pdf"],file_name=prefix+"_"+kind+".pdf",mime="application/pdf",key="selected_pdf_"+kind)
-        st.caption("Technical report: seven structured sections within the required7–15-page range. Tear sheet and memorandum are designed as one page. Validation is marked unavailable if not run.")
+        st.download_button("Download selected analysis package · ZIP",archive,file_name=prefix+".zip",mime="application/zip",type="primary")
+        columns=st.columns(2)
+        for col,kind,label in [(columns[0],"technical","Selected technical report"),(columns[1],"tear_sheet","Selected executive tear sheet")]:
+            col.download_button(label+" · PDF",entries[kind+".pdf"],file_name=prefix+"_"+kind+".pdf",mime="application/pdf",key="selected_pdf_"+kind)
+        with st.expander("Committee memorandum and calculation files"):
+            st.download_button("Selected investment memorandum · PDF",entries["memo.pdf"],file_name=prefix+"_memo.pdf",mime="application/pdf",key="selected_pdf_memo")
+            st.caption("The ZIP includes weights, risk, stress, policy checks, performance, available validation, analysis metadata and SHA256 checksums.")
     else:
-        st.info("Prepare a new export after changing allocation, limits, confidence, method or lookback. Stale files are not shown as current results.")
-    meta=provenance(result,research_version(),a,method)
-    slug=result["allocation_id"]+"_"+meta["generated_utc"][:10]
-    for frame,label in [(risk,"risk"),(result["stress"],"stress"),(result["checks"],"policy_checks"),(pd.DataFrame([result["kpi"]]),"performance")]:
-        st.download_button("Selected "+label.replace("_"," ")+" · CSV",csv_bytes(frame,meta),file_name="aegis_"+slug+"_"+label+".csv",mime="text/csv",key="selected_csv_"+label)
-    current_files={"Current_Technical_Report.pdf":"Current technical study · 15 pages", "Current_Investment_Tear_Sheet.pdf":"Current investment tear sheet · 1 page", "AI_Usage_Details.pdf":"AI usage details · 2 pages"}
-    if any((ROOT/"reports"/file).is_file() for file in current_files):
-        st.subheader("Current release files")
-        st.caption("The full technical study combines the locked reference research with a current software/mobile appendix. These release documents are distinct from the selected-allocation reports generated above.")
-        for file,label in current_files.items():
-            path=ROOT/"reports"/file
-            if path.is_file():st.download_button(label+" · PDF",path.read_bytes(),file_name=file,mime="application/pdf",key="release_"+file)
+        st.caption("Generate again after changing the allocation or settings. Earlier exports are not presented as current.")
+    with st.expander("Download individual calculations · CSV"):
+        meta=provenance(result,research_version(),a,method)
+        slug=result["allocation_id"]+"_"+meta["generated_utc"][:10]
+        for frame,label in [(risk,"risk"),(result["stress"],"stress"),(result["checks"],"policy_checks"),(pd.DataFrame([result["kpi"]]),"performance")]:
+            st.download_button("Selected "+label.replace("_"," ")+" · CSV",csv_bytes(frame,meta),file_name="aegis_"+slug+"_"+label+".csv",mime="text/csv",key="selected_csv_"+label)
+    st.divider()
+    st.subheader("Reference study")
+    st.caption("The original portfolio, original proposed limits and frozen dataset. These documents remain separate from your selected analysis.")
+    current_files={"Current_Technical_Report.pdf":"Technical study · 15 pages", "Current_Investment_Tear_Sheet.pdf":"Investment tear sheet · 1 page", "AI_Usage_Details.pdf":"AI usage disclosure · 2 pages"}
+    for file,label in current_files.items():
+        document=ROOT/"reports"/file
+        if document.is_file():
+            st.download_button(label+" · PDF",document.read_bytes(),file_name=file,mime="application/pdf",key="release_"+file)
+    st.link_button("View documented source on GitHub","https://github.com/CodeJediX/aegis-quantedge")
+    with st.expander("Android companion and original presentation files"):
         apk=ROOT/"mobile/releases/QuantumX_AEGIS_1.0.0.apk"
         if apk.is_file():
             st.download_button("Native Android app · APK",apk.read_bytes(),file_name=apk.name,mime="application/vnd.android.package-archive",key="release_apk")
-            st.caption("Native offline Android companion, Android 8.0+. Own mobile interface and calculations; no WebView or internet permission. Native risk scope is historical and Gaussian-log; advanced MC/EVT/state analytics remain on the website.")
-        st.link_button("Full website and Android source · GitHub","https://github.com/CodeJediX/aegis-quantedge")
-    with st.expander("Fixed research reference package"):
-        st.caption("These original reports concern the locked AEGIS minimum-variance portfolio. They do not change when a custom portfolio is selected. Technical PDF:13 pages; tear sheet:1 page; memo:1 page.")
-        for folder in ["reports","presentation"]:
-            for file in sorted((ROOT/folder).glob("*")):
-                if file.suffix in [".pdf",".docx",".pptx",".md"] and file.name not in current_files:
-                    st.download_button("Reference · "+file.stem.replace("_"," ")+" · "+file.suffix[1:].upper(),file.read_bytes(),file_name=file.name,key="fixed_download_"+file.name)
-    with st.expander("Research review and approval record"):
+            st.caption("26 October native release. Offline Android8+ interface with historical/Gaussian risk and bundled26October documents. Advanced web models and later website changes remain on this website.")
+        originals=[("reports/Technical_Report.docx","Original study · editable Word"),("reports/Investment_Committee_Memo.pdf","Original committee memo"),("presentation/Final_Pitch.pptx","Presentation · editable PowerPoint"),("presentation/Final_Pitch.pdf","Presentation · PDF")]
+        for relative,label in originals:
+            document=ROOT/relative
+            if document.is_file():
+                st.download_button(label,document.read_bytes(),file_name=document.name,key="fixed_download_"+document.name)
+    with st.expander("Independent human review record"):
         st.markdown((ROOT/"documentation/Team_Approval_Checklist.md").read_text(encoding="utf-8-sig"))
 
 
@@ -654,10 +698,11 @@ def assumptions():
 
 
 def methods(result,a,method):
+    lede("Understand the inputs, methods and responsibilities behind every result.")
     meta=provenance(result,research_version(),a,method)
     table(pd.DataFrame({"Parameter":["Dataset version","Data through","Training end","Test interval","Selected allocation ID","Lookback","Random seed","Snapshot MC draws","Rolling MC draws"],"Value":[meta["dataset_version"],meta["data_through"],TRAIN_END,meta["test_start"]+" to "+meta["test_end"],meta["allocation_id"],str(result["lookback"]),str(SEED),str(N_SIM),"10000"]}))
     for file in ["Methodology.md","Data_Governance.md","AI_Disclosure.md","Sources.md"]:
-        with st.expander(file.replace("_"," ").replace(".md",""),expanded=file=="AI_Disclosure.md"):
+        with st.expander(file.replace("_"," ").replace(".md",""),expanded=False):
             st.markdown((ROOT/"documentation"/file).read_text(encoding="utf-8-sig"))
     with st.expander("Installed dependency versions and processing steps"):
         table(pd.DataFrame({"Dependency":meta["versions"].keys(),"Version":meta["versions"].values()}))
@@ -672,9 +717,11 @@ def render(page,s,prices,r,rf,alloc,w,name,a,method,lookback,dates):
     forecasts_,validation_label=available_forecasts(result,alloc)
     validation=summarize(forecasts_) if forecasts_ is not None else None
     decision=recommendation(result,validation)
-    st.caption(f'Selected allocation: {name} · {result["allocation_id"]} · USD {NAV:,.0f} reference · data through {result["latest_end"]}')
+    st.markdown('<div class="analysis-strip"><span>'+escape(name)+'</span><span>USD 10m</span><span>'+f'{a:.0%} · '+escape(method)+'</span><span>'+str(lookback)+' prior returns</span></div>',unsafe_allow_html=True)
     if name=="Custom allocation":
-        st.caption("Custom source: "+st.session_state.get("custom_label","User weights")+". Interactive retrospective calculations; not the locked research record.")
+        st.caption("Custom: "+st.session_state.get("custom_label","User weights")+" · retrospective research")
+    if result["limits"]!=asdict(Limits()):
+        st.warning("Edited research limits are active across workspaces and exports. No client approval is recorded. Restore the original limits in Risk budgets.")
     if page=="Executive Command Center":
         overview(result,risk,decision,a,method)
     elif page=="Market Intelligence":
@@ -699,5 +746,9 @@ def render(page,s,prices,r,rf,alloc,w,name,a,method,lookback,dates):
         assumptions()
     elif page=="Methodology, Sources & AI Disclosure":
         methods(result,a,method)
+    with st.expander("Analysis details"):
+        st.caption(f'Allocation ID {result["allocation_id"]} · dataset {research_version()} · data through {result["latest_end"]}')
+        st.caption(f'Test: {result["test_start"]} to {result["test_end"]}. Risk window: {result["latest_start"]} to {result["latest_end"]}. One-day risk horizon.')
+        st.caption("Confidence changes VaR, ES and validation; historical performance and the fixed policy ES99 check stay unchanged.")
     from .chat_guide import chat_widget
     chat_widget(result,decision,validation is not None)

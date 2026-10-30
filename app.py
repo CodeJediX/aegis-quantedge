@@ -9,7 +9,7 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 from src.config import ROOT, TICKERS
-from src.ui import render
+from src.workspaces import render
 from src.database import active_store, research_version, DatabaseUnavailable
 from src.data import validate_prices
 from src.interactive import allocation_id
@@ -86,6 +86,7 @@ except (FileNotFoundError, ValueError, KeyError, DatabaseUnavailable) as exc:
 
 boot.empty()
 welcome_screen()
+st.session_state["_reference_dates"]=(pd.Timestamp(s["test_start"]).date(),pd.Timestamp(s["test_end"]).date())
 
 PAGES = [
     "Executive Command Center",
@@ -109,22 +110,25 @@ PAGE_LABELS = dict(zip(PAGES, [
 PAGE_TITLES = {**PAGE_LABELS, "Executive Command Center": "Investment decision"}
 if st.session_state.pop("_use_custom", False):
     st.session_state["portfolio"] = "Custom allocation"
+for key,default in {"page":PAGES[0],"portfolio":alloc.columns[0],"confidence":.99,
+                    "method":"Historical","lookback":756}.items():
+    st.session_state.setdefault(key,default)
 with st.sidebar:
     st.markdown(
         '<div class="brand-lockup quantumx-lockup"><div class="brand-plaque">'+logo_html()+
         '</div><div class="brand-sub">PORTFOLIO INTELLIGENCE</div></div>',
         unsafe_allow_html=True,
     )
-    page = st.selectbox("Workspace", PAGES, format_func=PAGE_LABELS.get, key="page")
+    page = st.selectbox("Workspace", PAGES, index=0, format_func=PAGE_LABELS.get, key="page")
     st.markdown('<div class="sidebar-label">EXPLORE AN ALLOCATION</div>', unsafe_allow_html=True)
     candidate = st.selectbox(
-        "Portfolio", list(alloc.columns) + ["Custom allocation"], key="portfolio",
+        "Portfolio", list(alloc.columns) + ["Custom allocation"], index=0, key="portfolio",
         help="Choose a reference portfolio, or build your own in Build a portfolio. All allocations use the same seven ETFs.",
     )
     alpha = st.selectbox(
         "Confidence level",
         [0.90, 0.95, 0.99],
-        index=2,
+        index=0,
         format_func=lambda x: f"{x:.0%}",
         key="confidence",
         help="A 99% VaR is a loss cutoff expected to be exceeded on about 1 in 100 days under the model. It is not a maximum loss.",
@@ -132,21 +136,21 @@ with st.sidebar:
     method = st.selectbox(
         "VaR methodology",
         ["Historical", "Parametric", "Monte Carlo", "EVT", "Volatility state"],
-        key="method",
+        index=0,key="method",
         help="Compare all methods in Risk comparison. Each estimates the same one-day loss horizon.",
     )
     with st.expander("Analysis settings", expanded=page == "Backtesting & Validation"):
-        lookback = st.selectbox("Historical lookback (trading days)", [252, 504, 756, 1260], index=2, key="lookback")
+        lookback = st.selectbox("Historical lookback (trading days)", [252, 504, 756, 1260], index=0, key="lookback")
         dates = st.date_input(
             "Backtesting date range",
-            value=(pd.Timestamp(s["test_start"]).date(), pd.Timestamp(s["test_end"]).date()),
+            value=st.session_state["_reference_dates"],
             min_value=pd.Timestamp(s["test_start"]).date(),
             max_value=pd.Timestamp(s["test_end"]).date(), key="dates",
         )
         st.caption("Date filters apply to Model validation. Selected-allocation forecasts use the selected lookback; the fixed research reference retains its756-day window.")
     with st.expander("About this research"):
         st.write("Seven ETFs across equities, bonds and gold. All dollar estimates use a USD 10 million reference portfolio; results are historical, not live prices.")
-        st.caption("Reference case: Serendib University Endowment Fund · Quantum-X · QuantEdge 1.0. The case constraints remain in force. Independent human review of the investment proposal is pending.")
+        st.caption("Original endowment mandate and seven-ETF constraints remain in force. Independent human investment review is pending.")
         if active_store() is not None:
             backend = "PostgreSQL" if active_store().postgres else "SQLite"
             mode = " · read-only" if os.environ.get("AEGIS_READONLY_DATABASE") == "1" else ""
@@ -167,7 +171,7 @@ if st.session_state.get("_editor_signature") != signature:
         st.session_state["weight_" + ticker] = float(weight * 100)
     st.session_state["_editor_signature"] = signature
 st.markdown(
-    '<div class="app-topline"><span>RESEARCH / ' + escape(PAGE_LABELS[page].upper()) + '</span>'
+    '<div class="app-topline"><span>QUANTUMX / AEGIS</span>'
     '<span class="snapshot-badge">HISTORICAL · ' + s["data"]["end"] + '</span></div>',
     unsafe_allow_html=True,
 )

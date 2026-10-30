@@ -101,6 +101,21 @@ def make_report(result, risk, decision, metadata, validation=None, kind="technic
         base_header("Executive tear sheet" if kind == "tear_sheet" else "Investment committee memorandum")
         decision_content()
         if kind == "tear_sheet":
+            selected_risk=risk[risk.model==metadata["current_method"]]
+            selected_var=float(selected_risk.iloc[0].VaR) if len(selected_risk) else None
+            training_dd=float(result["checks"].loc[result["checks"].check=="Training maximum net drawdown","value"].iloc[0])
+            terminal_loss=max(0.0,float((-result["stress"].return_pct).max()))
+            tab(["Decision risk detail","Result"],[
+                [f'Selected {metadata["current_method"]} VaR {metadata["current_confidence"]:.0%}',percent(selected_var)+" / "+money(selected_var)],
+                ["Training maximum net drawdown",percent(training_dd)],
+                ["Worst terminal scenario loss",percent(terminal_loss)+" / "+money(terminal_loss)]],[270,205])
+            if len(failed):
+                reason="; ".join(row.check+" "+percent(row.value) for row in list(failed.itertuples())[:3])
+                if len(failed)>3:reason+=f"; {len(failed)-3} additional failed checks in the full analysis"
+                p("Decision rationale: "+reason+".",True)
+            else:
+                p("Policy checks pass; selected validation and independent human review still apply.",True)
+            p("Before funding: review the allocation or agree revised limits, confirm spending needs and obtain independent human approval.",True)
             tab(["Holding", "Weight"], [[t,percent(w)] for t,w in zip(TICKERS,result["weights"])], [270,205])
         else:
             p("Failed constraints: " + ("; ".join(failed.check.tolist()) if len(failed) else "No numerical policy failures; validation and human approval still apply."))
@@ -132,7 +147,7 @@ def make_report(result, risk, decision, metadata, validation=None, kind="technic
         tab(["Scenario","Terminal return","Capital impact","Maximum drawdown"], [[row.scenario,percent(row.return_pct),money(row.return_pct),percent(row.max_drawdown)] for row in result["stress"].itertuples()],[135,95,135,110])
         p("The 2008, 2020 and2022 paths use actual adjusted-ETF observations and the currently selected constant target weights. They are retrospective exposure replays, not strategies held at those dates. Their P&L is gross of trading costs. Recovery dates follow the same hindsight weights through the remaining dataset.")
         p("The funding-squeeze event applies simultaneous assumed returns to the seven holdings. It has no estimated probability or invented recovery path. Asset contributions include changing NAV for historical daily replays and sum to total scenario return. Maximum drawdown is distinct from terminal loss.")
-        p("A 15.23% loss on this reference capital is USD1,523,000. A15% maximum tolerated loss is USD1,500,000. Similar-looking percentages and dollar labels do not change these units.")
+        p("Scenario dollar impacts equal the selected terminal return multiplied by the stated reference capital. Maximum drawdown is reported separately; it is not a terminal loss.")
         story.append(PageBreak())
         base_header("5 | Validation and policy checks")
         if validation is not None and len(validation):

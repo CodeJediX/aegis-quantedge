@@ -1,109 +1,92 @@
-# AEGIS | Quantum-X
+# QuantumX AEGIS
 
-QuantEdge 1.0 Final Challenge — Serendib University Endowment Fund, USD 10 million.
+Portfolio decisions supported by transparent risk analysis. AEGIS is a Python/Streamlit application for a USD 10 million endowment reference mandate, using seven prescribed ETFs. It compares one-day risk models, validates forecasts, replays crises and exports the selected analysis.
 
-AEGIS is a Python/Streamlit capital-preservation research application. It constructs a constrained portfolio from the seven prescribed ETFs, compares daily VaR/ES/EVT, performs strictly prior-window backtesting and crisis replay, and presents an automated APPROVE / REVISE / REJECT assessment. The default reference is **REVISE**, with three failed proposed policy checks. The allocation, proposed limits and investment judgment require independent human-team review. The application and all required calculations run without AI keys, subscriptions or paid data.
+**Live app:** https://quantumx-aegis.streamlit.app/
+**Public source:** https://github.com/CodeJediX/aegis-quantedge
+**Current product release:** 30October2026. **Historical input cutoff:** 30September2026.
 
-## Install and launch
+## Run locally
 
-The current release also includes the supplied QuantumX logo, an actual loading state/welcome transition, a floating typed website-guide chat and a separate native Android app. The guide is deterministic and requires no paid AI service. Download the native APK from Reports & downloads or `mobile/releases/QuantumX_AEGIS_1.0.0.apk`; see `mobile/README.md` for its offline features and verified SDK build. This is a native mobile interface and Java engine with no WebView or internet permission.
-
-Current requested PDFs: `reports/Current_Technical_Report.pdf` (15pages: original13-page study plus2current software pages), `reports/Current_Investment_Tear_Sheet.pdf` (1page), and `reports/AI_Usage_Details.pdf` (2pages). The original reference PDF/Word/pitch materials are preserved. Current documents and APK are separate from dynamically generated selected-portfolio reports.
-
-Tested Python: **3.11.9** on Windows. Use Python 3.11.
+Use **Python 3.11**. From this repository directory, install the pinned dependencies:
 
 ```powershell
 python -m venv .venv
 .venv\Scripts\activate
 python -m pip install -r requirements.txt
+```
+
+Then launch with **one command**:
+
+```powershell
 streamlit run app.py
 ```
 
-The final line is the one-command local app launch. The submitted snapshots and outputs permit offline/cached use after dependency installation. Navigate with Workspace in the sidebar. Controls include confidence (90/95/99%), risk methodology, lookback, candidate allocation and backtest dates. A selected allocation consistently drives performance, risk, stress, comparisons, attribution, decisions, the deterministic guide and selected exports. Run its rolling backtest in Model validation; reference forecasts are reused only when the actual weights and lookback match. Unavailable custom validation remains explicitly unavailable.
+On macOS/Linux, activate with `source .venv/bin/activate` before installation. Inputs and numerical outputs are included; launch does not require a market-data download, API key or paid service.
 
-Risk budgets supports editable proposed limits and three training-only optimization priorities. Build a portfolio supports named session allocations with JSON export/import for retention. Reports & downloads generates a selected seven-page technical report, one-page tear sheet, one-page committee memorandum and identified CSV/ZIP exports. The original 13-page reference PDF and Word companion remain separately labelled. See `documentation/Website_Improvements_Audit.md` for all 46 requested improvements and practical limits.
+To reproduce the public read-only SQL configuration instead, run `streamlit run hosted_app.py`. It creates a real SQLite research database from verified snapshots. Public shared saving is disabled because free local storage is temporary. A named allocation library can be exported/imported as JSON. Optional PostgreSQL setup is documented in `documentation/Hosted_Database.md`; no external PostgreSQL provisioning is claimed.
 
-## Reproduce the research and reports
+## Use the application
+
+1. **Overview:** read the automated assessment, selected risk and failed limits.
+2. **Build a portfolio:** enter seven weights totalling 100%, compare alternatives and save named allocations. Restore the reference context without deleting saved profiles.
+3. **Risk comparison:** compare historical, Gaussian-log, Monte Carlo, EVT and volatility-state estimates. The confidence comparison shows 90/95/99% on the same weights and history.
+4. **Model validation:** review the correct selected-weight/lookback forecasts. Custom validation must be run explicitly; reference results are never substituted.
+5. **Stress testing / Risk budgets:** inspect crisis paths, assumed shocks, contributions and training-only optimization. Edited proposed limits stay active across pages and exports until restored.
+6. **Reports & downloads:** generate identified selected PDF/CSV/ZIP outputs or download the separate reference study and tear sheet.
+
+Markets, Tail-risk lab, Research guide, Assumptions & Limitations and Methods & disclosures retain supporting evidence. The typed guide uses deterministic rules and selected context; it does not call a live generative model or place trades.
+
+Changing confidence updates VaR/ES and corresponding validation. Historical returns, weights and the mandate's fixed historical ES99 check do not change. EVT 90% is unavailable at the original90% fitting threshold. Traffic lights require exactly 250 one-day 99% forecasts.
+
+## Required submission files
+
+| Requirement | Delivered evidence |
+|---|---|
+| Documented, judge-accessible source | This repository and public GitHub URL above |
+| Deployed or one-command Streamlit app | Live URL above; `streamlit run app.py` locally after setup |
+| Technical report, 7Ã¢â‚¬â€œ15pages | `reports/Current_Technical_Report.pdf`: 15 pages, comprising the unchanged 13-page research study plus two current product/verification pages |
+| Executive tear sheet, one page | `reports/Current_Investment_Tear_Sheet.pdf`: allocation, performance, VaR/ES, failed-limit rationale and required action |
+
+`reports/AI_Usage_Details.pdf` provides the required material AI-assistance disclosure. Dynamic selected-allocation reports are separate: technical 7 pages, tear sheet 1 page and memo 1 page. Original Word and finalist presentation materials remain available in the source; they are not required to launch the app. The 26 October native Android companion remains under `mobile/`, with its own installation/build guide and explicitly smaller model scope. Its bundled documents belong to that earlier release.
+
+## Reproduce and verify
 
 ```powershell
 python run.py --reproduce
+python scripts/build_current_deliverables.py
 python -m unittest discover -s tests -v
-python scripts/check_app.py
+python scripts/check_app.py hosted_app.py
 python scripts/check_improvements.py
-python scripts/check_database_app.py
+python scripts/check_product_release.py
 python scripts/check_branding_chat.py
+python scripts/verify_manifest.py
 ```
 
-The pipeline regenerates data audits, cleaned simple/log returns, stationarity checks, weights, alternatives, KPIs, CAPM, frontier, risk estimates, EVT fits/intervals/sensitivity, daily rolling forecasts, coverage tests, crisis replays, risk contributions, policy checks, figures, technical PDF, one-page tear sheet, one-page decision memo, and pitch evidence/speaker notes. Allow roughly 30–90 seconds on a laptop after installation; the actual measured preparation run is in the validation record. Downloads and installation take longer. No multiprocessing is used.
+The research pipeline regenerates audits, returns, stationarity tests, allocations, ratios, risk, EVT, forecasts, coverage tests, stress, contributions, figures and original financial PDFs. The next command rebuilds the current15/1/2-page documents. Reproduction normally uses the hashed authentic snapshots; `python run.py --refresh-data` intentionally requests a new approved-source snapshot. Provider failures never trigger synthetic replacements.
 
-`python run.py --refresh-data` downloads a new approved-source dataset. `--skip-documents` skips PDF regeneration. Reproduction normally reuses the hashed authentic snapshots: a fixed date window alone does not freeze adjusted vendor histories. If snapshots are absent the pipeline downloads them; a partial or failed download does not invent data or silently use another provider.
+The verification record distinguishes tests executed on this release from earlier reproduction/mobile checks.53 numerical/integration/database/state tests,28 base interface checks,129 expanded checks,9 product-flow checks and9 guide checks are recorded in `documentation/Testing_and_Validation.md`. These are finite automated checks, not universal device certification or independent human review.
 
-The editable 12-slide PowerPoint and its PDF are delivered ready to present, with a 11-minute rehearsal script. All slide evidence is in `presentation/pitch_data.json`. Native charts/tables remain editable. Their optional authoring source is `scripts/build_pitch.mjs`, using the first-party `@oai/artifact-tool` Node package. Re-export requires that separate authoring runtime and is not needed to run the Streamlit app or reproduce its financial results/PDF reports. Do not claim a fresh environment without that authoring runtime regenerated the PPTX; the supplied deck is self-contained.
+## Research design and decision limits
 
-`reports/Technical_Report.docx` is an editable Word companion containing the same report text, tables and figures. The PDF is the submission layout authority. Optional Word regeneration uses `python scripts/build_word_report.py` and additionally requires `python-docx`; the mandatory application does not require it. Recheck pagination after editing in Word.
+- Universe: SPY, EFA, EEM, AGG, GLD, XLE, XLK. Long only and fully invested; original caps/floors remain explicit.
+- Data: Yahoo adjusted ETF closes via yfinance and strictly lagged FRED DTB3. Snapshots, retrieval times and SHA256 provenance are included.
+- Estimate through 2018; development 2019Ã¢â‚¬â€œ2022; retrospective held-out test 2023-01-03 through 2026-09-30,939 days. The design is not claimed to have been preregistered.
+- Daily target rebalancing; 10bp per dollar of absolute turnover for net performance. Current risk and historical crisis replays are gross. One-day VaR is not a maximum-loss guarantee.
+- Original reference remains **REVISE**:training maximum net drawdown 16.71%,worst terminal scenario loss 15.23% and worst historical crisis drawdown 17.52% exceed proposed 15%limits. Strict optimization does not silently relax a failed constraint.
+- Confidence does not mean model accuracy. Non-rejected coverage and Green traffic are not investment approval. Custom historical experiments can overfit.
 
-## Locked research design
+**Independent human investment review remains PENDING.** The team must substantiate and defend allocation, assumptions, interpretation and final recommendation. Material AI assistance is disclosed; automated checks do not replace human judgment. Full methods, sources, limitations and traceability are under `documentation/`.
 
-- Holdings universe only: **SPY, EFA, EEM, AGG, GLD, XLE, XLK**.
-- Source: Yahoo Finance through yfinance, adjusted close; FRED DTB3 for risk-free diagnostics.
-- Price request: 2005-01-01 to 2026-10-01 exclusive. Common prices: **2005-01-03 through 2026-09-30**. Returns start 2005-01-04.
-- Portfolio estimation: through **2018-12-31**. Development: **2019–2022**. Held-out test: **2023-01-03 through 2026-09-30**, 939 days.
-- This split is retrospective, not evidence of pre-registration or actual live trading. No portfolio/model settings are selected on test outcomes.
-- Primary candidate is constrained minimum training variance. No leverage; full investment; proposed caps/floors in `src/config.py`. Zero weights are permitted. Equal-weight and 60/40 benchmark may exceed proposed conservative constraints and are labelled comparators.
-- Provisional horizon: 10+ years. Provisional nominal objective 4%, assumed inflation 2.5%, before spending. Spending/income needs have not been supplied.
-- Daily target rebalancing; 10bp per dollar of absolute turnover before the next return. Net KPIs versus gross hypothetical risk/stress P&L are labelled separately.
-- Statistical log returns and exact simple-return portfolio wealth; 252-day annualization. Positive loss = negative portfolio simple return. USD risk uses constant reference NAV of $10m.
-- Risk horizon: **one day**; not a capital guarantee over the investment horizon. Historical, normal portfolio-log parametric, correlated normal asset-log Monte Carlo; EVT POT/GPD at a frozen 90% loss threshold with 40 minimum exceedances.
-- Rolling window 756 preceding returns, 10,000 MC draws. Current snapshot 50,000 draws; fixed seed **20261024**. Bootstrap 150 circular 20-day block resamples for EVT; 1,000 paired 20-day resamples for regime score differences.
-- Traffic lights: only 250 one-day 99% observations. Full test is N/A; last-250 status is explicit. Unsupported EVT90, infinite EVT ES and degenerate test transitions are not presented as valid estimates.
-- All numerical results, including failed diagnostics, are retained. The volatility-state extension is research only; no machine-learning or external LLM dependency was added.
+## Source map
 
-## What is in the package
-
-```text
-app.py                     Streamlit entry point
-run.py                     Numerical and PDF reproduction
-src/                       Data, portfolio, risk, EVT, validation, stress, decision, reporting, UI
-assets/style.css           Responsive navy/mint institutional design
-.streamlit/config.toml     Deployment-ready Streamlit settings
-data/snapshots/             Genuine adjusted prices and FRED rates
-data/metadata/              Retrieval timestamps and SHA-256 provenance
-outputs/tables/             All numerical tables, flags, forecasts and contributions
-outputs/results/            Summary, audits and executed app checks
-outputs/figures/            Publication figures
-reports/                    Technical PDF and editable Word report, one-page tear sheet, one-page memo, Markdown source
-presentation/               12-slide PPTX, PDF, computed evidence and speaker script
-tests/                      Numerical reference, leakage and input validation tests
-scripts/                    App checks, presentation source, verification and packaging
-mobile/                     Native Android Java source, instrumentation tests, signed APK and installation/build guide
-documentation/              Methods, sources, governance, limitations, disclosure, traceability, Q&A, approvals, audit
-SUBMISSION_MANIFEST.md      Checksums, inventory and pending external actions
-```
-
-## Review the results correctly
-
-The automated REVISE assessment is driven by the conflict between a 15% proposed tolerance and larger training/crisis/scenario exposure. The original fixed memo uses the equivalent earlier label ADJUST. The stricter optimizer did not find a training-feasible allocation at the original limits; this is not a global infeasibility proof. It does not silently relax the limits. A higher backtested return does not make a comparator suitable. A non-rejected coverage test is not certification, and a green traffic light is not a maximum-loss bound. See the evidence ledger and Assumptions_and_Limitations.md.
-
-AI usage is material and disclosed in `documentation/AI_Disclosure.md`. The human team must independently check and defend the allocation, interpretation and recommendation before submission under brief section 8.7. The pending checklist is not a claim that review happened.
+`app.py` and `hosted_app.py` are entry points; `src/` contains numerical analysis, session handling, UI and exports. `data/` contains frozen inputs/provenance; `outputs/` contains executed tables/figures/results; `tests/` and `scripts/` contain checks and reproduction; `reports/` contains deliverables. `SUBMISSION_MANIFEST.md` inventories files with SHA256 checksums. Secrets, local SQL files, environments, SDK intermediates and private APK signing keys are excluded from archives.
 
 ## Troubleshooting
 
 - Missing outputs: run `python run.py --reproduce` from this directory.
-- Yahoo/FRED timeout: use the supplied snapshot, check connectivity and retry the refresh later. No second vendor is substituted.
-- Checksum mismatch: restore the snapshot/metadata pair or intentionally refresh; do not edit hashes to conceal changes.
-- EVT unavailable: lower the threshold or increase lookback; at/below the threshold no extrapolated quantile is applicable.
-- Invalid custom weights: all seven finite nonnegative weights must sum to 100%. The app reports the error rather than normalizing silently.
-- PDF cannot be overwritten: close a viewer that locks it, then rerun.
+- Checksum mismatch: restore the original snapshot/metadata pair or intentionally refresh; do not edit hashes to hide changes.
+- Invalid weights: use seven finite, nonnegative values that sum to 100%; the app never silently normalizes them.
+- Unavailable EVT: inspect exceedances and fitting threshold or increase lookback; missing estimates remain unavailable.
 - Port in use: `streamlit run app.py --server.port 8502`.
-- Isolated package installation: use `python -m pip` in the activated environment; requirements pin the preparation versions. Transitive packages can change, so archive the installed lock record for exact environment comparison.
-
-## External release steps
-
-Live application: https://quantumx-aegis.streamlit.app/ — deployed and verified on 25 October 2026. Public source repository: https://github.com/CodeJediX/aegis-quantedge. Streamlit Community Cloud runs `hosted_app.py` with Python 3.11 and no secrets or payment details. Independent human-team approval remains pending.
-
-## Hosted database option
-
-The live application uses a real SQLite research database rebuilt from verified snapshots on startup. Prices and research tables come from SQL. Shared saves are disabled because free local storage is temporary; allocation experiments remain available in the current session. `render.yaml` records an unused alternative configuration. The code also supports external PostgreSQL for durable team-administered saves. `documentation/Hosted_Database.md` explains both modes. Bootstrap with `python scripts/bootstrap_database.py` after setting `AEGIS_DATABASE_URL`. Setting `AEGIS_REQUIRE_DATABASE=1` prevents a missing database configuration from silently becoming file mode.
-
-For free Streamlit Community Cloud hosting, select `hosted_app.py` as the entry point and Python3.11. It creates the same read-only SQLite database on first startup without any secrets or payment details. `streamlit run hosted_app.py` reproduces that hosted configuration locally. On this Render account, even the manual Free service form requested a card; that setup was cancelled without entering payment details. Streamlit Community Cloud is the chosen alternative.
-
+- Full runtime/SQL details and earlier verification history are retained in `documentation/`.
