@@ -1,0 +1,29 @@
+{
+  "tested_feature_commit": "511ad18",
+  "live_url": "https://quantumx-aegis.streamlit.app/",
+  "actual_public_download": "aegis_AEGIS_minimum_variance_a71dc20a2355_20261030T051732.zip",
+  "sha256": "039140debaf6a55748844765a7fc977df1a6ec076913dc86d93009081882ab40",
+  "retained_limits": {
+    "volatility": 0.1,
+    "drawdown": 0.2,
+    "daily_ES99": 0.025,
+    "scenario_loss": 0.18,
+    "objective": 0.04,
+    "bond_min": 0.35,
+    "equity_cap": 0.5
+  },
+  "confidence": 0.95,
+  "human_approval": "PENDING",
+  "selected_PDF_pages": [
+    7,
+    1,
+    1
+  ],
+  "crc_and_internal_hashes": "PASS",
+  "observed_dashboard_ES_USD": {
+    "99": 131011,
+    "95": 90861
+  },
+  "public_confidence_comparison": "90/95/99 visible for same allocation/window",
+  "free_app_woken_from_inactivity": true
+}

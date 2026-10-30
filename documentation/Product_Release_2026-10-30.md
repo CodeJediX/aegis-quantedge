@@ -17,3 +17,5 @@ A quiet institutional decision desk: compact logo/context, visible assessment, r
 All12workspaces, five quantitative layers, original reference inputs and numerical results remain. The guide is deterministic. Data stop on2026-09-30. Hosting remains free Streamlit with real read-only SQLite. No paid resource or external live generative API is introduced. The26October native app is not represented as a new mobile release. Independent human-team review is still pending.
 
 Verification and public deployment evidence are recorded in Testing_and_Validation.md and outputs/results/product_release_checks.json. The delivery ZIP includes documented source, app/run links, a15-page report and one-page tear sheet, plus AI disclosure.
+
+Numerical reproduction also synchronized two coverage-CSV schemas with the current explicit latest-window fields; existing values and raw input bytes are unchanged. Input cache keys now include the evidence catalog fingerprint. This is a reproducibility/metadata correction, not a new investment result.

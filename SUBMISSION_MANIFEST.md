@@ -1,9 +1,9 @@
 # Submission manifest
 
-AEGIS / Quantum-X | QuantEdge 1.0 Final Challenge | current release 26 October 2026
+AEGIS / Quantum-X | QuantEdge 1.0 Final Challenge | current release 30 October 2026
 
 Data cutoff: 2026-09-30. Current technical report 15 pages, investment tear sheet 1 page, AI usage details 2 pages and a signed native Android APK. Original 13-page report/Word companion, memo and 12-slide pitch are preserved. All five technical layers and twelve workspaces are implemented.
-Selected-portfolio exports are generated separately in the app: technical PDF 7 pages, tear sheet 1, committee memo 1, identified CSV/ZIP and provenance. The current default automated recommendation is REVISE with three failed proposed policy checks. Verification: 49 numerical/integration/database tests, 28 base and 129 expanded interface checks, 9 branding/chat checks, 222 Java/Python comparisons and 24 signed-APK emulator runtime checks. Native model scope is explicitly smaller than website scope; see mobile/README.md.
+Selected-portfolio exports are generated separately in the app: technical PDF 7 pages, tear sheet 1, committee memo 1, identified CSV/ZIP and provenance. The current default automated recommendation is REVISE with three failed proposed policy checks. Verification: 53 numerical/integration/database/state tests, 28 base and 129 expanded interface checks, 9 product workflow checks, 9 branding/chat checks; earlier native release: 222 Java/Python comparisons and 24 signed-APK emulator runtime checks. Native model scope is explicitly smaller than website scope; see mobile/README.md.
 
 Live application: https://quantumx-aegis.streamlit.app/ (free Streamlit Community Cloud). Public source: https://github.com/CodeJediX/aegis-quantedge. Hosting uses read-only SQLite rebuilt from verified research snapshots; shared saves are disabled. **Pending human actions:** independent team validation and the final investment decision. No human approval is claimed.
 
@@ -19,15 +19,15 @@ Virtual environments, secrets, intermediate deck builds and external QA render d
 | .gitattributes | 129 | 5cfc825676fbb0cd1e7b381f9aeadea517cb70e9a59f9e981babc5dc2073f7bd |
 | .gitignore | 197 | d4842af177803503432cb045d2c914366a4dbc65ca1a16d5265b4757de9f0022 |
 | .streamlit/config.toml | 214 | ae66df6dbf9ef84583adde9931143187d9ae7ae243a6dde7292095e8d6758f9a |
-| app.py | 8728 | 1312f72180bddbc78ab92cf610e5262a87fd57779a7890dfb51b1f36aff61186 |
+| app.py | 8969 | ec13699e0b36e2b4b4eb3c55639d7de448f58eae92a30900ce23671a88bab11c |
 | assets/quantumx_logo.png | 604343 | 6fa6db064e9e32e737f794b145fdfab88cb93bdb601d2839f7f5755f663b8756 |
-| assets/style.css | 10974 | e6c08bdb41a698e6b75389f58e43b7937344dd8f88e6b76656f89b7f1fc10681 |
+| assets/style.css | 11783 | 6c4c337e1aa1d7ee6d9dcf5b788777e9df426b9640b9b4e8344ea684460f912c |
 | data/metadata/fred.json | 302 | b1bb1b8aa1d13460942ec2e31244d84369e19c0bf1dd5abc48ab8de64e21cef3 |
 | data/metadata/prices.json | 405 | 7748ac014c2bafaf3f333254958900fe5e7d56faf1bc1abb0e7c8f5c3e5a6e9c |
 | data/README.md | 760 | 0fc146e39879a0fa43b7615789abcc17e237a6848990ce6377d7901c4d1dfd0c |
 | data/snapshots/adjusted_prices.csv | 595496 | 7948d99f7ba6b79b6c8425ecd48482d76d914115088adc84c3c8ff90df0f2af1 |
 | data/snapshots/DTB3.csv | 95398 | 40897a0518d118159f8af98fa4e57b124bec9ceb419bed747e838b7195594eb2 |
-| documentation/AI_Disclosure.md | 3367 | 0bdb1e27020c95c93a5455ce9120ba63666930c43c037c8bb7fb2faa1819e0d1 |
+| documentation/AI_Disclosure.md | 3866 | 7c535c8a2d3e74bc2fc4acd7b4066518c531d8e237d00d327da37f31a7673565 |
 | documentation/Assumptions_and_Limitations.md | 7928 | 6c720762cdc4e62ef0a7a73ef63fd419ec65fc149e703548ca32f0e9157d2f84 |
 | documentation/Brand_Chat_Mobile_Release.md | 4272 | f200dc2b19306ee5d8d796f8793b2afa3ee9f1e6b5fc03e64dc20ebc3b457174 |
 | documentation/Data_Governance.md | 2020 | c728825016b102ed96749edb17ef7ce8a7a1d8f48311cc786991bdd7cb8a7f8b |
@@ -37,10 +37,11 @@ Virtual environments, secrets, intermediate deck builds and external QA render d
 | documentation/Judges_QA.md | 6558 | 3b9ba2526319d30901ffa942fe9d7f2d8d44536bd3f93bcde63bb3f1629a84f7 |
 | documentation/Methodology.md | 7249 | 5e78fa6b880edb49421c9cccf5d7e62ef43fe9d0be67008996676297b3730c64 |
 | documentation/Prior_Work_Audit.md | 1656 | 130911efcfbba63d4e6f15e600af5e7300379f7d12464c851bbd02d50db83e66 |
-| documentation/Requirements_Traceability.md | 8801 | 1f4690f14eb08609583ccd45d5bc00e765e776834ec8b36a74cea7948b55ed29 |
+| documentation/Product_Release_2026-10-30.md | 2167 | ed4b55f7a8a557851e940d4acf7c9c7b66ae8fbeebdfa16973bff085de4d966b |
+| documentation/Requirements_Traceability.md | 9573 | c47581827bd160718036faeeee292cd611209dbf885c9e08d11f4eb759d92db3 |
 | documentation/Sources.md | 3160 | c5ea5cb5bc714cdc243a6b5ab2390bc0e379af958464396b45735bf0de5ceffb |
 | documentation/Team_Approval_Checklist.md | 1391 | 256a0fece2a24a24754383e797a61fdda6c4dd8f8bbae88c80ace2bea34507c8 |
-| documentation/Testing_and_Validation.md | 18134 | a4a8598c9f1599f56005a274b467a9c7e06e15c2e96999ad9cfaaa194bfc6583 |
+| documentation/Testing_and_Validation.md | 21421 | 75c4be72e73cf99d5e0a9ef05ecd7255635594df1bf2fb5966f4167eab3c1ae9 |
 | documentation/Website_Improvements_Audit.md | 12509 | 135a5447517efb09f211e93a8617f3ee3f67460813d55d0b074106dde0aca834 |
 | hosted_app.py | 580 | 3857e07b6a06ed5fb17f92f9017c6eaf2ca5099b2d50c01759659316898cee8c |
 | mobile/app/src/main/AndroidManifest.xml | 785 | be24b2296b3db44ba3fed85ca1719d133e0c35892dd0ed854d6300f1b44dd918 |
@@ -63,18 +64,22 @@ Virtual environments, secrets, intermediate deck builds and external QA render d
 | outputs/figures/stress.png | 40249 | 3432a3d316f50c59dd98369da2f6f3e0822a10b9c8484515433cd99256b321e6 |
 | outputs/results/app_checks.json | 2660 | 3f4058b9c5541a57d79708bc159f3869db4526f03405901f43b4e0e314120ebd |
 | outputs/results/branding_chat_checks.json | 779 | 676841e716c924ead25a6f0c1ad7086bcb420308b3d94fca3cfde6f6011de601 |
-| outputs/results/current_deliverables.json | 485 | bc01f3e039a36c6e0e543b86b6d9a86c1124948dc5ec902db9a0e7b075a71863 |
+| outputs/results/current_deliverables.json | 485 | 99f9b40bda02356584bd95e35ef1c69d624d31166d60ec3408ccf5fb4a97c743 |
 | outputs/results/current_release_deployment_checks.json | 2638 | a2ca70917167b364a7933e22e8c9704fd57b7d6aeb45f90a450ad9f540947a59 |
 | outputs/results/data_audit.json | 760 | c8f676d9d716c88fe7e0bbe29ae02b3b033d60854494c5a41f548ddac98230f1 |
 | outputs/results/deployment_checks.json | 2030 | 8586da360d37366f31eacd4f60fb5a8c8941cca08c2d1523c487f25317dd5eca |
 | outputs/results/improvement_checks.json | 14884 | 19b37232ab9bdfe5d91ed4bcb5c7b20deaa89561824ebb8705b5d9183a6b9017 |
 | outputs/results/mobile_engine_checks.json | 294 | ea9e044a5dca8312db401170b80ca3cf925691c329ecb694e402d1dc47a9b9cd |
 | outputs/results/mobile_runtime_checks.json | 1842 | f37dbc6d5343b89a7de513fe908c81f1ba753100d68520bafc22f25aa8d70161 |
+| outputs/results/product_public_checks.json | 825 | 9b9b49a4b2b8ee71280d9b48f504e189a2b6e8d495cfbc5f1d0dcf7cf4baaaf5 |
+| outputs/results/product_release_checks.json | 928 | 491affa8a76e325e4eb111268f1c3fedf501762f9363b587ac13b98434ff6640 |
+| outputs/results/product_reproduction_checks.json | 617 | 328d80e56ba9523dc921765f5660a647eb7ecda0b3586c9771474c26fe2de8c6 |
+| outputs/results/product_verified_environment.json | 1930 | 289944eb6042f475618e1aeb379b30d2eb8e7338479cb987a7b908ce39ac61cd |
 | outputs/results/summary.json | 3900 | 034204771912a52409eb3118c2579c0fb19a19a597fe981d77f7c755e00d1013 |
 | outputs/tables/adf.csv | 555 | dfe74f476beb9c22575f0bb6901a52884dc88701f2da60c54c19c8afc1eac575 |
 | outputs/tables/allocations.csv | 429 | 6a58ff88213acbc32ff927441f73519c9dd8e892710c0808e90540fb8265c275 |
-| outputs/tables/backtesting_development.csv | 4471 | 73fe40baa4d16db1ecc052150c46c8ed854c334691fe3d4ec72cdb0f2881b982 |
-| outputs/tables/backtesting_test.csv | 4435 | 6b77e3675c4c45d5cf5ef90bde753cbe150a17b40984bfc4342b595b219f101a |
+| outputs/tables/backtesting_development.csv | 5163 | 2651165e4364e1a35276cc22b62e1477e42d98178c63cb1ff0933428e1542517 |
+| outputs/tables/backtesting_test.csv | 5127 | b141a24900c157e3143422cab88cb762f7d888c5e17b32ec6c45fab2161a4da8 |
 | outputs/tables/capm_training.csv | 400 | dfd02e8144d8d41ee69fa47ed21eaa8e560c9eb3638eb7400d402943be8f5107 |
 | outputs/tables/cost_sensitivity.csv | 702 | 931b4362f8f41ccfc5449846600d0a932539c6d7c17f65411892f5b1dba844ae |
 | outputs/tables/coverage.csv | 285 | 7626993f11dc33f76e88f86d6d569e61d56c062046557a754405b4d3832333f4 |
@@ -101,11 +106,11 @@ Virtual environments, secrets, intermediate deck builds and external QA render d
 | presentation/pitch_data.json | 8802 | a490dcc6fd1b125275c30b8111bc9ad9e5b8e8c04a50e1afe535a43e589c607f |
 | presentation/Rehearsal_Script.md | 8334 | d6d85661cfe6a10acb241f59478bceacddf6b1a67f7c59ba56f369e57bc2335e |
 | presentation/Speaker_Notes.md | 3535 | c3e34c95641c4cc9bd2c6df8d292e6c96ba71f5a0726c1e0e24a03e222bdd6b9 |
-| README.md | 12130 | c3336294e27a2eb7ebf1a37bad74eea7b2fc4773ed9c2f2f21170bc99d66eb40 |
+| README.md | 7719 | b63da31c1f5cefa9f41643da12968bf1172238c2530896116272c5c030f62841 |
 | render.yaml | 679 | 2d2fcb7e11f1336fc5c81ec9906dd9e4bbe6ddf630f60acacaf5c24907302369 |
-| reports/AI_Usage_Details.pdf | 811919 | 3f67c5a65a68bacfe6bd1e0bc8b6f52040c512068f6758d14c8cbf4d295a6ff2 |
-| reports/Current_Investment_Tear_Sheet.pdf | 2935 | a370a9733e7e642203d3f31ba2701915e7eea86fcbd3ad8f9c25e8ba4f0e0292 |
-| reports/Current_Technical_Report.pdf | 1404441 | f1a91008338b712fd406c6c16fcd9ea0343932a27b066917a9eb25d240428352 |
+| reports/AI_Usage_Details.pdf | 812049 | 644677c86dd660be402557d026076a09f7b07da90d7c93bcc49eff1658561d0d |
+| reports/Current_Investment_Tear_Sheet.pdf | 3218 | db79e6e48df98ca8ff8d93ffaf7295aba58384d644f32357c4102cee7cb3d5ed |
+| reports/Current_Technical_Report.pdf | 1404552 | e0ebe22beb893f8dc53c4f5beed8b4516b63e5bbde253816ad1b7210df8a4515 |
 | reports/Executive_Tear_Sheet.pdf | 3348 | a04f0a265c3b3484caecb3863978fafb308cf9bbd30a234625d399cf38b9c2d1 |
 | reports/Investment_Committee_Memo.pdf | 3462 | 0c26cd8953d4a7be84ad67e7e0d68ff5e9e9098e55d0021c5c3d5cd3c584d55e |
 | reports/Technical_Report.docx | 538591 | 906b83765232f92a44f9e2e88117842cc3e3d8c17905786eb2a8ce75635e7803 |
@@ -114,7 +119,7 @@ Virtual environments, secrets, intermediate deck builds and external QA render d
 | requirements.txt | 219 | ae531cebb87c54e01d51651ee8060759e71592fedccbadb15e84ea0f28c125e8 |
 | run.py | 8570 | 0f0d276188ac13278bdb2ff53013b2a515122de74492e2a5abfae3f5e9a00f4f |
 | scripts/bootstrap_database.py | 648 | adbadf76aec9e68b558e4e16ebf0362b0bdad6880dbc3be5106bc459c58261f2 |
-| scripts/build_current_deliverables.py | 14432 | c3e2ed233bc856eb0971a911d6a62b877378787d2617090705d3754320214f62 |
+| scripts/build_current_deliverables.py | 14708 | 35f107e351a30f4a53df5e1b5350659452b53f6219f726976f6d945ec0877c0d |
 | scripts/build_mobile.py | 6104 | e5fab85a90ebcf280899878a0dab3a5bcfe59ca908291a8240cd24f339bf8d2c |
 | scripts/build_pitch.mjs | 5546 | 44d7efbb19a80c9be3468247c750a1bf5b258c3e146bcdd04b10845ba93e452c |
 | scripts/build_word_report.py | 6306 | ec2319343d3783f46ddf38670e0ba13c613ed6e94faf90c9f9cc0765802a0b35 |
@@ -124,7 +129,9 @@ Virtual environments, secrets, intermediate deck builds and external QA render d
 | scripts/check_improvements.py | 6502 | c2e115e55d0579ee629c3403fe621633489f0fda0101932cbda637df1934482e |
 | scripts/check_mobile_engine.py | 3623 | 0b0f851fbe4ab4f670da3cf4b45af0f8920671338a58b35fd2ac4e530b4e7acc |
 | scripts/check_mobile_runtime.py | 2460 | 977262afbe2016c74c7d871bfa6de68e1915eb42c294479ba6dcb2d11e8dfe03 |
-| scripts/package_submission.py | 5499 | cabc29231c727ea5048aefceaf01c2a877c915b09975b3b6e42b0ecc3da4cc11 |
+| scripts/check_product_release.py | 4825 | dc703219281caa6adb95e83a1b20502825ec3ab428d4cc27c7351bbf50e0e840 |
+| scripts/package_final_product.py | 4847 | 6cd4cfbe4af1c7bfc9472b131fee34355e8f0757606545a85dc3ae7aa73588ff |
+| scripts/package_submission.py | 5696 | 96faf2483fef0385fb553ce5764215220712994b211d21189d47b90d99f18b59 |
 | scripts/prepare_qa.py | 8671 | b772441f1d801248ed01a290afbf875bfc8277351b6ecf03bbff2433212ed116 |
 | scripts/rehearsal.py | 8813 | a8287aa7e6418a86bbe2d29dbcc0a91f96e6c7ff72bb941ff5fade0318763e07 |
 | scripts/render_pitch_pdf.py | 622 | 1c56143674c98017fef4a015a7c3add5993844526bec92250f8e4fb65c61dd91 |
@@ -138,17 +145,19 @@ Virtual environments, secrets, intermediate deck builds and external QA render d
 | src/database.py | 12218 | 3d0393cb4a36f306eba5bab06eb98741625845838da3b490c9ead8139ffb6c3a |
 | src/decision.py | 6090 | e2831ac984f2db0559ad6d27826583ae51c6d48c7536b1cc65a82deb295120c6 |
 | src/evt.py | 5573 | a098903b7a4b75e14251b1fe119ed554bd8f79a3513b31c8133a2e252c67cd77 |
-| src/exports.py | 17898 | d2d615e30a7a51bd1b05bc7863545825672ee72a39a8fa45b10cf6eb67847ee5 |
+| src/exports.py | 19218 | d253641712407aeb4524471b95e64fa34656c7dc619e48ab4ea59460a7d53e65 |
 | src/figures.py | 4973 | 4440a979a460563e51452b41c0155da6bc2f4db372a46a7321a04f423e75efd7 |
 | src/interactive.py | 12898 | 03d15dcd51f1347519a66f6525a120aa0c5abb2d1395451a6ed2608774f8b213 |
 | src/portfolio.py | 6151 | c4f151cb8dedd69aabb54047087721d07f9b39ad360ac43f01653fec85b02b30 |
+| src/product.py | 1517 | 7b9bde434cd1985ccce059e083ec7396fe5c4840de6e7fcdc15215154be717af |
 | src/reporting.py | 42235 | 74a74a191b27a003ea87557a22d1d8a34cf99810f3b1dfb76558e06e7a27873d |
 | src/risk.py | 4503 | c90319c3b01a13758ec8e552f9a50d8580564eab138f95498f89d4f032dd2a1e |
 | src/stress.py | 3244 | 7a7ef52a33b7d3fb48cbacd9c6e43b02af1d11374c21b040e6a164db17ccf0bd |
 | src/ui.py | 5119 | 81d1284bf9407443465bff46d8cecc071056460fe7254fd177c259619f6f6a58 |
-| src/workspaces.py | 51893 | eabd1f50001353fb6aaf47c408b65b97f783fa1c8b94074a202d166b2b8948c9 |
+| src/workspaces.py | 55035 | be7379c078542278cf6c9c022f691fee2528e31327df32d40c2ede772d0c042e |
 | tests/test_chat_guide.py | 1966 | 77071429e2d511696435895cd4b41fca73d4f19fedb473179f6c2eed474114c9 |
 | tests/test_database.py | 4645 | 80bb65683b966d44971ba776f66ae0d90c3d552e2bfea6fad7de1ae18a284593 |
 | tests/test_improvements.py | 13895 | d7406619543d23e28721d52b6d439fd4f984d926ab1ac409a45c4f64d5f86ebd |
 | tests/test_integration.py | 2623 | bdffa0d31a01610938b6830cfcddf40e7d306c2686d583060328272cb922c781 |
+| tests/test_product.py | 1964 | 8cabc28774b71285267e540a9998127c988aa96cf3797a3495000e29a6b780d9 |
 | tests/test_quant.py | 5300 | e1251b9da49246be8b9f2bea3aef27457e9157596bc92ac8def210da45310832 |

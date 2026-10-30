@@ -30,7 +30,7 @@ st.markdown(
 
 
 @st.cache_data(show_spinner=False)
-def inputs() -> tuple:
+def inputs(evidence_version: str) -> tuple:
     store = active_store()
     if os.environ.get("AEGIS_REQUIRE_DATABASE") == "1" and store is None:
         raise DatabaseUnavailable("Hosted database configuration is required for this deployment.")
@@ -51,7 +51,7 @@ def inputs() -> tuple:
         ):
             raise ValueError("Snapshot checksum mismatch: " + filename)
     if store is not None:
-        version = research_version()
+        version = evidence_version
         summary = json.loads(store.content(version, "outputs/results/summary.json"))
         prices = validate_prices(store.load_prices(version))
         r = prices.pct_change(fill_method=None).dropna()
@@ -75,7 +75,7 @@ def inputs() -> tuple:
 
 boot = loading_screen()
 try:
-    s, prices, r, rf, alloc = inputs()
+    s, prices, r, rf, alloc = inputs(research_version())
 except (FileNotFoundError, ValueError, KeyError, DatabaseUnavailable) as exc:
     boot.empty()
     st.error(

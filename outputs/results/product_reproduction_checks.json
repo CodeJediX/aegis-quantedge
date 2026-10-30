@@ -1,0 +1,14 @@
+{
+  "input": "extracted submitted source ZIP",
+  "operation": "python run.py --reproduce --skip-documents",
+  "exit_code": 0,
+  "seconds": 27.72,
+  "files_compared": 26,
+  "byte_identical": 24,
+  "changed": [
+    "outputs\\tables\\backtesting_development.csv",
+    "outputs\\tables\\backtesting_test.csv"
+  ],
+  "scope": "Numerical CSV tables and summary; document regeneration checked separately",
+  "schema_explanation": "Two older coverage CSVs lacked six latest-window/date columns. Every shared field matched exactly. Current schema copies are now included; no input or financial value changed."
+}
